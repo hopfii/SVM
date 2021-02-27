@@ -1,0 +1,5 @@
+https://www.youtube.com/watch?reload=9&v=_PwhiWxHK8o&ab_channel=MITOpenCourseWare
+https://kseow.com/svm
+https://www.svm-tutorial.com/2017/10/support-vector-machines-succinctly-released/
+https://math.stackexchange.com/questions/1127464/how-to-show-that-svm-is-convex-problem
+
