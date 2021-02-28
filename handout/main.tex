@@ -1,0 +1,218 @@
+\documentclass[a4paper,11pt,twoside]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}   
+\usepackage{graphicx}       
+\usepackage[german]{babel}
+\usepackage{csquotes}     
+\usepackage{acronym}
+\usepackage{eurosym}
+\usepackage[linktocpage=true]{hyperref}
+\usepackage[bindingoffset=8mm]{geometry}
+\usepackage{caption}
+\captionsetup{format=hang, justification=raggedright}
+\usepackage[style=authoryear, backend=biber]{biblatex}
+\usepackage{float}
+\usepackage{rotating}
+\usepackage{blkarray}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{listings}
+\addbibresource{references.bib} 
+\usepackage{caption}
+\usepackage{subcaption}
+
+\newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
+
+\begin{document}
+
+% Titelblatt:
+% \newpage\mbox{}\newpage
+\cleardoublepage   % force output to a right page
+\thispagestyle{empty}
+\begin{titlepage}
+  \begin{flushright}
+  \includegraphics[width=0.4\linewidth]{assets/Logo-A3.jpg}
+  \end{flushright}
+  \begin{center}
+  \section*{Support Vector Machines (SVM)}
+  \vspace{2cm}
+
+\textbf{Computational Intelligence II}    
+\vspace{0.5cm}
+
+  Informatik - Software and Information Engineering\\
+  Fachhochschule Vorarlberg\\
+
+  \vspace{1cm}
+  
+    Erstellt von\\
+  André Hopfgartner \& Matthias Rupp\\
+  
+ 
+  \vspace{1cm}
+  
+
+  
+  Dornbirn, am \today
+  
+  
+  \end{center}
+\end{titlepage}
+
+
+% Inhaltsverzeichnis:
+\clearpage   % force output to a right page
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{4}
+\tableofcontents
+
+% evtl. Abkürzungsverzeichnis:
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+\chapter*{Abkürzungsverzeichnis}
+\begin{acronym}
+ \acro{SVM}{Support Vector Machine}
+\end{acronym}
+
+
+
+\chapter{Einführung}
+
+\section{Intuition}
+Ziel: möglichst breites Band zwischen den 2 verschiedenen Klassen aufziehen.
+
+\section{Mathematische Herleitung}
+Gegeben sei ein Gewichtsvektor $\vec{w} \in \mathbb{R}^{M}$ und ein beliebiger Vektor $\vec{u} \in \mathbb{R}^{M}$. Der Gewichtsvektor $\vec{w}$ spannt mit dem Bias $b \in \mathbb{R}$ eine Ebene im Raum auf. Um entscheiden zu können, ob ein Punkt $\vec{u}$ über oder unter der Trennebene liegt, kann folgende Entscheidungsregel eingeführt werden:
+
+\begin{equation} \label{dec_rule}
+    \begin{aligned}
+    \vec{w} \cdot \vec{u} + b & \geq 0 \\
+    \end{aligned}
+\end{equation}
+
+Als nächstes führen wir ein Band um die Trennebene ein. Gegeben sei eine Trainingsmenge von Tupeln $(\vec{x_{i}}, d_{i})$ mit $\vec{x_{i}} \in \mathbb{R}^{M}$ und $d_{i} \in \{-1, +1\}$. Bei $\vec{x_{i}}$ handelt es sich um einen Eingabevektor, $d_{i}$ ist das jeweils zugehörige Label. Wir führen folgende Regeln ein:
+\begin{equation} \label{band_rules}
+    \begin{aligned}
+    \vec{w} \cdot \vec{x_{i}} + b & \geq +1 \textbf{ für $d_{i} = +1$} \\
+    \vec{w} \cdot \vec{x_{i}} + b & \leq -1 \textbf{ für $d_{i} = -1$}
+    \end{aligned}
+\end{equation}
+
+\autoref{band_rules} kann weiter verallgemeinert werden, indem auf beiden Seiten mit $d_{i}$ multipliziert wird. Weil für jedes beliebige $d_{i}$ gilt $d_{i} d_{i} = 1$ ergibt sich:
+
+\begin{equation} \label{band_rule}
+    \begin{aligned}
+    d_{i} (\vec{w} \cdot \vec{x_{i}} + b) & \geq 1 \textbf{ für $d_{i} = +1$}\\
+    d_{i} (\vec{w} \cdot \vec{x_{i}} + b) & \geq 1 \textbf{ für $d_{i} = -1$}\\
+    \end{aligned}
+\end{equation}
+
+Für Punkte $\vec{x_{i}}$, die genau auf den Grenzen des Bandes liegen, muss also gelten:
+\begin{equation} \label{band_rule}
+    \begin{aligned}
+    d_{i} (\vec{w} \cdot \vec{x_{i}} + b) -1 &= 0\\
+    \end{aligned}
+\end{equation}
+
+Die Breite $\xi$ des Bandes lässt sich berechnen, indem zwei Punkte $\vec{x_{+}}$ und $\vec{x_{-}}$ gewählt werden, die jeweils auf den Grenzen des Bandes liegen. Der Differenzvektor $\vec{x_{+}}$ - $\vec{x_{-}}$ kann anschließend auf den Einheitsvektor $\vec{w}^{0}$ projiziert werden mittels des Skalarprodukts. Als Ergebnis erhält man den Normalabstand zwischen den Grenzen des Bandes, was genau der Breite des Bandes entspricht:
+
+\begin{equation} \label{band_width}
+    \begin{aligned}
+    \xi &= (\vec{x_{+}} - \vec{x_{-}}) \cdot \frac{\vec{w}}{\lVert \vec{w} \rVert}\\
+    &=  \frac{1}{\lVert \vec{w} \rVert} \cdot (\vec{x_{+}} \cdot \vec{w} - \vec{x_{-}} \cdot \vec{w})
+    \end{aligned}
+\end{equation}
+
+Setzt man in \autoref{band_rule} die Tupel $(\vec{x_{+}}, +1)$ und $(\vec{x_{-}}, -1)$ ein erhält man:
+\begin{equation} \label{band_width_x}
+    \begin{aligned}
+     \vec{w} \cdot \vec{x_{+}} &= 1 -b \textbf{ für $d_{i} = +1$}\\
+     \vec{w} \cdot \vec{x_{-}} &= -b -1 \textbf{ für $d_{i} = -1$}\\
+    \end{aligned}
+\end{equation}
+
+Damit ergibt sich für \autoref{band_width}:
+\begin{equation} \label{band_width_final}
+    \begin{aligned}
+    \xi &= \frac{1}{\lVert \vec{w} \rVert} \cdot ((1-b) - (-b-1)) \\
+    &= \frac{2}{\lVert \vec{w} \rVert}
+    \end{aligned}
+\end{equation}
+
+Weil wir bei \ac{SVM} ein möglichst breites Band zwischen den Trainingsdaten haben möchten führen wir eine Maximierung der Breite durch, die sich auch als Minimierung darstellen lässt:
+\begin{equation} \label{band_width_max}
+    \begin{aligned}
+    \hat{\xi} = \max \frac{2}{\lVert \vec{w} \rVert} &= \min {\lVert \vec{w} \rVert} &= \frac{1}{2} \min {\lVert \vec{w} \rVert}^{2}
+    \end{aligned}
+\end{equation}
+
+Die in \autoref{band_width_max} beschriebene Umformungen wurden gemacht, weil dadurch die später zu optimierende Gleichung besser darstellbar ist. \\
+
+Um \autoref{band_width_max} optimieren zu können wird die Lagrangegleichung mit der in \autoref{band_rule} beschriebenen Nebenbedingung aufgestellt:
+\begin{equation} \label{lagrange_1}
+    \begin{aligned}
+    L &= \frac{1}{2} {\lVert \vec{w} \rVert}^{2} - \sum (\alpha_{i} (d_{i} (\vec{w} \cdot \vec{x_{i}} + b) -1)) 
+    \end{aligned}
+\end{equation}
+
+Um den Extremwert einer Lagrangegleichung ermitteln zu können müssen alle partiellen Ableitungen 0 gesetzt werden:
+
+\begin{equation} \label{lagrange_partial_w}
+    \begin{aligned}
+    \frac{\partial L}{\partial \vec{w}} = \vec{w} - \sum (\alpha_{i} d_{i} \vec{x_{i}}) &\overset{!}{=} 0 \\
+    \vec{w} &= \sum (\alpha_{i} d_{i} \vec{x_{i}})
+    \end{aligned}
+\end{equation}
+\newline
+\begin{equation} \label{lagrange_partial_b}
+    \begin{aligned}
+    \frac{\partial L}{\partial b} = - \sum (\alpha_{i} d_{i}) &\overset{!}{=} 0 \\
+    \sum (\alpha_{i} d_{i}) &= 0
+    \end{aligned}
+\end{equation}
+
+Die Ergebnisse von \autoref{lagrange_partial_w} und \autoref{lagrange_partial_b} können in \autoref{lagrange_1} wieder eingesetzt werden:
+\begin{equation} \label{lagrange_2}
+    \begin{aligned}
+    L &= \frac{1}{2} (\sum (\alpha_{i} d_{i} \vec{x_{i}})) \cdot (\sum (\alpha_{j} d_{j} \vec{x_{j}})) - \sum (\alpha_{i} d_{i} x_{i} \cdot (\sum (\alpha_{j} d_{j} \vec{x_{j}})) - \sum (\alpha_{i} d_{i} b) + \sum (\alpha_{i}) =\\
+    &= \frac{1}{2} (\sum (\alpha_{i} d_{i} \vec{x_{i}})) \cdot (\sum (\alpha_{j} d_{j} \vec{x_{j}})) - \sum (\alpha_{i} d_{i} x_{i} \cdot (\sum (\alpha_{j} d_{j} \vec{x_{j}})) - b \sum (\alpha_{i} d_{i}) + \sum (\alpha_{i})
+    \end{aligned}
+\end{equation}
+
+Aus \autoref{lagrange_partial_b} gilt $\sum (\alpha_{i} d_{i}) = 0$:
+\begin{equation} \label{lagrange_3}
+    \begin{aligned}
+    L &= \frac{1}{2} (\sum (\alpha_{i} d_{i} \vec{x_{i}})) \cdot (\sum (\alpha_{j} d_{j} \vec{x_{j}})) - \sum (\alpha_{i} d_{i} x_{i} \cdot (\sum (\alpha_{j} d_{j} \vec{x_{j}})) + \sum (\alpha_{i})
+    \end{aligned}
+\end{equation}
+
+Bei den Summen ergibt sich eine Symmetrie der Form $\frac{1}{2} a - a$ wobei $a$ als Abkürzung für die Summen verstanden werden kann:
+\begin{equation} \label{lagrange_final}
+    \begin{aligned}
+    L &= \frac{1}{2} (\sum \sum (\alpha_{i} \alpha_{j} d_{i} d_{j} \vec{x_{i}} \cdot \vec{x_{j}})) + \sum (\alpha_{i})
+    \end{aligned}
+\end{equation}
+
+Das bemerkenswerte an \autoref{lagrange_final} ist, dass die Optimierung nur auf dem Skalarprodukt von je 2 Samples abhängt. \\
+
+Weiters lässt sich die Entscheidungsregel \autoref{dec_rule} mit \autoref{lagrange_partial_w} umformen:
+\begin{equation} \label{dec_rule}
+    \begin{aligned}
+    (\sum (\alpha_{i} d_{i} \vec{x_{i}})) \cdot \vec{u} + b & \geq 0 
+    \end{aligned}
+\end{equation}
+
+Somit hängt die Entscheidungsregel auch nur von den Skalarprodukten ab.
+
+
+
+% Literaturverzeichnis:
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography
+
+\end{document}
