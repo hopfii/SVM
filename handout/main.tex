@@ -85,7 +85,7 @@
 Ziel: möglichst breites Band zwischen den 2 verschiedenen Klassen aufziehen.
 
 \section{Mathematische Herleitung}
-Gegeben sei ein Gewichtsvektor $\vec{w} \in \mathbb{R}^{M}$ und ein beliebiger Vektor $\vec{u} \in \mathbb{R}^{M}$. Der Gewichtsvektor $\vec{w}$ definiert mit dem Bias $b \in \mathbb{R}$ eine Trennebene im Raum wobei $vec{w}$ normal zu der Trennebene steht. Um entscheiden zu können, ob ein Punkt $\vec{u}$ über oder unter der Trennebene liegt, kann folgende Entscheidungsregel eingeführt werden:
+Gegeben sei ein Gewichtsvektor $\vec{w} \in \mathbb{R}^{M}$ und ein beliebiger Vektor $\vec{u} \in \mathbb{R}^{M}$. Der Gewichtsvektor $\vec{w}$ definiert mit dem Bias $b \in \mathbb{R}$ eine Trennebene im Raum wobei $\vec{w}$ normal zu der Trennebene steht. Um entscheiden zu können, ob ein Punkt $\vec{u}$ über oder unter der Trennebene liegt, kann folgende Entscheidungsregel eingeführt werden:
 
 \begin{equation} \label{dec_rule}
     \begin{aligned}
@@ -112,7 +112,7 @@ Als nächstes wird ein Band um die Trennebene eingeführt. Gegeben sei eine Trai
 
 \autoref{band_rules} kann weiter verallgemeinert werden, indem auf beiden Seiten mit $d_{i}$ multipliziert wird. Weil für jedes beliebige $d_{i}$ gilt $d_{i} d_{i} = 1$ ergibt sich:
 
-\begin{equation} \label{band_rule}
+\begin{equation} \label{band_rule1}
     \begin{aligned}
     d_{i} (\vec{w} \cdot \vec{x_{i}} + b) & \geq 1 \textbf{ für $d_{i} = +1$}\\
     d_{i} (\vec{w} \cdot \vec{x_{i}} + b) & \geq 1 \textbf{ für $d_{i} = -1$}\\
