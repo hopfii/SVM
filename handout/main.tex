@@ -85,7 +85,7 @@
 Ziel: möglichst breites Band zwischen den 2 verschiedenen Klassen aufziehen.
 
 \section{Mathematische Herleitung}
-Gegeben sei ein Gewichtsvektor $\vec{w} \in \mathbb{R}^{M}$ und ein beliebiger Vektor $\vec{u} \in \mathbb{R}^{M}$. Der Gewichtsvektor $\vec{w}$ definiert mit dem Bias $b \in \mathbb{R}$ eine Trennebene im Raum. Um entscheiden zu können, ob ein Punkt $\vec{u}$ über oder unter der Trennebene liegt, kann folgende Entscheidungsregel eingeführt werden:
+Gegeben sei ein Gewichtsvektor $\vec{w} \in \mathbb{R}^{M}$ und ein beliebiger Vektor $\vec{u} \in \mathbb{R}^{M}$. Der Gewichtsvektor $\vec{w}$ definiert mit dem Bias $b \in \mathbb{R}$ eine Trennebene im Raum wobei $vec{w}$ normal zu der Trennebene steht. Um entscheiden zu können, ob ein Punkt $\vec{u}$ über oder unter der Trennebene liegt, kann folgende Entscheidungsregel eingeführt werden:
 
 \begin{equation} \label{dec_rule}
     \begin{aligned}
@@ -97,7 +97,7 @@ Gegeben sei ein Gewichtsvektor $\vec{w} \in \mathbb{R}^{M}$ und ein beliebiger V
 \begin{figure}[H]
 	\centering
 	\includegraphics{assets/trennebene.png}
-	\caption{Trennebene}
+	\caption{Die Lage und damit die Klasse des Vektors $\vec{u}$ soll bestimmt werden.}
 	\label{fig:trennebene}
 \end{figure}
 
@@ -134,6 +134,15 @@ Die Breite $\xi$ des Bandes lässt sich berechnen, indem zwei Punkte $\vec{x_{+}
     &=  \frac{1}{\lVert \vec{w} \rVert} \cdot (\vec{x_{+}} \cdot \vec{w} - \vec{x_{-}} \cdot \vec{w})
     \end{aligned}
 \end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics{assets/bandbreite.png}
+	\caption{Die Breite des Bandes kann mittels zwei Punkten, die sich genau auf den Grenzen befinden, berechnet werden.}
+	\label{fig:bandbreite}
+\end{figure}
+
+
 
 Setzt man in \autoref{band_rule} die Tupel $(\vec{x_{+}}, +1)$ und $(\vec{x_{-}}, -1)$ ein erhält man:
 \begin{equation} \label{band_width_x}
