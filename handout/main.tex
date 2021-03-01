@@ -85,7 +85,7 @@
 Ziel: möglichst breites Band zwischen den 2 verschiedenen Klassen aufziehen.
 
 \section{Mathematische Herleitung}
-Gegeben sei ein Gewichtsvektor $\vec{w} \in \mathbb{R}^{M}$ und ein beliebiger Vektor $\vec{u} \in \mathbb{R}^{M}$. Der Gewichtsvektor $\vec{w}$ spannt mit dem Bias $b \in \mathbb{R}$ eine Ebene im Raum auf. Um entscheiden zu können, ob ein Punkt $\vec{u}$ über oder unter der Trennebene liegt, kann folgende Entscheidungsregel eingeführt werden:
+Gegeben sei ein Gewichtsvektor $\vec{w} \in \mathbb{R}^{M}$ und ein beliebiger Vektor $\vec{u} \in \mathbb{R}^{M}$. Der Gewichtsvektor $\vec{w}$ definiert mit dem Bias $b \in \mathbb{R}$ eine Trennebene im Raum. Um entscheiden zu können, ob ein Punkt $\vec{u}$ über oder unter der Trennebene liegt, kann folgende Entscheidungsregel eingeführt werden:
 
 \begin{equation} \label{dec_rule}
     \begin{aligned}
@@ -93,7 +93,16 @@ Gegeben sei ein Gewichtsvektor $\vec{w} \in \mathbb{R}^{M}$ und ein beliebiger V
     \end{aligned}
 \end{equation}
 
-Als nächstes führen wir ein Band um die Trennebene ein. Gegeben sei eine Trainingsmenge von Tupeln $(\vec{x_{i}}, d_{i})$ mit $\vec{x_{i}} \in \mathbb{R}^{M}$ und $d_{i} \in \{-1, +1\}$. Bei $\vec{x_{i}}$ handelt es sich um einen Eingabevektor, $d_{i}$ ist das jeweils zugehörige Label. Wir führen folgende Regeln ein:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics{assets/trennebene.png}
+	\caption{Trennebene}
+	\label{fig:trennebene}
+\end{figure}
+
+
+Als nächstes wird ein Band um die Trennebene eingeführt. Gegeben sei eine Trainingsmenge von Tupeln $(\vec{x_{i}}, d_{i})$ mit $\vec{x_{i}} \in \mathbb{R}^{M}$ und $d_{i} \in \{-1, +1\}$. Bei $\vec{x_{i}}$ handelt es sich um einen Eingabevektor, $d_{i}$ ist das jeweils zugehörige Label. Wir führen folgende Regeln ein:
 \begin{equation} \label{band_rules}
     \begin{aligned}
     \vec{w} \cdot \vec{x_{i}} + b & \geq +1 \textbf{ für $d_{i} = +1$} \\
