@@ -183,7 +183,7 @@ Somit gilt für einen korrekt klassifizierten Vektor $x_{k}$:
 \end{equation}
 
 
-Durch Anwendung von \autoref{abs_value_trick} in \autoref{eq:constraint1}, Umformulierung der zu optimierenden Funktion in eine Minimierung und der Verallgemeinerung von $\hat{x}$ auf beliebige Punkte $x_{n}$ erhält man:
+Durch Anwendung von \autoref{abs_value_trick} in \autoref{eq:constraint1}, Umformulierung der Maximierung in eine Minimierung und der Verallgemeinerung von $\hat{x}$ auf beliebige Punkte $x_{n}$ erhält man:
 \begin{subequations}
 	\begin{alignat}{2}
 		&\!\min_{w}        &\qquad&  \frac{1}{2} w^{T} w \label{eq:optProb2}\\
@@ -211,7 +211,7 @@ $y_n (w^{T} x_{n} + b)-1$ kann hierbei als eine Art Schlupf verstanden werden. D
 	\end{alignat}
 \end{subequations}
 
-Nun kann die uneingeschränkte Optimierung von \autoref{eq:optProb4} gelöst werden indem die Ableitungen bestimmt und $0$ gesetzt werden.
+Nun kann die uneingeschränkte Optimierung von \autoref{eq:optProb4} nach $w$ und $b$ gelöst werden indem die Ableitungen bestimmt und $0$ gesetzt werden.
 
 \begin{equation} \label{gradient_lagrange_w}
 	\begin{aligned}
@@ -259,9 +259,9 @@ Vergleicht man den Term $\sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n}$ mit dem Er
 	\end{alignat}
 \end{subequations}
 
-Das in \autoref{final_lagrange} beschriebene Problem kann beispielsweise mittels eines Quadratic Programming Solves gelöst werden. Als Ergebnis erhält man einen Vektor $\alpha$ mit allen $\alpha_{n}$. Durch Einsetzen in $w = \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}$ kann $w$ bestimmt werden. \\
+Das in \autoref{final_lagrange} beschriebene Problem kann beispielsweise mittels eines Quadratic Programming Solvers gelöst werden. Als Ergebnis erhält man einen Vektor $\alpha$ mit allen $\alpha_{n}$. Durch Einsetzen in $w = \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}$ kann $w$ bestimmt werden. \\
 
-Betrachtet man den Ergebnisvektor $\alpha$ wird man feststellen, dass sehr viele Werte $0$ ergeben. In \autoref{eq:optProb4} befindet sich der Term $\alpha_{n} (y_n (w^{T} x_{n} + b)-1)$ und $(y_n (w^{T} x_{n} + b)-1)$ wurde bereits zuvor als Schlupf bezeichnet. Das Produkt von Schlupf und $\alpha_{n}$ kann nur $0$ werden, wenn entweder der Schlupf $0$ ist oder $\alpha_{n}$. Umgekehrt bedeutet dies, dass alle Vektoren, die genau auf der Trennebene liegen, ein $\alpha_{n} \neq 0$ haben. Diese Vektoren werden Stützvektoren genannt. \\
+Betrachtet man den Ergebnisvektor $\alpha$ wird man feststellen, dass sehr viele Werte $0$ ergeben. In \autoref{eq:optProb4} befindet sich der Term $\alpha_{n} (y_n (w^{T} x_{n} + b)-1)$ und $(y_n (w^{T} x_{n} + b)-1)$ wurde bereits zuvor als Schlupf bezeichnet. Das Produkt von Schlupf und $\alpha_{n}$ kann nur $0$ werden, wenn entweder der Schlupf $0$ ist oder $\alpha_{n}$. Umgekehrt bedeutet dies, dass alle Vektoren, die einen minimalen Abstand zu der Trennebene haben, ein $\alpha_{n} \neq 0$ haben. Diese Vektoren werden Stützvektoren genannt. \\
 
 
 Mit dieser Erkenntnis kann \autoref{gradient_lagrange_w} erneut analysiert werden:
@@ -291,6 +291,8 @@ Noch offen ist die Bestimmung des Bias $b$. Weil für Stützvektoren $y_n (w^{T}
 	\end{aligned}
 \end{equation}
 
+\subsection{Quadratic Programming Solver}
+TODO
 
 
 % Literaturverzeichnis:
