@@ -9,4 +9,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.2}Mathematische Herleitung}{4}{section.1.2}%
 \defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.1}Problemdefinition}{4}{subsection.1.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.2}Optimierungsproblem}{6}{subsection.1.2.2}%
+\defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

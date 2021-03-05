@@ -27,6 +27,7 @@
 \usepackage{subcaption}
 
 \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
+\newcommand{\norm}[1]{\lVert#1\rVert}
 
 \begin{document}
 
@@ -88,6 +89,9 @@
 Ziel: möglichst breites Band zwischen den 2 verschiedenen Klassen aufziehen.
 
 \section{Mathematische Herleitung}
+
+TODO TEXT HERE
+\subsection{Problemdefinition}
 Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{D}$, ein Bias $b \in \mathbb{R}$ und ein beliebiger Punkt $x \in \mathbb{R}^{D}$. Eine Ebene im Raum kann definiert werden durch:
 
 \begin{equation} \label{plane_eq}
@@ -116,7 +120,7 @@ Als nächsten Schritt bestimmen wir den euklidischen Normalabstand $D$ eines bel
 		\begin{aligned}
 			w^{T} x_{1} + b &= 0 \\
 			w^{T} x_{2} + b &= 0 \\
-			w^{T} (x_{1} - x_{2}) &= 0 \leftrightarrow \lVert w^{T} \rVert \lVert x_{1} - x_{2} \rVert \cos(\alpha) = 0 \leftrightarrow \alpha = 90^{\circ}
+			w^{T} (x_{1} - x_{2}) &= 0 \leftrightarrow \norm{w^{T}} \norm{x_{1} - x_{2}} \cos(\alpha) = 0 \leftrightarrow \alpha = 90^{\circ}
 		\end{aligned}
 	\end{equation}
 \end{proof}
@@ -126,8 +130,8 @@ Um den Normalabstand $D$ eines beliebigen Punkts $x_{k}$ zu ermitteln wählt man
 \begin{equation} \label{distance_to_plane}
 	\begin{aligned}
 		D &= | \frac{w^{T}}{\lVert w \rVert} (x_{k} - x) | = \\
-		&= \frac{1}{\lVert w \rVert} | (w^{T} x_{k} - w^{T} x) | =\\
-		&= \frac{1}{\lVert w \rVert} | (w^{T} x_{k} + b - (w^{T} x + b)) |
+		&= \frac{1}{\norm{w}} | (w^{T} x_{k} - w^{T} x) | =\\
+		&= \frac{1}{\norm{w}} | (w^{T} x_{k} + b - (w^{T} x + b)) |
 	\end{aligned}
 \end{equation}
 
@@ -141,16 +145,57 @@ Um den Normalabstand $D$ eines beliebigen Punkts $x_{k}$ zu ermitteln wählt man
 Weil der Punkt $x$ auf der Ebene liegt gilt $w^{T} x + b = 0$ (\autoref{plane_eq}):
 \begin{equation} \label{distance_to_plane_simplified1}
 	\begin{aligned}
-		D &= \frac{1}{\lVert w \rVert} | (w^{T} x_{k} + b) |
+		D &= \frac{1}{\norm{w}} | (w^{T} x_{k} + b) |
 	\end{aligned}
 \end{equation}
 
 Aus \autoref{plane_normalization} gilt weiters $| (w^{T} x_{k} + b) | = 1$ wenn $x_{k}$ der am nächsten zu der Ebene liegende Punkt ist. Somit ergibt sich der kleinste Abstand zur Ebene als:
 \begin{equation} \label{distance_to_plane_simplified2}
 	\begin{aligned}
-		D &= \frac{1}{\lVert w \rVert}
+		D &= \frac{1}{\norm{w}}
 	\end{aligned}
 \end{equation}
+
+\subsection{Optimierungsproblem}
+
+\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
+
+\begin{subequations}
+	\begin{alignat}{2}
+		&\!\max_{w}        &\qquad&  \frac{1}{\norm{w}} \label{eq:optProb}\\
+		&\text{mit } &      & \min_{n=1..N} |w^{T} x_{n} + b| = 1 \label{eq:constraint1}
+	\end{alignat}
+\end{subequations}
+
+
+Der Betrag lässt sich umschreiben durch die Einführung von Labels $y_{n} \in \{-1, +1\}$. Diese beschreiben jeweils die Klasse des zugehörigen Vektors $x_{n}$. Für eine korrekte Klassifizierung der \ac{SVM} gilt:
+\begin{equation} \label{svm_classif}
+	\begin{aligned}
+		y_{n} &= sign(w^{T} x_{n} + b)
+	\end{aligned}
+\end{equation}
+
+Somit gilt für einen korrekt klassifizierten Vektor $x_{k}$:
+\begin{equation} \label{abs_value_trick}
+	\begin{aligned}
+		|w^{T} x_{n} + b| &= y_{n} (w^{T} x_{n} + b)
+	\end{aligned}
+\end{equation}
+
+
+Durch Anwendung von \autoref{abs_value_trick} in \autoref{eq:constraint1}, Umformulierung der zu optimierenden Funktion in eine Minimierung und der Verallgemeinerung auf beliebige Punkte $x_{n}$ erhält man:
+\begin{subequations}
+	\begin{alignat}{2}
+		&\!\min_{w}        &\qquad&  \frac{1}{2} w^{T} w \label{eq:optProb2}\\
+		&\text{mit } &      & y_n (w^{T} x_{n} + b) \geq 1 \text{ für } n=1..N \label{eq:constraint12}
+	\end{alignat}
+\end{subequations}
+
+Die Verallgemeinerung von \autoref{eq:constraint1} auf \autoref{eq:constraint12} auf beliebige Punkte ist so möglich, weil durch \autoref{plane_normalization} sichergestellt ist, dass der kleinste Wert für $(w^{T} x_{n} + b)$ $1$ ist, und somit die Werte für alle anderen Punkte größer oder gleich $1$ sein müssen. \\
+
+\subsection{Lagrange Optimierung}
+
+
 
 
 
