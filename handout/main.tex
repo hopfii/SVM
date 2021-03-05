@@ -28,6 +28,7 @@
 
 \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
 \newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\Lagr}{\mathcal{L}}
 
 \begin{document}
 
@@ -194,7 +195,101 @@ Die Verallgemeinerung von \autoref{eq:constraint1} auf \autoref{eq:constraint12}
 
 \subsection{Lagrange Optimierung}
 
+Das beschriebene Optimierungsproblem beinhaltet eine Ungleichung in \autoref{eq:constraint12}. Diese Optimierung kann mittels des Karush–Kuhn–Tucker Ansatzes gelöst werden. Zuerst wird die Nebenbedingung umgeformt:
+\begin{subequations}
+	\begin{alignat}{2}
+		&\!\min_{w}        &\qquad&  \frac{1}{2} w^{T} w \label{eq:optProb3}\\
+		&\text{mit } &      & y_n (w^{T} x_{n} + b)-1 \geq 0 \text{ für } n=1..N \label{eq:constraint13}
+	\end{alignat}
+\end{subequations}
 
+$y_n (w^{T} x_{n} + b)-1$ kann hierbei als eine Art Schlupf verstanden werden. Das Problem kann nun formuliert werden:
+\begin{subequations}
+	\begin{alignat}{2}
+		&\!\min_{w, b}        &\qquad&  \Lagr (w, b, \alpha) = \frac{1}{2} w^{T} w - \sum_{n=1}^{N} \alpha_{n} (y_n (w^{T} x_{n} + b)-1) \label{eq:optProb4}\\
+		&\max_{\alpha_{n}} &      & \alpha_{n} \geq 0 \text{ für } n=1..N \label{eq:constraint14}
+	\end{alignat}
+\end{subequations}
+
+Nun kann die uneingeschränkte Optimierung von \autoref{eq:optProb4} gelöst werden indem die Ableitungen bestimmt und $0$ gesetzt werden.
+
+\begin{equation} \label{gradient_lagrange_w}
+	\begin{aligned}
+		\nabla_{w} \Lagr &= w - \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n} \overset{!}{=} \vec{0} \\
+		w &= \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}
+	\end{aligned}
+\end{equation}
+
+\begin{equation} \label{partial_lagrange_b}
+	\begin{aligned}
+		\frac{\partial}{\partial b} \Lagr &= - \sum_{n=1}^{N} \alpha_{n} y_{n} \overset{!}{=} 0 \\
+		\sum_{n=1}^{N} \alpha_{n} y_{n} &= 0
+	\end{aligned}
+\end{equation}
+
+Die Ergebnisse von \autoref{gradient_lagrange_w} und \autoref{partial_lagrange_b} können in \autoref{eq:optProb4} eingesetzt werden.
+
+\begin{equation} \label{lagrange_substituted}
+	\begin{aligned}
+		\Lagr(w, b, \alpha) &= \frac{1}{2} w^{T} w - \sum_{n=1}^{N} \alpha_{n} (y_n (w^{T} x_{n} + b)-1) = \\
+		&= \frac{1}{2} w^{T} w - [\sum_{n=1}^{N} \alpha_{n} y_{n} b - \sum_{n=1}^{N} \alpha_{n} + \sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n}]
+	\end{aligned}
+\end{equation}
+
+Weil $\sum_{n=1}^{N} \alpha_{n} y_{n} = 0$ aus \autoref{partial_lagrange_b} fällt der Term $\sum_{n=1}^{N} \alpha_{n} y_{n} b$ weg:
+\begin{equation} \label{lagrange_substituted2}
+	\begin{aligned}
+		\Lagr(w, b, \alpha) &= \frac{1}{2} w^{T} w - [-\sum_{n=1}^{N} \alpha_{n} + \sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n}]
+	\end{aligned}
+\end{equation}
+
+Vergleicht man den Term $\sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n}$ mit dem Ergebnis von \autoref{gradient_lagrange_w} erkennt man, dass $\sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n} = w^T w$ gilt. Dies kann ausgeschrieben werden als:
+\begin{equation} \label{lagrange_substituted3}
+	\begin{aligned}
+		\Lagr(\alpha) &= \sum_{n=1}^{N} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m}
+	\end{aligned}
+\end{equation}
+
+\autoref{lagrange_substituted3} beschreibt das Optimierungsproblem ohne Abhängigkeit von $w$ und $b$, wir haben jetzt also eine Maximierung für $\alpha$ mit Nebenbedingungen:
+\begin{subequations} \label{final_lagrange}
+	\begin{alignat}{2}
+		&\!\max_{\alpha}        &\qquad&  	\Lagr(\alpha) = \sum_{n=1}^{N} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m} \label{eq:optProb5}\\
+		&\text{mit } &      & \alpha_{n} \geq 0 \text{ für } n=1..N \label{eq:constraint16}\\
+		&       & & \sum_{n=1}^{N} \alpha_{n} y_{n} = 0\text{ für } n=1..N \label{eq:constraint17}
+	\end{alignat}
+\end{subequations}
+
+Das in \autoref{final_lagrange} beschriebene Problem kann beispielsweise mittels eines Quadratic Programming Solves gelöst werden. Als Ergebnis erhält man einen Vektor $\alpha$ mit allen $\alpha_{n}$. Durch Einsetzen in $w = \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}$ kann $w$ bestimmt werden. \\
+
+Betrachtet man den Ergebnisvektor $\alpha$ wird man feststellen, dass sehr viele Werte $0$ ergeben. In \autoref{eq:optProb4} befindet sich der Term $\alpha_{n} (y_n (w^{T} x_{n} + b)-1)$ und $(y_n (w^{T} x_{n} + b)-1)$ wurde bereits zuvor als Schlupf bezeichnet. Das Produkt von Schlupf und $\alpha_{n}$ kann nur $0$ werden, wenn entweder der Schlupf $0$ ist oder $\alpha_{n}$. Umgekehrt bedeutet dies, dass alle Vektoren, die genau auf der Trennebene liegen, ein $\alpha_{n} \neq 0$ haben. Diese Vektoren werden Stützvektoren genannt. \\
+
+
+Mit dieser Erkenntnis kann \autoref{gradient_lagrange_w} erneut analysiert werden:
+
+\begin{equation} \label{weights_calc}
+	\begin{aligned}
+		w &= \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}
+	\end{aligned}
+\end{equation}
+
+Weil nur Stützvektoren ein $\alpha_{n} \neq 0$ aufweisen und somit auch nur Stützvektoren einen Beitrag zu $w$ leisten kann \autoref{weights_calc} stark vereinfacht werden:
+
+\begin{equation} \label{weights_calc2}
+	\begin{aligned}
+		w &= \sum_{n \text{ ist Stützvektor}} \alpha_{n} y_{n} x_{n}
+	\end{aligned}
+\end{equation}
+
+Der Gewichtsvektor $w$ hängt also lediglich von einigen, in der Regeln wenigen, Stützvektoren ab.\\
+
+
+Noch offen ist die Bestimmung des Bias $b$. Weil für Stützvektoren $y_n (w^{T} x_{n} + b) = 1$ gilt kann der Bias $b$ aus jedem beliebigen Stützvektor bestimmt werden:
+
+\begin{equation} \label{bias_calc}
+	\begin{aligned}
+		b &= \frac{1}{y_{n}} - w^{T} x_{n}
+	\end{aligned}
+\end{equation}
 
 
 
