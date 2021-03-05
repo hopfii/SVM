@@ -131,6 +131,13 @@ Um den Normalabstand $D$ eines beliebigen Punkts $x_{k}$ zu ermitteln wählt man
 	\end{aligned}
 \end{equation}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics{assets/projection.png}
+	\caption{Durch die Projektion von $(x_{k} - x)$ auf den Einheitsvektor von $w$ kann der Normalabstand $D$ von $x_{k}$ zu der Ebene bestimmt werden.}
+	\label{fig:projection}
+\end{figure}
+
 Weil der Punkt $x$ auf der Ebene liegt gilt $w^{T} x + b = 0$ (\autoref{plane_eq}):
 \begin{equation} \label{distance_to_plane_simplified1}
 	\begin{aligned}
@@ -138,7 +145,7 @@ Weil der Punkt $x$ auf der Ebene liegt gilt $w^{T} x + b = 0$ (\autoref{plane_eq
 	\end{aligned}
 \end{equation}
 
-Aus \autoref{plane_normalization} gilt weiters $| (w^{T} x_{k} + b) | = 1$:
+Aus \autoref{plane_normalization} gilt weiters $| (w^{T} x_{k} + b) | = 1$ wenn $x_{k}$ der am nächsten zu der Ebene liegende Punkt ist. Somit ergibt sich der kleinste Abstand zur Ebene als:
 \begin{equation} \label{distance_to_plane_simplified2}
 	\begin{aligned}
 		D &= \frac{1}{\lVert w \rVert}
