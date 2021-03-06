@@ -301,8 +301,65 @@ Noch offen ist die Bestimmung des Bias $b$. Weil für Stützvektoren $y_n (w^{T}
 	\end{aligned}
 \end{equation}
 
-\subsection{Quadratic Programming Solver}
-TODO
+\subsection{Lösung mittels Quadratic Programming Solver}
+
+Das in \autoref{final_lagrange} beschriebene Optimierungsproblem kann mittels eines Quadratic Programming Solvers gelöst werden. Hierfür muss das Problem aber umformuliert werden, da die Standardform von QP-Problemen wie folgt ist:
+
+\begin{equation} \label{std_QP_problem}
+	\begin{aligned}
+		\min_{x} &= \frac{1}{2} x^{T} Q x + c x + d 
+	\end{aligned}
+\end{equation}
+
+$Q \in \mathbb{R}^{n \times n}$ ist eine symmetrische reelle Matrix mit Koeffizienten, die einen quadratischen Beitrag leisten. $c \in \mathbb{R}$ ist ein Faktor für den linearen Beitrag und $d \in \mathbb{R}$ ist ein fixer Anteil. \\
+
+Unter der Voraussetzung, dass $\max_{x} f(x) = \min_{x} (-f(x))$ gilt können wir unser Maximierungsproblem aus \autoref{final_lagrange} in ein Minimierungsproblem umformen:
+\begin{equation} \label{qp_adapt1}
+	\begin{aligned}
+		\min_{\alpha} \Lagr(\alpha) &= \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m} - \sum_{n=1}^{N} \alpha_{n}
+	\end{aligned}
+\end{equation}
+
+Als nächsten Schritt müssen wir die Koeffizienten aus den Summen extrahieren, $\alpha$ und $y$ als Vektor darstellen, das Problem in die Standard-QP-Form bringen und die Nebenbedingungen als Matrizenmultiplikation darstellen:
+
+
+\begin{subequations} \label{qp1}
+	\begin{alignat}{2}
+		&\!\min_{\alpha}        &\qquad& \Lagr(\alpha) = \frac{1}{2} \alpha^{T} Q \alpha + (-1^T) \alpha \label{eq:qp1}\\
+		&\text{mit} &      & Q = \begin{bmatrix} 
+			y_{1}y_{1}x_{1}^{T}x_{1} & y_{1}y_{2}x_{1}^{T}x_{2} & \dots & y_{1}y_{N}x_{1}^{T}x_{N}\\
+			y_{2}y_{1}x_{2}^{T}x_{1} & y_{2}y_{2}x_{2}^{T}x_{2} & \dots & y_{2}y_{N}x_{2}^{T}x_{N}\\
+			\vdots & \vdots & \vdots & \vdots\\
+			y_{N}y_{1}x_{N}^{T}x_{1} & y_{N}y_{2}x_{N}^{T}x_{2} & \dots & y_{N}y_{N}x_{N}^{T}x_{N}\\ 
+	\end{bmatrix}\\
+&\text{für} & & y^{T} \alpha = 0\\
+& & & 0 \leq \alpha \leq \infty
+	\end{alignat}
+\end{subequations}
+
+Das Problem in dieser Darstellung können wir direkt an ein Quadratic-Programming Solver Framework übergeben und erhalten einen Vektor $\alpha = (\alpha_{1}, \alpha_{2}, ..., \alpha_{n})$ als Ergebnis. \\
+
+Daraus können wir, wie bereits zuvor erwähnt, $w$ und $b$ bestimmen:
+
+\begin{equation} \label{weights_calc_qp}
+	\begin{aligned}
+		w &= \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}
+	\end{aligned}
+\end{equation}
+
+Für die Biasberechnung benötigen wir einen beliebigen Stützvektor $x_{k}$. Wir finden einen Stützvektor, indem wir den Ergebnisvektor $\alpha$ betrachten. Ein Stützvektor $x_{k}$ muss $\alpha_{k} \neq 0$ aufweisen.
+\begin{equation} \label{bias_calc_qp}
+	\begin{aligned}
+		b &= \frac{1}{y_{k}} - w^{T} x_{k}
+	\end{aligned}
+\end{equation}
+
+Die \ac{SVM} ist nun vollständig definiert, neue Eingabevektoren $x$ können wie folgt klassifiziert werden:
+\begin{equation} \label{svm_classify}
+	\begin{aligned}
+		y &= sign(w^{T} x + b)
+	\end{aligned}
+\end{equation}
 
 
 % Literaturverzeichnis:
