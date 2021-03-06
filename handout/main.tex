@@ -271,7 +271,7 @@ Vergleicht man den Term $\sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n}$ mit dem Er
 
 Das in \autoref{final_lagrange} beschriebene Problem kann beispielsweise mittels eines Quadratic Programming Solvers gelöst werden. Als Ergebnis erhält man einen Vektor $\alpha$ mit allen $\alpha_{n}$. Durch Einsetzen in $w = \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}$ kann $w$ bestimmt werden. \\
 
-Betrachtet man den Ergebnisvektor $\alpha$ wird man feststellen, dass sehr viele Werte $0$ ergeben. In \autoref{eq:optProb4} befindet sich der Term $\alpha_{n} (y_n (w^{T} x_{n} + b)-1)$. Der Term $(y_n (w^{T} x_{n} + b)-1)$ kann als Schlupf bezeichnet werden. Das Produkt von Schlupf und $\alpha_{n}$ kann nur $0$ werden wenn entweder der Schlupf $0$ ist oder $\alpha_{n}$. Umgekehrt bedeutet dies, dass alle Vektoren, die einen minimalen Abstand zu der Trennebene haben, ein $\alpha_{n} \neq 0$ aufweisen. Vektoren, die diese Bedingung erfüllen, werden Stützvektoren genannt. \\
+Betrachtet man den Ergebnisvektor $\alpha$ so wird man feststellen, dass sehr viele Werte $0$ ergeben. In \autoref{eq:optProb4} befindet sich der Term $\alpha_{n} (y_n (w^{T} x_{n} + b)-1)$. Der Term $(y_n (w^{T} x_{n} + b)-1)$ kann als Schlupf bezeichnet werden. Das Produkt von Schlupf und $\alpha_{n}$ kann nur $0$ werden wenn entweder der Schlupf $0$ ist oder $\alpha_{n}$. Umgekehrt bedeutet dies, dass alle Vektoren, die einen minimalen Abstand zu der Trennebene haben, ein $\alpha_{n} \neq 0$ aufweisen. Vektoren, die diese Bedingung erfüllen, werden Stützvektoren genannt. \\
 
 
 Mit dieser Erkenntnis kann \autoref{gradient_lagrange_w} erneut analysiert werden:
