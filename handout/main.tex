@@ -176,7 +176,7 @@ Nun trifft man die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenn
 
 \subsection{Optimierungsproblem}
 
-\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x_{n}}$. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands für alle $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
+\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x}$. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
 
 \begin{subequations}
 	\begin{alignat}{2}
@@ -185,14 +185,8 @@ Nun trifft man die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenn
 	\end{alignat}
 \end{subequations}
 
-\autoref{eq:constraint1} beschreibt hier den am nächsten zur Ebene gelegenen Punkt $\hat{x}$ in allgemeiner Form. Der Betrag lässt sich umschreiben durch die Multiplikation mit dem zugehörigen Label $y_{n}$. Für eine korrekte Klassifizierung der \ac{SVM} gilt:
-\begin{equation} \label{svm_classif}
-	\begin{aligned}
-		y_{n} &= sign(w^{T} x_{n} + b)
-	\end{aligned}
-\end{equation}
+\autoref{eq:constraint1} beschreibt hier den am nächsten zur Ebene gelegenen Punkt $\hat{x}$ aus der gebenenen Menge von Eingabevektoren in allgemeiner Form. Der Betrag lässt sich vermeiden durch die Anwendung von \autoref{decision_rules2}:
 
-Somit gilt für einen korrekt klassifizierten Vektor $x_{n}$:
 \begin{equation} \label{abs_value_trick}
 	\begin{aligned}
 		|w^{T} x_{n} + b| &= y_{n} (w^{T} x_{n} + b)

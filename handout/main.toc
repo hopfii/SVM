@@ -13,7 +13,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.2}Optimierungsproblem}{6}{subsection.1.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.3}Lagrange Optimierung}{7}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.3}Lagrange Optimierung}{6}{subsection.1.2.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.4}Quadratic Programming Solver}{9}{subsection.1.2.4}%
 \defcounter {refsection}{0}\relax 
