@@ -93,19 +93,19 @@ Ziel: möglichst breites Band zwischen den 2 verschiedenen Klassen aufziehen.
 
 TODO TEXT HERE
 \subsection{Problemdefinition}
-Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{D}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{k} \in \mathbb{R}^{D}$ und ein zugehöriges Label $y_{k} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
+Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{D}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{D}$ und ein zugehöriges Label $y_{n} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
 
 \begin{equation} \label{plane_eq}
     \begin{aligned}
-    w^{T} x_{k} + b &= 0 \\
+    w^{T} x_{n} + b &= 0 \\
     \end{aligned}
 \end{equation}
 
 Weiters soll für eine richtige Klassifikation gelten:
 \begin{subequations} \label{decision_rules}
 	\begin{alignat}{2}
-		w^{T} x_{k} + b \geq +1 & \qquad & \text{ für } y_{k} = +1\\
-		w^{T} x_{k} + b \leq -1 & & \text{ für } y_{k} = -1
+		w^{T} x_{n} + b \geq +1 & \qquad & \text{ für } y_{k} = +1\\
+		w^{T} x_{n} + b \leq -1 & & \text{ für } y_{k} = -1
 	\end{alignat}
 \end{subequations}
 
@@ -113,12 +113,12 @@ Weiters soll für eine richtige Klassifikation gelten:
 
 \begin{subequations} \label{decision_rules2}
 	\begin{alignat}{2}
-		y_{k} (w^{T} x_{k} + b) \geq 1 & \qquad & \text{ für } y_{k} = +1\\
-		y_{k} (w^{T} x_{k} + b) \geq 1 & & \text{ für } y_{k} = -1
+		y_{k} (w^{T} x_{n} + b) \geq 1 & \qquad & \text{ für } y_{k} = +1\\
+		y_{k} (w^{T} x_{n} + b) \geq 1 & & \text{ für } y_{k} = -1
 	\end{alignat}
 \end{subequations}
 
-Für den Grenzfall, dass $x_{k} = \hat{x}$ genau an der Grenze der Trennebene liegt, gilt somit:
+Für den Grenzfall, dass $x_{n} = \hat{x}$ genau an der Grenze der Trennebene liegt, gilt somit:
 \begin{equation} \label{dec_rule}
 	\begin{aligned}
 		y_{k} (w^{T} \hat{x} + b) &= 1
@@ -126,7 +126,7 @@ Für den Grenzfall, dass $x_{k} = \hat{x}$ genau an der Grenze der Trennebene li
 \end{equation}
 
 
-Als nächsten Schritt bestimmen wir den euklidischen Normalabstand $D$ eines beliebigen Punkts $x_{k} \in \mathbb{R}^{D}$ zu der Ebene. Hierfür ist zuerst zu bemerken, dass $w$ normal zur definierten Ebene steht.
+Als nächsten Schritt bestimmen wir den euklidischen Normalabstand $D$ eines beliebigen Punkts $x_{n} \in \mathbb{R}^{D}$ zu der Ebene. Hierfür ist zuerst zu bemerken, dass $w$ normal zur definierten Ebene steht.
 
 \begin{lemma}
 	Eine Ebene sei definiert durch $w^{T} x + b = 0$. Der Vektor $w$ steht normal zu der definierten Ebene.
@@ -143,31 +143,31 @@ Als nächsten Schritt bestimmen wir den euklidischen Normalabstand $D$ eines bel
 	\end{equation}
 \end{proof}
 
-Um den Normalabstand $D$ eines beliebigen Punkts $x_{k}$ zu ermitteln wählt man einen Punkt $x$, der auf der Ebene liegt, und projiziert den Vektor $(x_{k} - x)$ auf den Einheitsvektor von $w$. Weil nur der tatsächliche Abstand zur Ebene relevant ist und nicht die Richtung nimmt man den Betrag.
+Um den Normalabstand $D$ eines beliebigen Punkts $x_{n}$ zu ermitteln wählt man einen Punkt $x$, der auf der Ebene liegt, und projiziert den Vektor $(x_{n} - x)$ auf den Einheitsvektor von $w$. Weil nur der tatsächliche Abstand zur Ebene relevant ist und nicht die Richtung nimmt man den Betrag.
 
 \begin{equation} \label{distance_to_plane}
 	\begin{aligned}
-		D &= | \frac{w^{T}}{\lVert w \rVert} (x_{k} - x) | = \\
-		&= \frac{1}{\norm{w}} | (w^{T} x_{k} - w^{T} x) | =\\
-		&= \frac{1}{\norm{w}} | (w^{T} x_{k} + b - (w^{T} x + b)) |
+		D &= | \frac{w^{T}}{\lVert w \rVert} (x_{n} - x) | = \\
+		&= \frac{1}{\norm{w}} | (w^{T} x_{n} - w^{T} x) | =\\
+		&= \frac{1}{\norm{w}} | (w^{T} x_{n} + b - (w^{T} x + b)) |
 	\end{aligned}
 \end{equation}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics{assets/projection.png}
-	\caption{Durch die Projektion von $(x_{k} - x)$ auf den Einheitsvektor von $w$ kann der Normalabstand $D$ von $x_{k}$ zu der Ebene bestimmt werden.}
+	\includegraphics[width = 13cm]{assets/projection.png}
+	\caption{Durch die Projektion von $(x_{n} - x)$ auf den Einheitsvektor von $w$ kann der Normalabstand $D$ von $x_{n}$ zu der Ebene bestimmt werden.}
 	\label{fig:projection}
 \end{figure}
 
 Weil der Punkt $x$ auf der Ebene liegt gilt $w^{T} x + b = 0$ (\autoref{plane_eq}):
 \begin{equation} \label{distance_to_plane_simplified1}
 	\begin{aligned}
-		D &= \frac{1}{\norm{w}} | (w^{T} x_{k} + b) |
+		D &= \frac{1}{\norm{w}} | (w^{T} x_{n} + b) |
 	\end{aligned}
 \end{equation}
 
-Nun trifft man die Annahme, dass $x_{k} = \hat{x}$ der am nächsten zu der Trenngrenze liegende Punkt ist. Aus \autoref{dec_rule} gilt $y_{k} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ unter der Annahme, dass der Punkt richtig klassifiziert wurde. Somit ergibt sich der kleinste Abstand zur Trennebene als:
+Nun trifft man die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenngrenze liegende Punkt ist. Aus \autoref{dec_rule} gilt $y_{k} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ unter der Annahme, dass der Punkt richtig klassifiziert wurde. Somit ergibt sich der kleinste Abstand zur Trennebene als:
 \begin{equation} \label{distance_to_plane_simplified2}
 	\begin{aligned}
 		D &= \frac{1}{\norm{w}}
@@ -176,7 +176,7 @@ Nun trifft man die Annahme, dass $x_{k} = \hat{x}$ der am nächsten zu der Trenn
 
 \subsection{Optimierungsproblem}
 
-\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x_{k}}$. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands für alle $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
+\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x_{n}}$. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands für alle $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
 
 \begin{subequations}
 	\begin{alignat}{2}
@@ -208,7 +208,7 @@ Durch Anwendung von \autoref{abs_value_trick} in \autoref{eq:constraint1}, Umfor
 	\end{alignat}
 \end{subequations}
 
-Die Verallgemeinerung von \autoref{eq:constraint1} auf \autoref{eq:constraint12} auf beliebige Punkte ist so möglich, weil durch \autoref{dec_rule} sichergestellt ist, dass der kleinste Wert für $(w^{T} x_{n} + b)$ $1$ ist, und somit die Werte für alle anderen Punkte größer oder gleich $1$ sein müssen. \\
+Die Verallgemeinerung von \autoref{eq:constraint1} auf \autoref{eq:constraint12} auf beliebige Punkte ist so möglich, weil durch \autoref{dec_rule} sichergestellt ist, dass für beliebige Punkte $y_{n}(w^{T} x_{n} + b) \geq 1$ gilt.
 
 \subsection{Lagrange Optimierung}
 
