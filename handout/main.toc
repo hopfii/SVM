@@ -17,4 +17,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.4}Lösung mittels Quadratic Programming Solver}{9}{subsection.1.2.4}%
 \defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{11}{section*.7}%
+\defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

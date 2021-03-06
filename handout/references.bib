@@ -1,15 +1,27 @@
 
-@video{widrow_lms_2019,
-	title = {The {LMS} algorithm and {ADALINE}. Part I - The {LMS} algorithm},
-	url = {https://www.youtube.com/watch?v=hc2Zj55j1zU&t=404s&ab_channel=widrowlms},
-	author = {Widrow, Bernard},
-	urldate = {2020-10-30},
-	date = {2019-08-05}
+@article{burges_tutorial_1998,
+	title = {A Tutorial on Support Vector Machines for Pattern Recognition},
+	volume = {2},
+	issn = {1573-756X},
+	url = {https://doi.org/10.1023/A:1009715923555},
+	doi = {10.1023/A:1009715923555},
+	abstract = {The tutorial starts with an overview of the concepts of {VC} dimension and structural risk minimization. We then describe linear Support Vector Machines ({SVMs}) for separable and non-separable data, working through a non-trivial example in detail. We describe a mechanical analogy, and discuss when {SVM} solutions are unique and when they are global. We describe how support vector training can be practically implemented, and discuss in detail the kernel mapping technique which is used to construct {SVM} solutions which are nonlinear in the data. We show how Support Vector machines can have very large (even infinite) {VC} dimension by computing the {VC} dimension for homogeneous polynomial and Gaussian radial basis function kernels. While very high {VC} dimension would normally bode ill for generalization performance, and while at present there exists no theory which shows that good generalization performance is guaranteed for {SVMs}, there are several arguments which support the observed high accuracy of {SVMs}, which we review. Results of some experiments which were inspired by these arguments are also presented. We give numerous examples and proofs of most of the key theorems. There is new material, and I hope that the reader will find that even old material is cast in a fresh light.},
+	pages = {121--167},
+	number = {2},
+	journaltitle = {Data Mining and Knowledge Discovery},
+	shortjournal = {Data Mining and Knowledge Discovery},
+	author = {Burges, Christopher J.C.},
+	urldate = {2021-03-06},
+	date = {1998-06-01},
+	langid = {english}
 }
 
-@unpublished{boyd_least_2007,
-	title = {Least squares},
-	url = {https://see.stanford.edu/materials/lsoeldsee263/05-ls.pdf},
-	author = {Boyd, Stephen},
-	date = {2007}
+@report{platt_sequential_1998,
+	title = {Sequential Minimal Optimization: A Fast Algorithm for Training Support Vector Machines},
+	url = {https://www.microsoft.com/en-us/research/publication/sequential-minimal-optimization-a-fast-algorithm-for-training-support-vector-machines/},
+	abstract = {This paper proposes a new algorithm for training support vector machines: Sequential Minimal Optimization , or {SMO} . Training a support vector machine requires the solution of a very large quadratic programming ({QP}) optimization problem. {SMO} breaks this large {QP} problem into a series of smallest possible {QP} problems. These small {QP} problems are solved analytically, which avoids using a time-consuming numerical {QP} optimization as an inner loop. The amount of memory required for {SMO} is linear in the training set size, which allows {SMO} to handle very large training sets. Because matrix computation is avoided, {SMO} scales somewhere between linear and quadratic in the training set size for various test problems, while the standard chunking {SVM} algorithm scales somewhere between linear and cubic in the training set size. {SMO}'s computation time is dominated by {SVM} evaluation, hence {SMO} is fastest for linear {SVMs} and sparse data sets. On real- world sparse data sets, {SMO} can be more than 1000 times faster than the chunking algorithm.},
+	pages = {21},
+	number = {{MSR}-{TR}-98-14},
+	author = {Platt, John},
+	date = {1998-04}
 }

@@ -1,0 +1,61 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{platt_sequential_1998}{report}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=74ebe0fc06c0292871d5f756cfe5414d}{%
+           family={Platt},
+           familyi={P\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{74ebe0fc06c0292871d5f756cfe5414d}
+      \strng{fullhash}{74ebe0fc06c0292871d5f756cfe5414d}
+      \strng{bibnamehash}{74ebe0fc06c0292871d5f756cfe5414d}
+      \strng{authorbibnamehash}{74ebe0fc06c0292871d5f756cfe5414d}
+      \strng{authornamehash}{74ebe0fc06c0292871d5f756cfe5414d}
+      \strng{authorfullhash}{74ebe0fc06c0292871d5f756cfe5414d}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper proposes a new algorithm for training support vector machines: Sequential Minimal Optimization , or {SMO} . Training a support vector machine requires the solution of a very large quadratic programming ({QP}) optimization problem. {SMO} breaks this large {QP} problem into a series of smallest possible {QP} problems. These small {QP} problems are solved analytically, which avoids using a time-consuming numerical {QP} optimization as an inner loop. The amount of memory required for {SMO} is linear in the training set size, which allows {SMO} to handle very large training sets. Because matrix computation is avoided, {SMO} scales somewhere between linear and quadratic in the training set size for various test problems, while the standard chunking {SVM} algorithm scales somewhere between linear and cubic in the training set size. {SMO}'s computation time is dominated by {SVM} evaluation, hence {SMO} is fastest for linear {SVMs} and sparse data sets. On real- world sparse data sets, {SMO} can be more than 1000 times faster than the chunking algorithm.}
+      \field{month}{4}
+      \field{number}{{MSR}-{TR}-98-14}
+      \field{title}{Sequential Minimal Optimization: A Fast Algorithm for Training Support Vector Machines}
+      \field{year}{1998}
+      \field{dateera}{ce}
+      \field{pages}{21}
+      \range{pages}{1}
+      \verb{urlraw}
+      \verb https://www.microsoft.com/en-us/research/publication/sequential-minimal-optimization-a-fast-algorithm-for-training-support-vector-machines/
+      \endverb
+      \verb{url}
+      \verb https://www.microsoft.com/en-us/research/publication/sequential-minimal-optimization-a-fast-algorithm-for-training-support-vector-machines/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

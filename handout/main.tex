@@ -337,6 +337,9 @@ Als nächsten Schritt müssen wir die Koeffizienten aus den Summen extrahieren, 
 	\end{alignat}
 \end{subequations}
 
+An dieser Stelle ist zu bemerken dass es sich bei der Matrix $Q$ um eine $N \times N$ Matrix handelt. Für eine große Anzahl an Trainingsdaten ist dies sehr problematisch beziehungsweise nicht mehr lösbar. Hier können andere Optimierungsverfahren wie beispielsweise in \textcite{platt_sequential_1998} beschrieben verwendet werden. \\
+
+
 Das Problem in dieser Darstellung können wir direkt an ein Quadratic-Programming Solver Framework übergeben und erhalten einen Vektor $\alpha = (\alpha_{1}, \alpha_{2}, ..., \alpha_{n})$ als Ergebnis. \\
 
 Daraus können wir, wie bereits zuvor erwähnt, $w$ und $b$ bestimmen:
