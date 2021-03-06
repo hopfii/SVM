@@ -93,21 +93,38 @@ Ziel: möglichst breites Band zwischen den 2 verschiedenen Klassen aufziehen.
 
 TODO TEXT HERE
 \subsection{Problemdefinition}
-Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{D}$, ein Bias $b \in \mathbb{R}$ und ein beliebiger Punkt $x \in \mathbb{R}^{D}$. Eine Ebene im Raum kann definiert werden durch:
+Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{D}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{k} \in \mathbb{R}^{D}$ und ein zugehöriges Label $y_{k} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
 
 \begin{equation} \label{plane_eq}
     \begin{aligned}
-    w^{T} x + b &= 0 \\
+    w^{T} x_{k} + b &= 0 \\
     \end{aligned}
 \end{equation}
 
-Weil \autoref{plane_eq} mit verschiedenen Skalarwerten skaliert werden kann, führen wir eine zusätzliche Bedingung ohne Beschränkung der Allgemeinheit ein. Sei $\hat{x} \in \mathbb{R}^{D}$ der am nächsten zur Ebene gelegene Punkt so soll gelten:
+Weiters soll für eine richtige Klassifikation gelten:
+\begin{subequations} \label{decision_rules}
+	\begin{alignat}{2}
+		w^{T} x_{k} + b \geq +1 & \qquad & \text{ für } y_{k} = +1\\
+		w^{T} x_{k} + b \leq -1 & & \text{ für } y_{k} = -1
+	\end{alignat}
+\end{subequations}
 
-\begin{equation} \label{plane_normalization}
+\autoref{decision_rules} kann weiter verallgemeinert werden durch beidseitige Multiplikation mit $y_{k}$:
+
+\begin{subequations} \label{decision_rules2}
+	\begin{alignat}{2}
+		y_{k} (w^{T} x_{k} + b) \geq 1 & \qquad & \text{ für } y_{k} = +1\\
+		y_{k} (w^{T} x_{k} + b) \geq 1 & & \text{ für } y_{k} = -1
+	\end{alignat}
+\end{subequations}
+
+Für den Grenzfall, dass $x_{k} = \hat{x}$ genau an der Grenze der Trennebene liegt, gilt somit:
+\begin{equation} \label{dec_rule}
 	\begin{aligned}
-		|w^{T} \hat{x} + b| &= 1 \\
+		y_{k} (w^{T} \hat{x} + b) &= 1
 	\end{aligned}
 \end{equation}
+
 
 Als nächsten Schritt bestimmen wir den euklidischen Normalabstand $D$ eines beliebigen Punkts $x_{k} \in \mathbb{R}^{D}$ zu der Ebene. Hierfür ist zuerst zu bemerken, dass $w$ normal zur definierten Ebene steht.
 
@@ -126,7 +143,7 @@ Als nächsten Schritt bestimmen wir den euklidischen Normalabstand $D$ eines bel
 	\end{equation}
 \end{proof}
 
-Um den Normalabstand $D$ eines beliebigen Punkts $x_{k}$ zu ermitteln wählt man einen Punkt $x$ der auf der Ebene liegt und projiziert den Vektor $(x_{k} - x)$ auf den Einheitsvektor von $w$. Weil nur der tatsächliche Abstand zur Ebene relevant ist nimmt man den Betrag.
+Um den Normalabstand $D$ eines beliebigen Punkts $x_{k}$ zu ermitteln wählt man einen Punkt $x$, der auf der Ebene liegt, und projiziert den Vektor $(x_{k} - x)$ auf den Einheitsvektor von $w$. Weil nur der tatsächliche Abstand zur Ebene relevant ist und nicht die Richtung nimmt man den Betrag.
 
 \begin{equation} \label{distance_to_plane}
 	\begin{aligned}
@@ -150,7 +167,7 @@ Weil der Punkt $x$ auf der Ebene liegt gilt $w^{T} x + b = 0$ (\autoref{plane_eq
 	\end{aligned}
 \end{equation}
 
-Aus \autoref{plane_normalization} gilt weiters $| (w^{T} x_{k} + b) | = 1$ wenn $x_{k} = \hat{x}$ der am nächsten zu der Ebene liegende Punkt ist. Somit ergibt sich der kleinste Abstand zur Ebene als:
+Nun trifft man die Annahme, dass $x_{k} = \hat{x}$ der am nächsten zu der Trenngrenze liegende Punkt ist. Aus \autoref{dec_rule} gilt $y_{k} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ unter der Annahme, dass der Punkt richtig klassifiziert wurde. Somit ergibt sich der kleinste Abstand zur Trennebene als:
 \begin{equation} \label{distance_to_plane_simplified2}
 	\begin{aligned}
 		D &= \frac{1}{\norm{w}}
@@ -159,7 +176,7 @@ Aus \autoref{plane_normalization} gilt weiters $| (w^{T} x_{k} + b) | = 1$ wenn 
 
 \subsection{Optimierungsproblem}
 
-\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x}$. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands für alle $N$ Eingabevektoren $x_{1}..x_{N} \in \mathbb{R}^{D}$. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
+\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x_{k}}$. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands für alle $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
 
 \begin{subequations}
 	\begin{alignat}{2}
@@ -168,14 +185,14 @@ Aus \autoref{plane_normalization} gilt weiters $| (w^{T} x_{k} + b) | = 1$ wenn 
 	\end{alignat}
 \end{subequations}
 
-\autoref{eq:constraint1} beschreibt hier den am nächsten zur Ebene gelegenen Punkt $\hat{x}$ in allgemeiner Form. Der Betrag lässt sich umschreiben durch die Einführung von Labels $y_{n} \in \{-1, +1\}$. Diese beschreiben jeweils die Klasse des zugehörigen Vektors $x_{n}$. Für eine korrekte Klassifizierung der \ac{SVM} gilt:
+\autoref{eq:constraint1} beschreibt hier den am nächsten zur Ebene gelegenen Punkt $\hat{x}$ in allgemeiner Form. Der Betrag lässt sich umschreiben durch die Multiplikation mit dem zugehörigen Label $y_{n}$. Für eine korrekte Klassifizierung der \ac{SVM} gilt:
 \begin{equation} \label{svm_classif}
 	\begin{aligned}
 		y_{n} &= sign(w^{T} x_{n} + b)
 	\end{aligned}
 \end{equation}
 
-Somit gilt für einen korrekt klassifizierten Vektor $x_{k}$:
+Somit gilt für einen korrekt klassifizierten Vektor $x_{n}$:
 \begin{equation} \label{abs_value_trick}
 	\begin{aligned}
 		|w^{T} x_{n} + b| &= y_{n} (w^{T} x_{n} + b)
@@ -191,7 +208,7 @@ Durch Anwendung von \autoref{abs_value_trick} in \autoref{eq:constraint1}, Umfor
 	\end{alignat}
 \end{subequations}
 
-Die Verallgemeinerung von \autoref{eq:constraint1} auf \autoref{eq:constraint12} auf beliebige Punkte ist so möglich, weil durch \autoref{plane_normalization} sichergestellt ist, dass der kleinste Wert für $(w^{T} x_{n} + b)$ $1$ ist, und somit die Werte für alle anderen Punkte größer oder gleich $1$ sein müssen. \\
+Die Verallgemeinerung von \autoref{eq:constraint1} auf \autoref{eq:constraint12} auf beliebige Punkte ist so möglich, weil durch \autoref{dec_rule} sichergestellt ist, dass der kleinste Wert für $(w^{T} x_{n} + b)$ $1$ ist, und somit die Werte für alle anderen Punkte größer oder gleich $1$ sein müssen. \\
 
 \subsection{Lagrange Optimierung}
 
@@ -283,7 +300,7 @@ Weil nur Stützvektoren ein $\alpha_{n} \neq 0$ aufweisen und somit auch nur St�
 Der Gewichtsvektor $w$ hängt also lediglich von einigen, in der Regeln wenigen, Stützvektoren ab.\\
 
 
-Noch offen ist die Bestimmung des Bias $b$. Weil für Stützvektoren $y_n (w^{T} x_{n} + b) = 1$ gilt kann der Bias $b$ aus jedem beliebigen Stützvektor bestimmt werden:
+Noch offen ist die Bestimmung des Bias $b$. Weil für Stützvektoren $y_n (w^{T} x_{n} + b) = 1$ gilt (\autoref{dec_rule}) kann der Bias $b$ aus jedem beliebigen Stützvektor bestimmt werden:
 
 \begin{equation} \label{bias_calc}
 	\begin{aligned}
