@@ -90,7 +90,7 @@
 \chapter{Einführung}
 
 \section{Intuition}
-Ziel: möglichst breites Band zwischen den 2 verschiedenen Klassen aufziehen.
+Ziel: Ebene so wählen dass möglichst breites Band zwischen den 2 verschiedenen Klassen entsteht.
 
 
 \begin{figure}[H]
@@ -103,7 +103,8 @@ Ziel: möglichst breites Band zwischen den 2 verschiedenen Klassen aufziehen.
 
 \section{Mathematische Herleitung}
 
-TODO TEXT HERE
+TODO ZUSAMMENFASSUNG HERE
+
 \subsection{Problemdefinition}
 Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{D}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{D}$ und ein zugehöriges Label $y_{n} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
 
@@ -137,7 +138,7 @@ Durch \autoref{decision_rules} wird sichergestellt, dass Werte aus dem Intervall
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width = 13cm]{assets/trennband.png}
+	\includegraphics[width = 12cm]{assets/trennband.png}
 	\caption{Um die Trennebene entsteht ein Trennband. Die am nächsten zu der Ebene liegenden Eingabevektoren liegen genau auf den Grenzen des Trennbands.}
 	\label{fig:trennband}
 \end{figure}
@@ -180,11 +181,11 @@ Als nächsten Schritt bestimmen wir den euklidischen Normalabstand $D$ eines bel
 	\end{equation}
 \end{proof}
 
-Um den Normalabstand $D$ eines beliebigen Punkts $x_{n}$ zu ermitteln wählt man einen Punkt $x$, der auf der Ebene liegt, und projiziert den Vektor $(x_{n} - x)$ auf den Einheitsvektor von $w$. Weil nur der tatsächliche Abstand zur Ebene relevant ist und nicht die Richtung nimmt man den Betrag.
+Um den Normalabstand $d$ eines beliebigen Punkts $x_{n}$ zu ermitteln wählt man einen Punkt $x$, der auf der Ebene liegt, und projiziert den Vektor $(x_{n} - x)$ auf den Einheitsvektor von $w$. Weil nur der tatsächliche Abstand zur Ebene relevant ist und nicht die Richtung nimmt man den Betrag.
 
 \begin{equation} \label{distance_to_plane}
 	\begin{aligned}
-		D &= | \frac{w^{T}}{\lVert w \rVert} (x_{n} - x) | = \\
+		d &= | \frac{w^{T}}{\lVert w \rVert} (x_{n} - x) | = \\
 		&= \frac{1}{\norm{w}} | (w^{T} x_{n} - w^{T} x) | =\\
 		&= \frac{1}{\norm{w}} | (w^{T} x_{n} + b - (w^{T} x + b)) |
 	\end{aligned}
@@ -193,18 +194,18 @@ Um den Normalabstand $D$ eines beliebigen Punkts $x_{n}$ zu ermitteln wählt man
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 13cm]{assets/projection.png}
-	\caption{Durch die Projektion von $(x_{n} - x)$ auf den Einheitsvektor von $w$ kann der Normalabstand $D$ von $x_{n}$ zu der Ebene bestimmt werden.}
+	\caption{Durch die Projektion von $(x_{n} - x)$ auf den Einheitsvektor von $w$ kann der Normalabstand $d$ von $x_{n}$ zu der Ebene bestimmt werden.}
 	\label{fig:projection}
 \end{figure}
 
 Weil der Punkt $x$ auf der Ebene liegt gilt $w^{T} x + b = 0$ (\autoref{plane_eq}):
 \begin{equation} \label{distance_to_plane_simplified1}
 	\begin{aligned}
-		D &= \frac{1}{\norm{w}} | (w^{T} x_{n} + b) |
+		d &= \frac{1}{\norm{w}} | (w^{T} x_{n} + b) |
 	\end{aligned}
 \end{equation}
 
-Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenngrenze liegende Punkt ist, so gilt aus \autoref{dec_rule} gilt $y_{k} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ unter der Annahme, dass der Punkt richtig klassifiziert wurde. Somit ergibt sich der kleinste Abstand zur Trennebene, welcher zugleich der halben Breite des Trennbands entspricht, als:
+Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenngrenze liegende Punkt ist, so gilt aus \autoref{dec_rule} gilt $y_{k} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ unter der Annahme, dass der Punkt richtig klassifiziert wurde. Somit ergibt sich der kleinste Abstand zur Trennebene $D = d(\hat{x})$, welcher zugleich der halben Breite des Trennbands entspricht, als:
 \begin{equation} \label{distance_to_plane_simplified2}
 	\begin{aligned}
 		D &= \frac{1}{\norm{w}}
@@ -213,7 +214,7 @@ Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenn
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width = 13cm]{assets/trennband_mit_D.png}
+	\includegraphics[width = 12cm]{assets/trennband_mit_D.png}
 	\caption{Der Normalabstand $D$ von der Ebene zu den am nächsten liegenden Eingabevektoren entspricht genau der Hälfte der Breite des Trennbands.}
 	\label{fig:trennband2}
 \end{figure}
