@@ -1,7 +1,7 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {german}{}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Abkürzungsverzeichnis}{3}{section*.3}%
+\contentsline {chapter}{Abkürzungsverzeichnis}{3}{section*.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Einführung}{4}{chapter.1}%
 \defcounter {refsection}{0}\relax 
@@ -15,8 +15,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.3}Lagrange Optimierung}{9}{subsection.1.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.4}Lösung mittels Quadratic Programming Solver}{11}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.4}Lösung mittels Quadratic Programming Solver}{12}{subsection.1.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{13}{section*.10}%
+\contentsline {subsection}{\numberline {1.2.5}Soft Margin \ac {SVM}}{13}{subsection.1.2.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{15}{section*.10}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

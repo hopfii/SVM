@@ -90,8 +90,9 @@
 \chapter{Einführung}
 
 \section{Intuition}
-Ziel: Ebene so wählen dass möglichst breites Band zwischen den 2 verschiedenen Klassen entsteht.
+Ziel: Ebene so wählen dass möglichst breites Band zwischen den 2 verschiedenen Klassen entsteht. \\
 
+Hard Margin vs Soft Margin
 
 \begin{figure}[H]
 	\centering
@@ -106,7 +107,7 @@ Ziel: Ebene so wählen dass möglichst breites Band zwischen den 2 verschiedenen
 TODO ZUSAMMENFASSUNG HERE
 
 \subsection{Problemdefinition}
-Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{D}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{D}$ und ein zugehöriges Label $y_{n} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
+Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{K}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{K}$ und ein zugehöriges Label $y_{n} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
 
 \begin{equation} \label{plane_eq}
     \begin{aligned}
@@ -164,14 +165,14 @@ Für den Fall, dass $x_{n} = \hat{x}$ genau an der Grenze des Trennbands liegt, 
 \end{equation}
 
 
-Als nächsten Schritt bestimmen wir den euklidischen Normalabstand $D$ eines beliebigen Punkts $x_{n} \in \mathbb{R}^{D}$ zu der Ebene. Hierfür ist zuerst zu bemerken, dass $w$ normal zur definierten Ebene steht.
+Als nächsten Schritt bestimmen wir den euklidischen Normalabstand $D$ eines beliebigen Punkts $x_{n} \in \mathbb{R}^{K}$ zu der Ebene. Hierfür ist zuerst zu bemerken, dass $w$ normal zur definierten Ebene steht.
 
 \begin{lemma}
 	Eine Ebene sei definiert durch $w^{T} x + b = 0$. Der Vektor $w$ steht normal zu der definierten Ebene.
 \end{lemma}
 
 \begin{proof}
-	Man wähle zwei Punkte $x_{1}, x_{2} \in \mathbb{R}^{D}$ die auf der Ebene liegen. Somit muss gelten:
+	Man wähle zwei Punkte $x_{1}, x_{2} \in \mathbb{R}^{K}$ die auf der Ebene liegen. Somit muss gelten:
 	\begin{equation}
 		\begin{aligned}
 			w^{T} x_{1} + b &= 0 \\
@@ -223,7 +224,9 @@ Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenn
 \subsection{Optimierungsproblem}
 
 \autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x}$. Der Normalabstand ist gleichbedeutend mit der Hälfte der Breite des Trennbands, wobei für die Optimierung der Faktor $2$ keine Rolle spielt und vernachlässigt werden kann. \\
-Das Ziel einer \ac{SVM} ist die Maximierung der Breite des Trennbands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Bei dieser Version der \ac{SVM} müssen die Eingabevektoren linear separierbar sein. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
+Das Ziel einer \ac{SVM} ist die Maximierung der Breite des Trennbands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{K}$. Bei der in diesem Kapitel hergeleiteten Version der \ac{SVM} müssen die Eingabevektoren linear separierbar sein. Diese Art der \ac{SVM} wird auch Hard-Margin SVM genannt. Die zweite Version, bei der nicht alle Eingabevektoren linear trennbar sind, heißt Soft-Margin SVM und wird in \autoref{sec:soft_margin} beschrieben. \\
+
+Bei dem beschriebenen Problem handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
 
 \begin{subequations}
 	\begin{alignat}{2}
@@ -251,10 +254,10 @@ Durch Anwendung von \autoref{abs_value_trick} in \autoref{eq:constraint1}, Umfor
 
 Die Verallgemeinerung von \autoref{eq:constraint1} auf \autoref{eq:constraint12} auf beliebige Punkte ist so möglich, weil durch \autoref{dec_rule} sichergestellt ist, dass für beliebige Punkte $y_{n}(w^{T} x_{n} + b) \geq 1$ gilt.
 
-\subsection{Lagrange Optimierung}
+\subsection{Lagrange Optimierung} \label{sec:lagrange}
 
 Das beschriebene Optimierungsproblem beinhaltet eine Ungleichung in \autoref{eq:constraint12}. Um die Lagrangegleichung aufstellen zu können wird zuerst die Nebenbedingung umgeformt:
-\begin{subequations}
+\begin{subequations} \label{min_problem}
 	\begin{alignat}{2}
 		&\!\min_{w}        &\qquad&  \frac{1}{2} w^{T} w \label{eq:optProb3}\\
 		&\text{mit } &      & y_n (w^{T} x_{n} + b)-1 \geq 0 \text{ für } n=1..N \label{eq:constraint13}
@@ -411,6 +414,48 @@ Die \ac{SVM} ist nun vollständig definiert, neue Eingabevektoren $x$ können wi
 	\end{aligned}
 \end{equation}
 
+\subsection{Soft Margin \ac{SVM}} \label{sec:soft_margin}
+Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind. Dieses Problem kann durch eine Hard-Margin SVM, wie in den Kapiteln zuvor gezeigt gelöst werden. Trifft diese Annahme für eine Menge von Eingabevektoren nicht mehr zu wird der bisher beschriebene Algorithmus keine Trennebene finden. Durch die Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$ in \autoref{decision_rules} kann dieses Problem umgangen werden:
+
+\begin{subequations} \label{decision_rules_softmargin}
+	\begin{alignat}{2}
+		w^{T} x_{n} + b \geq +1 - \xi_{n}& \qquad & \text{ für } y_{n} = +1\\
+		w^{T} x_{n} + b \leq -1 + \xi_{n}& & \text{ für } y_{n} = -1
+	\end{alignat}
+\end{subequations}
+
+Damit ein Eingabevektor $x_{n}$ nun, gemäß \autoref{decision_rules_softmargin}, falsch klassifiziert werden kann muss der Fehler $\xi_{n}$ über $1$ steigen. Eine obere Grenze für die Anzahl der aufgetretenen Fehler kann somit beschrieben werden durch $\sum_{n=1}^{N} \xi_{n}$. \\
+
+Basierend auf dieser Grundlage kann eine Kostenfunktion $E$ basierend auf der Anzahl der Fehler formuliert werden:
+\begin{equation} \label{soft_margin_error_cost_function}
+	\begin{aligned}
+		E = C(\sum_{n=1}^{N} \xi_{n})
+	\end{aligned}
+\end{equation}
+
+Der Parameter $C \in \mathbb{R}, C \geq 0$ bestimmt die Höhe der Bestrafung von Fehlern und kann frei gewählt werden. \\
+
+
+Erweitert man die zu minimierende Funktion $\frac{1}{2} w^{T} w $ aus \autoref{min_problem} um die Kostenfunktion $C(\sum_{n=1}^{N} \xi_{n})$ so erhält man ein neues Optimierungsproblem:
+
+\begin{subequations} \label{soft_margin_problem}
+	\begin{alignat}{2}
+		&\!\min_{w}        &\qquad&  \frac{1}{2} w^{T} w + C(\sum_{n=1}^{N} \xi_{n}) \label{eq:optProbsoft}\\
+		&\text{mit } &      & y_n (w^{T} x_{n} + b)-1 \geq 0 \text{ für } n=1..N \label{eq:constraintsoft}
+	\end{alignat}
+\end{subequations}
+
+Wendet man die in \autoref{sec:lagrange} beschriebenen Schritte auf das in \autoref{soft_margin_problem} beschriebene Problem an erhält man folgendes Optimierungsproblem:
+
+\begin{subequations} \label{final_lagrange_soft}
+	\begin{alignat}{2}
+		&\!\max_{\alpha}        &\qquad&  	\Lagr(\alpha) = \sum_{n=1}^{N} \alpha_{n} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m} \label{eq:soft_margin_final}\\
+		&\text{mit } &      & 0 \leq \alpha_{n} \leq C \text{ für } n=1..N \label{eq:constraint_soft}\\
+		&       & & \sum_{n=1}^{N} \alpha_{n} y_{n} = 0\text{ für } n=1..N
+	\end{alignat}
+\end{subequations}
+
+Sehr bemerkenswert hier ist, dass der einzige Unterschied zu \autoref{final_lagrange} die Beschränkung der Lagrange Multiplikatoren durch $C$ ist. Umgekehrt bedeutet dies, dass eine Hard-Margin SVM durch \autoref{final_lagrange_soft} beschrieben werden kann wenn der Parameter $C$ sehr groß gewählt wird.
 
 % THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
 \nocite{*}
