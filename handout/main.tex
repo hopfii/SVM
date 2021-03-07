@@ -25,6 +25,8 @@
 \addbibresource{references.bib} 
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{interval}
+
 
 \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
 \newcommand{\norm}[1]{\lVert#1\rVert}
@@ -101,15 +103,27 @@ Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{D}$, ein Bias $b \in \mathbb{R
     \end{aligned}
 \end{equation}
 
-Weiters soll für eine richtige Klassifikation gelten:
-\begin{subequations} \label{decision_rules}
+Mit einer bereits trainierten \ac{SVM} können neue, noch unklassifizierte Eingabevektoren $x$ wie folgt klassifiziert werden:
+
+\begin{subequations} \label{svm_classify1}
 	\begin{alignat}{2}
-		w^{T} x_{n} + b \geq +1 & \qquad & \text{ für } y_{k} = +1\\
-		w^{T} x_{n} + b \leq -1 & & \text{ für } y_{k} = -1
+		y = sign(w^{T} x + b)  & \qquad & \text{ gleichbedeutend mit} \\
+		w^{T} x + b > 0 & & \text{ für } y = +1\\
+		w^{T} x + b < 0 & & \text{ für } y = -1
 	\end{alignat}
 \end{subequations}
 
-\autoref{decision_rules} kann weiter verallgemeinert werden durch beidseitige Multiplikation mit $y_{k}$:
+
+Für die Herleitung führen wir eine noch striktere Regel ein. So soll für eine richtige Klassifikation eines gegebenen Eingabevektors $x_{n}$ mit dem Label $y_{n}$ gelten:
+\begin{subequations} \label{decision_rules}
+	\begin{alignat}{2}
+		w^{T} x_{n} + b \geq +1 & \qquad & \text{ für } y_{n} = +1\\
+		w^{T} x_{n} + b \leq -1 & & \text{ für } y_{n} = -1
+	\end{alignat}
+\end{subequations}
+
+
+Durch \autoref{decision_rules} wird sichergestellt, dass Werte aus dem Intervall $\interval[open]{-1}{+1}$ als Ergebnis nicht vorkommen können. Dadurch entsteht eine Art symmetrisches Trennband um die Trennebene in dem keine Punkte liegen dürfen. \\ \autoref{decision_rules} kann weiter verallgemeinert werden durch beidseitige Multiplikation mit $y_{k}$:
 
 \begin{subequations} \label{decision_rules2}
 	\begin{alignat}{2}
@@ -118,7 +132,9 @@ Weiters soll für eine richtige Klassifikation gelten:
 	\end{alignat}
 \end{subequations}
 
-Für den Grenzfall, dass $x_{n} = \hat{x}$ genau an der Grenze der Trennebene liegt, gilt somit:
+
+
+Für den Fall, dass $x_{n} = \hat{x}$ genau an der Grenze des Trennbands liegt, gilt somit:
 \begin{equation} \label{dec_rule}
 	\begin{aligned}
 		y_{k} (w^{T} \hat{x} + b) &= 1
@@ -167,7 +183,7 @@ Weil der Punkt $x$ auf der Ebene liegt gilt $w^{T} x + b = 0$ (\autoref{plane_eq
 	\end{aligned}
 \end{equation}
 
-Nun trifft man die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenngrenze liegende Punkt ist. Aus \autoref{dec_rule} gilt $y_{k} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ unter der Annahme, dass der Punkt richtig klassifiziert wurde. Somit ergibt sich der kleinste Abstand zur Trennebene als:
+Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenngrenze liegende Punkt ist, so gilt aus \autoref{dec_rule} gilt $y_{k} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ unter der Annahme, dass der Punkt richtig klassifiziert wurde. Somit ergibt sich der kleinste Abstand zur Trennebene, welcher zugleich der halben Breite des Trennbands entspricht, als:
 \begin{equation} \label{distance_to_plane_simplified2}
 	\begin{aligned}
 		D &= \frac{1}{\norm{w}}
@@ -176,7 +192,7 @@ Nun trifft man die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenn
 
 \subsection{Optimierungsproblem}
 
-\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x}$. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
+\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x}$, der gleichbedeutend mit der Breite des Trennbands ist. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Bei dieser Version der \ac{SVM} müssen die Eingabevektoren linear separierbar sein. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
 
 \begin{subequations}
 	\begin{alignat}{2}
@@ -364,6 +380,9 @@ Die \ac{SVM} ist nun vollständig definiert, neue Eingabevektoren $x$ können wi
 	\end{aligned}
 \end{equation}
 
+
+% THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
+\nocite{*}
 
 % Literaturverzeichnis:
 \clearpage
