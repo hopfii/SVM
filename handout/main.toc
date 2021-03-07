@@ -11,12 +11,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.1}Problemdefinition}{4}{subsection.1.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.2}Optimierungsproblem}{7}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.2}Optimierungsproblem}{8}{subsection.1.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.3}Lagrange Optimierung}{8}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.3}Lagrange Optimierung}{9}{subsection.1.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.4}Lösung mittels Quadratic Programming Solver}{10}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.4}Lösung mittels Quadratic Programming Solver}{11}{subsection.1.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{13}{section*.9}%
+\contentsline {chapter}{Bibliography}{13}{section*.10}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
