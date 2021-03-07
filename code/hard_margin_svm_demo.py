@@ -19,24 +19,28 @@ m = X.shape[0]
 K = np.array([np.dot(X[i], X[j])
  for j in range(m)
  for i in range(m)]).reshape((m, m))
-P = cvxopt.matrix(np.outer(y, y) * K)
+Q = cvxopt.matrix(np.outer(y, y) * K)
+
 q = cvxopt.matrix(-1 * np.ones(m))
 
-# Equality constraints
+# equality constraints (form: Ax = b)
+# for SVM problem: y^T alpha = 0
 A = cvxopt.matrix(y, (1, m))
 b = cvxopt.matrix(0.0)
 
-# Inequality constraints
+# Inequality constraints: (Gx <= h)
+# for SVM problem:: 0 <= alpha <= inf
+# (-1 * alpha) <= 0 -> violated for alpha < 0
 G = cvxopt.matrix(np.diag(-1 * np.ones(m)))
 h = cvxopt.matrix(np.zeros(m))
 
-# Solve the problem
-solution = cvxopt.solvers.qp(P, q, G, h, A, b)
+# solve problem
+solution = cvxopt.solvers.qp(Q, q, G, h, A, b)
 
-# Lagrange multipliers
+# get lagrange multipliers
 multipliers = np.ravel(solution['x'])
 
-# Support vectors have positive multipliers.
+# support vectors have positive lagrange multiplier
 has_positive_multiplier = multipliers > 1e-7
 sv_multipliers = multipliers[has_positive_multiplier]
 support_vectors = X[has_positive_multiplier]
