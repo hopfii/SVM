@@ -123,12 +123,12 @@ Für die Herleitung führen wir eine noch striktere Regel ein. So soll für eine
 \end{subequations}
 
 
-Durch \autoref{decision_rules} wird sichergestellt, dass Werte aus dem Intervall $\interval[open]{-1}{+1}$ als Ergebnis nicht vorkommen können. Wie in \autoref{fig:trennband} dargestellt entsteht dadurch ein symmetrisches Trennband um die Trennebene in dem keine Punkte liegen dürfen. Ziel der \ac{SVM} ist die Maximierung der Breite dieses Bandes.\\
+Durch \autoref{decision_rules} wird sichergestellt, dass Werte aus dem Intervall $\interval[open]{-1}{+1}$ als Ergebnis nicht vorkommen können. Wie in \autoref{fig:trennband} dargestellt entsteht dadurch ein symmetrisches Trennband um die Trennebene in dem keine Punkte liegen. Ziel der \ac{SVM} ist die Maximierung der Breite dieses Bandes.\\
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 13cm]{assets/trennband.png}
-	\caption{Um die Trennebene entsteht ein Trennband mit den Normalabständen $D$ zu den am nächsten liegenden Eingabevektoren.}
+	\caption{Um die Trennebene entsteht ein Trennband. Die am nächsten zu der Ebene liegenden Eingabevektoren liegen genau auf den Grenzen des Trennbands.}
 	\label{fig:trennband}
 \end{figure}
 
@@ -200,6 +200,14 @@ Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenn
 		D &= \frac{1}{\norm{w}}
 	\end{aligned}
 \end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 13cm]{assets/trennband_mit_D.png}
+	\caption{Der Normalabstand $D$ von der Ebene zu den am nächsten liegenden Eingabevektoren entspricht genau der Hälfte der Breite des Trennbands.}
+	\label{fig:trennband2}
+\end{figure}
+
 
 \subsection{Optimierungsproblem}
 
