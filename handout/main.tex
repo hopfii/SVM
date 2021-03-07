@@ -211,7 +211,8 @@ Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenn
 
 \subsection{Optimierungsproblem}
 
-\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x}$, der gleichbedeutend mit der Breite des Trennbands ist. Ziel einer \ac{SVM} ist die Maximierung dieses Abstands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Bei dieser Version der \ac{SVM} müssen die Eingabevektoren linear separierbar sein. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
+\autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x}$. Der Normalabstand ist gleichbedeutend mit der Hälfte der Breite des Trennbands, wobei für die Optimierung der Faktor $2$ keine Rolle spielt und vernachlässigt werden kann. \\
+Das Ziel einer \ac{SVM} ist die Maximierung der Breite des Trennbands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{D}$. Bei dieser Version der \ac{SVM} müssen die Eingabevektoren linear separierbar sein. Hierbei handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
 
 \begin{subequations}
 	\begin{alignat}{2}
