@@ -4,14 +4,18 @@ import numpy as np
 
 
 # calculate bias as average over all support vectors
-def compute_b(w, X, y):
+def compute_b_avg(w, X, y):
     return np.sum([y[i] - np.dot(w, X[i]) for i in range(len(X))]) / len(X)
+
+# calculate bias from one support vector
+def compute_b(w, X, y):
+    return ((1/y) - np.dot(w, np.transpose(X)))
 
 # calculate w for svm
 def compute_w(multipliers, X, y):
     return np.sum(multipliers[i] * y[i] * X[i] for i in range(len(y)))
 
-
+# load dataset
 X, y = get_dataset(ls.get_training_examples)
 m = X.shape[0]
 
@@ -54,8 +58,11 @@ print(w)
 print("w from support vectors:")
 print(w_from_sv)
 
-b = compute_b(w, support_vectors, support_vectors_y) 
-print("b")
+b = compute_b(w, support_vectors[0], support_vectors_y[0]) 
+print("b calculated from single support vector")
 print(b)
+print("b calculated as avg over all support vectors")
+print(compute_b_avg(w, support_vectors, support_vectors_y))
+
 
 
