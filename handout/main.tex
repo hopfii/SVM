@@ -123,7 +123,18 @@ Für die Herleitung führen wir eine noch striktere Regel ein. So soll für eine
 \end{subequations}
 
 
-Durch \autoref{decision_rules} wird sichergestellt, dass Werte aus dem Intervall $\interval[open]{-1}{+1}$ als Ergebnis nicht vorkommen können. Dadurch entsteht eine Art symmetrisches Trennband um die Trennebene in dem keine Punkte liegen dürfen. \\ \autoref{decision_rules} kann weiter verallgemeinert werden durch beidseitige Multiplikation mit $y_{k}$:
+Durch \autoref{decision_rules} wird sichergestellt, dass Werte aus dem Intervall $\interval[open]{-1}{+1}$ als Ergebnis nicht vorkommen können. Wie in \autoref{fig:trennband} dargestellt entsteht dadurch ein symmetrisches Trennband um die Trennebene in dem keine Punkte liegen dürfen. Ziel der \ac{SVM} ist die Maximierung der Breite dieses Bandes.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 13cm]{assets/trennband.png}
+	\caption{Um die Trennebene entsteht ein Trennband mit den Normalabständen $D$ zu den am nächsten liegenden Eingabevektoren.}
+	\label{fig:trennband}
+\end{figure}
+
+
+
+ \autoref{decision_rules} kann weiter verallgemeinert werden durch beidseitige Multiplikation mit $y_{k}$:
 
 \begin{subequations} \label{decision_rules2}
 	\begin{alignat}{2}
