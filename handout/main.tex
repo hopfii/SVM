@@ -472,13 +472,25 @@ Sehr bemerkenswert hier ist, dass der einzige Unterschied zu \autoref{final_lagr
 TODO: text here
 
 \subsection{Transformation der Problemstellung in eine höhere Dimension}
-Idee: nichtlineare Transformation der Eingabevektoren in beliebig hohe Dimension \\
+Idee: nichtlineare Transformation der Eingabevektoren in beliebig hohe, endliche Dimension \\
 
-Vorteil: Einzige Zusatzkosten sind Skalarprodukt in Optimierung, Anzahl Alphas und Dimension der Gram-Matrix bleibt gleich weil abhängig von Anzahl Testdaten und nicht der Dimension \\
+Transformation $\Phi(x): \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ \\
 
-Generalisierungsverhalten: Anzahl SV dividiert durch Anzahl Testdaten -> möglichst kleine Zahl \\
+Statt $x$ wird $\Phi(x)$ überall eingesetzt -> 
 
-Bei Kernel-Trick: sogar kosten für Skalarprodukt erspart
+\begin{subequations} \label{eq:soft_margin_with_transform}
+	\begin{alignat}{2}
+		&\!\max_{\alpha}        &\qquad&  	\Lagr(\alpha) = \sum_{n=1}^{N} \alpha_{n} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} \Phi(x_{n})^{T} \Phi(x_{m})\\
+		&\text{mit } &      & 0 \leq \alpha_{n} \leq C \text{ für } n=1..N\\
+		&       & & \sum_{n=1}^{N} \alpha_{n} y_{n} = 0\text{ für } n=1..N
+	\end{alignat}
+\end{subequations}
+
+Wie in \autoref{eq:soft_margin_with_transform} ersichtlich: Einzige Zusatzkosten sind höherdimensionale Skalarprodukte in Optimierung. Anzahl Alphas und Dimension der Q-Matrix aus \autoref{qp1} bleibt gleich weil diese nur abhängig von Anzahl Testdaten sind und nicht von der Dimension.\\
+
+Generalisierungsverhalten beurteilen: Anzahl SV dividiert durch Anzahl Testdaten -> möglichst kleine Zahl \\
+
+Vorschau: Bei Kernel-Trick: sogar Kosten für Skalarprodukt erspart
 
 \subsection{Kernel Methode}
 
