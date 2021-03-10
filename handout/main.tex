@@ -422,7 +422,7 @@ Die \ac{SVM} ist nun vollständig definiert, neue Eingabevektoren $x$ können wi
 	\label{fig:soft_margin_example}
 \end{figure}
 
-Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind ohne dass Fehlklassifikationen aufreten. Dieses Problem kann durch eine Hard-Margin SVM, wie in den Kapiteln zuvor gezeigt, gelöst werden. Trifft diese Annahme für eine Menge von Eingabevektoren nicht mehr zu, wie in \autoref{fig:soft_margin_example} dargestellt, wird der bisher beschriebene Algorithmus keine lineare Trennebene finden. Durch die Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$ in \autoref{decision_rules} kann dieses Problem umgangen werden und trotzdem eine fehlerbehaftete, lineare Trennung bestimmt werden:
+Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind ohne dass Fehlklassifikationen aufreten. Dieses Problem kann durch eine Hard-Margin \ac{SVM}, wie in den Kapiteln zuvor gezeigt, gelöst werden. Trifft diese Annahme für eine Menge von Eingabevektoren nicht mehr zu, wie in \autoref{fig:soft_margin_example} dargestellt, wird der bisher beschriebene Algorithmus keine lineare Trennebene finden. Durch die Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$ in \autoref{decision_rules} kann dieses Problem umgangen werden und trotzdem eine fehlerbehaftete, lineare Trennebene gefunden werden:
 
 \begin{subequations} \label{decision_rules_softmargin}
 	\begin{alignat}{2}
