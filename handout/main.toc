@@ -19,6 +19,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.5}Soft Margin \ac {SVM}}{13}{subsection.1.2.5}%
 \defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.6}Transformation der Problemstellung in eine höhere Dimension}{14}{subsection.1.2.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.7}Kernel Methode}{14}{subsection.1.2.7}%
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Bibliography}{15}{section*.10}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

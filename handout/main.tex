@@ -415,7 +415,7 @@ Die \ac{SVM} ist nun vollständig definiert, neue Eingabevektoren $x$ können wi
 \end{equation}
 
 \subsection{Soft Margin \ac{SVM}} \label{sec:soft_margin}
-Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind. Dieses Problem kann durch eine Hard-Margin SVM, wie in den Kapiteln zuvor gezeigt gelöst werden. Trifft diese Annahme für eine Menge von Eingabevektoren nicht mehr zu wird der bisher beschriebene Algorithmus keine Trennebene finden. Durch die Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$ in \autoref{decision_rules} kann dieses Problem umgangen werden:
+Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind ohne dass Fehlklassifikationen aufreten. Dieses Problem kann durch eine Hard-Margin SVM, wie in den Kapiteln zuvor gezeigt, gelöst werden. Trifft diese Annahme für eine Menge von Eingabevektoren nicht mehr zu wird der bisher beschriebene Algorithmus keine lineare Trennebene finden. Durch die Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$ in \autoref{decision_rules} kann dieses Problem umgangen werden und trotzdem eine fehlerbehaftete, lineare Trennung bestimmt werden:
 
 \begin{subequations} \label{decision_rules_softmargin}
 	\begin{alignat}{2}
@@ -424,7 +424,7 @@ Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind. Dies
 	\end{alignat}
 \end{subequations}
 
-Damit ein Eingabevektor $x_{n}$ nun, gemäß \autoref{decision_rules_softmargin}, falsch klassifiziert werden kann muss der Fehler $\xi_{n}$ über $1$ steigen. Eine obere Grenze für die Anzahl der aufgetretenen Fehler kann somit beschrieben werden durch $\sum_{n=1}^{N} \xi_{n}$. \\
+Damit ein Eingabevektor $x_{n}$ nun, gemäß \autoref{decision_rules_softmargin}, falsch klassifiziert werden kann muss der zu dem Vektor gehörende Fehler $\xi_{n}$ über $1$ steigen. Eine obere Grenze für die Anzahl der aufgetretenen Fehler kann somit beschrieben werden durch $\sum_{n=1}^{N} \xi_{n}$. \\
 
 Basierend auf dieser Grundlage kann eine Kostenfunktion $E$ basierend auf der Anzahl der Fehler formuliert werden:
 \begin{equation} \label{soft_margin_error_cost_function}
@@ -456,6 +456,20 @@ Wendet man die in \autoref{sec:lagrange} beschriebenen Schritte auf das in \auto
 \end{subequations}
 
 Sehr bemerkenswert hier ist, dass der einzige Unterschied zu \autoref{final_lagrange} die Beschränkung der Lagrange Multiplikatoren durch $C$ ist. Umgekehrt bedeutet dies, dass eine Hard-Margin SVM durch \autoref{final_lagrange_soft} beschrieben werden kann wenn der Parameter $C$ sehr groß gewählt wird.
+
+
+\subsection{Transformation der Problemstellung in eine höhere Dimension}
+Idee: nichtlineare Transformation der Eingabevektoren in beliebig hohe Dimension \\
+
+Vorteil: Einzige Zusatzkosten sind Skalarprodukt in Optimierung, Anzahl Alphas und Dimension der Gram-Matrix bleibt gleich weil abhängig von Anzahl Testdaten und nicht der Dimension \\
+
+Generalisierungsverhalten: Anzahl SV dividiert durch Anzahl Testdaten -> möglichst kleine Zahl \\
+
+Bei Kernel-Trick: sogar kosten für Skalarprodukt erspart
+
+\subsection{Kernel Methode}
+
+
 
 % THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
 \nocite{*}
