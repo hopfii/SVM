@@ -92,7 +92,8 @@
 \section{Intuition}
 Ziel: Ebene so wählen dass möglichst breites Band zwischen den 2 verschiedenen Klassen entsteht. \\
 
-Hard Margin vs Soft Margin
+Hard Margin SVM: Trennebene trennt Daten, alle Eingabevektoren werden richtig klassifziert
+Soft Margin SVM: Trennebene trennt Daten, Eingabevektoren können falsch klassifiziert werden, Fehlklassifikationen werden minimiert
 
 \begin{figure}[H]
 	\centering
@@ -102,7 +103,7 @@ Hard Margin vs Soft Margin
 \end{figure}
 
 
-\section{Mathematische Herleitung}
+\section{Hard-Margin Support Vector Machine} \label{sec:hard_margin}
 
 TODO ZUSAMMENFASSUNG HERE
 
@@ -319,7 +320,7 @@ Vergleicht man den Term $\sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n}$ mit dem Er
 	\end{alignat}
 \end{subequations}
 
-Das in \autoref{final_lagrange} beschriebene Problem kann beispielsweise mittels eines Quadratic Programming Solvers gelöst werden. Als Ergebnis erhält man einen Vektor $\alpha$ mit allen $\alpha_{n}$. Durch Einsetzen in $w = \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}$ kann $w$ bestimmt werden. \\
+Bei dem in \autoref{final_lagrange} beschriebene Problem handelt es sich um ein Quadratic Programming Problem, ersichtlich an dem Term $x_{n}^{T} x_{m}$, welches beispielsweise mittels eines Quadratic Programming Solvers gelöst werden kann. Als Ergebnis erhält man einen Vektor $\alpha$ mit allen $\alpha_{n}$. Durch Einsetzen in $w = \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}$ kann $w$ bestimmt werden. \\
 
 Betrachtet man den Ergebnisvektor $\alpha$ so wird man feststellen, dass sehr viele Werte $0$ ergeben. In \autoref{eq:optProb4} befindet sich der Term $\alpha_{n} (y_n (w^{T} x_{n} + b)-1)$. Der Term $(y_n (w^{T} x_{n} + b)-1)$ kann als Schlupf bezeichnet werden. Das Produkt von Schlupf und $\alpha_{n}$ kann nur $0$ werden wenn entweder der Schlupf $0$ ist oder $\alpha_{n}$. Umgekehrt bedeutet dies, dass alle Vektoren, die einen minimalen Abstand zu der Trennebene haben, ein $\alpha_{n} \neq 0$ aufweisen. Vektoren, die diese Bedingung erfüllen, werden Stützvektoren genannt. \\
 
@@ -353,7 +354,7 @@ Noch offen ist die Bestimmung des Bias $b$. Weil für Stützvektoren $y_n (w^{T}
 
 \subsection{Lösung mittels Quadratic Programming Solver}
 
-Das in \autoref{final_lagrange} beschriebene Optimierungsproblem kann mittels eines Quadratic Programming Solvers gelöst werden. Hierfür muss das Problem aber umformuliert werden, da die Standardform von QP-Problemen wie folgt ist:
+Weil es sich bei dem in \autoref{final_lagrange} beschriebene Optimierungsproblem um ein Quadratic Programming Problem handelt kann dieses auch mittels eines Quadratic Programming Solvers gelöst werden. Die Implementationsdetails für diese Lösungsverfahren werden an dieser Stelle nicht weiter ausgeführt. Für die Anwendung eines Quadratic Programming Solvers muss das Problem in die Standardform von \ac{QP} Problemen umformuliert werden.
 
 \begin{equation} \label{std_QP_problem}
 	\begin{aligned}
@@ -414,7 +415,7 @@ Die \ac{SVM} ist nun vollständig definiert, neue Eingabevektoren $x$ können wi
 	\end{aligned}
 \end{equation}
 
-\subsection{Soft Margin \ac{SVM}} \label{sec:soft_margin}
+\section{Soft-Margin Support Vector Machine} \label{sec:soft_margin}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 12cm]{assets/soft_margin_example.png}
@@ -422,7 +423,7 @@ Die \ac{SVM} ist nun vollständig definiert, neue Eingabevektoren $x$ können wi
 	\label{fig:soft_margin_example}
 \end{figure}
 
-Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind ohne dass Fehlklassifikationen aufreten. Dieses Problem kann durch eine Hard-Margin \ac{SVM}, wie in den Kapiteln zuvor gezeigt, gelöst werden. Trifft diese Annahme für eine Menge von Eingabevektoren nicht mehr zu, wie in \autoref{fig:soft_margin_example} dargestellt, wird der bisher beschriebene Algorithmus keine lineare Trennebene finden. Durch die Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$ in \autoref{decision_rules} kann dieses Problem umgangen werden und trotzdem eine fehlerbehaftete, lineare Trennebene gefunden werden:
+In den Überlegungen in \autoref{sec:hard_margin} wurde angenommen, dass alle Eingabevektoren linear separierbar sind ohne dass Fehlklassifikationen aufreten. Dieses Problem kann durch eine Hard-Margin \ac{SVM}, wie in den Kapiteln zuvor gezeigt, gelöst werden. Trifft diese Annahme für eine Menge von Eingabevektoren nicht mehr zu, wie in \autoref{fig:soft_margin_example} dargestellt, kann der bisher beschriebene Algorithmus keine lineare Trennebene finden. Durch die Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$ in \autoref{decision_rules} kann dieses Problem umgangen werden und trotzdem eine fehlerbehaftete, lineare Trennebene gefunden werden:
 
 \begin{subequations} \label{decision_rules_softmargin}
 	\begin{alignat}{2}
@@ -465,6 +466,10 @@ Wendet man die in \autoref{sec:lagrange} beschriebenen Schritte auf das in \auto
 
 Sehr bemerkenswert hier ist, dass der einzige Unterschied zu \autoref{final_lagrange} die Beschränkung der Lagrange Multiplikatoren durch $C$ ist. Umgekehrt bedeutet dies, dass eine Hard-Margin SVM durch \autoref{final_lagrange_soft} beschrieben werden kann wenn der Parameter $C$ sehr groß gewählt wird.
 
+
+\section{Nichtlineare Trennung}
+
+TODO: text here
 
 \subsection{Transformation der Problemstellung in eine höhere Dimension}
 Idee: nichtlineare Transformation der Eingabevektoren in beliebig hohe Dimension \\
