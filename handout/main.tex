@@ -415,7 +415,14 @@ Die \ac{SVM} ist nun vollständig definiert, neue Eingabevektoren $x$ können wi
 \end{equation}
 
 \subsection{Soft Margin \ac{SVM}} \label{sec:soft_margin}
-Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind ohne dass Fehlklassifikationen aufreten. Dieses Problem kann durch eine Hard-Margin SVM, wie in den Kapiteln zuvor gezeigt, gelöst werden. Trifft diese Annahme für eine Menge von Eingabevektoren nicht mehr zu wird der bisher beschriebene Algorithmus keine lineare Trennebene finden. Durch die Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$ in \autoref{decision_rules} kann dieses Problem umgangen werden und trotzdem eine fehlerbehaftete, lineare Trennung bestimmt werden:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 12cm]{assets/soft_margin_example.png}
+	\caption{Die Eingabevektoren können nicht ohne einzelne Fehlklassifizierungen (blau markiert) linear getrennt werden.}
+	\label{fig:soft_margin_example}
+\end{figure}
+
+Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind ohne dass Fehlklassifikationen aufreten. Dieses Problem kann durch eine Hard-Margin SVM, wie in den Kapiteln zuvor gezeigt, gelöst werden. Trifft diese Annahme für eine Menge von Eingabevektoren nicht mehr zu, wie in \autoref{fig:soft_margin_example} dargestellt, wird der bisher beschriebene Algorithmus keine lineare Trennebene finden. Durch die Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$ in \autoref{decision_rules} kann dieses Problem umgangen werden und trotzdem eine fehlerbehaftete, lineare Trennung bestimmt werden:
 
 \begin{subequations} \label{decision_rules_softmargin}
 	\begin{alignat}{2}
@@ -423,6 +430,7 @@ Bisher wurde angenommen, dass alle Eingabevektoren linear separierbar sind ohne 
 		w^{T} x_{n} + b \leq -1 + \xi_{n}& & \text{ für } y_{n} = -1
 	\end{alignat}
 \end{subequations}
+
 
 Damit ein Eingabevektor $x_{n}$ nun, gemäß \autoref{decision_rules_softmargin}, falsch klassifiziert werden kann muss der zu dem Vektor gehörende Fehler $\xi_{n}$ über $1$ steigen. Eine obere Grenze für die Anzahl der aufgetretenen Fehler kann somit beschrieben werden durch $\sum_{n=1}^{N} \xi_{n}$. \\
 
