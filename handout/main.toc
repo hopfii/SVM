@@ -23,8 +23,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.4.1}Transformation der Problemstellung}{15}{subsection.1.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.4.2}Kernel Methode}{16}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.2}Kernel Methode}{17}{subsection.1.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{17}{section*.13}%
+\contentsline {chapter}{Bibliography}{18}{section*.14}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
