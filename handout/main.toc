@@ -21,10 +21,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.4}Nichtlineare Trennung}{15}{section.1.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.4.1}Transformation der Problemstellung in eine höhere Dimension}{15}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.1}Transformation der Problemstellung}{15}{subsection.1.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.4.2}Kernel Methode}{15}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.2}Kernel Methode}{16}{subsection.1.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{16}{section*.12}%
+\contentsline {chapter}{Bibliography}{17}{section*.13}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

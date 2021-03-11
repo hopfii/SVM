@@ -471,8 +471,17 @@ Sehr bemerkenswert hier ist, dass der einzige Unterschied zu \autoref{final_lagr
 
 TODO: text here
 
-\subsection{Transformation der Problemstellung in eine höhere Dimension}
-Idee: nichtlineare Transformation der Eingabevektoren in beliebig hohe, endliche Dimension \\
+\subsection{Transformation der Problemstellung}
+Idee: nichtlineare Transformation der Eingabevektoren sodass die Eingabevektoren nach der Transformation linear trennbar sind.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 13cm]{assets/transformation.png}
+	\caption{Die Eingabevektoren werden mittels einer Funktion $\Phi(x)$ transformiert. Die transformierten Vektoren sind nach der Transformation linear trennbar.}
+	\label{fig:phi_transformation}
+\end{figure}
+
 
 Transformation $\Phi(x): \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ \\
 
@@ -486,7 +495,7 @@ Statt $x$ wird $\Phi(x)$ überall eingesetzt ->
 	\end{alignat}
 \end{subequations}
 
-Wie in \autoref{eq:soft_margin_with_transform} ersichtlich: Einzige Zusatzkosten sind höherdimensionale Skalarprodukte in Optimierung. Anzahl Alphas und Dimension der Q-Matrix aus \autoref{qp1} bleibt gleich weil diese nur abhängig von Anzahl Testdaten sind und nicht von der Dimension.\\
+Wie in \autoref{eq:soft_margin_with_transform} ersichtlich ist sind die einzigen Zusatzkosten, die durch die Transformation entstehen, die Berechnung des mitunter höherdimensionalen Skalarprodukts $\Phi(x)^{T} \Phi(x)$. Die Anzahl der Lagrangefaktoren $\alpha$ und die Dimension der Q-Matrix aus \autoref{qp1} bleibt gleich weil diese nur von der Anzahl der Eingabevektoren sind und nicht von der Dimension der Eingabevektoren.\\
 
 Generalisierungsverhalten beurteilen: Anzahl SV dividiert durch Anzahl Testdaten -> möglichst kleine Zahl \\
 
