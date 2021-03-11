@@ -469,10 +469,11 @@ Sehr bemerkenswert hier ist, dass der einzige Unterschied zu \autoref{final_lagr
 
 \section{Nichtlineare Trennung}
 
-TODO: text here
+Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind, 
 
 \subsection{Transformation der Problemstellung}
-Idee: nichtlineare Transformation der Eingabevektoren sodass die Eingabevektoren nach der Transformation linear trennbar sind.
+
+Sind die Eingabevektoren nicht linear trennbar können diese mittels einer Transformation $\Phi(x): \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ in einen Raum, in dem diese trennbar sind, transformiert werden.
 
 
 \begin{figure}[H]
@@ -483,9 +484,7 @@ Idee: nichtlineare Transformation der Eingabevektoren sodass die Eingabevektoren
 \end{figure}
 
 
-Transformation $\Phi(x): \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ \\
-
-Statt $x$ wird $\Phi(x)$ überall eingesetzt -> 
+Setzt man für alle Eingabevektoren $x$ deren transformierte Vektoren $\Phi(x)$ in \autoref{final_lagrange_soft} ein erhält man: 
 
 \begin{subequations} \label{eq:soft_margin_with_transform}
 	\begin{alignat}{2}
@@ -495,11 +494,11 @@ Statt $x$ wird $\Phi(x)$ überall eingesetzt ->
 	\end{alignat}
 \end{subequations}
 
-Wie in \autoref{eq:soft_margin_with_transform} ersichtlich ist sind die einzigen Zusatzkosten, die durch die Transformation entstehen, die Berechnung des mitunter höherdimensionalen Skalarprodukts $\Phi(x)^{T} \Phi(x)$. Die Anzahl der Lagrangefaktoren $\alpha$ und die Dimension der Q-Matrix aus \autoref{qp1} bleibt gleich weil diese nur von der Anzahl der Eingabevektoren sind und nicht von der Dimension der Eingabevektoren.\\
+Wie in \autoref{eq:soft_margin_with_transform} ersichtlich sind die einzigen Zusatzkosten gegenüber einer Soft-Margin \ac{SVM} die Berechnungen der mitunter höherdimensionalen Skalarprodukte $\Phi(x)^{T} \Phi(x)$. Die Anzahl der Lagrangefaktoren $\alpha$ und die Dimension der Q-Matrix aus \autoref{qp1} bleibt gleich weil diese nur von der Anzahl der Eingabevektoren und nicht von der Dimension derer abhängig sind. \\
 
-Generalisierungsverhalten beurteilen: Anzahl SV dividiert durch Anzahl Testdaten -> möglichst kleine Zahl \\
+Die Stützvektoren dieser Methode befinden sich in dem neuen Raum $\mathbb{R}^{L}$, weil auch nur die transformierten Eingabevektoren betrachtet werden. Durch die, mitunter nichtlineare, Transformation $\Phi$ ist es so möglich mittels einer \ac{SVM} nichtlineare Trennungen durchführen zu könnne. \\
 
-Vorschau: Bei Kernel-Trick: sogar Kosten für Skalarprodukt erspart
+Das Problem dieses Ansatzes ist die Wahl der Transformationsfunktion $\Phi(x)$. Im Normalfall ist eine solche Funktion nicht bekannt. Trotzdem ist die Erkenntnis, dass die Dimension der Vektoren das Optimierungsproblem nicht groß beeinflusst und dass durch eine Transformation nichtlineare Trenngrenzen bestimmt werden können, äußerst relevant für die weitere Betrachtung. In \autoref{sec:_kernel} wird beschrieben wie sogar die Zusatzkosten des Skalarprodukts umgangen werden können.
 
 \subsection{Kernel Methode}
 
