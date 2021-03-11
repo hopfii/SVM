@@ -479,14 +479,14 @@ Sind die Eingabevektoren nicht linear trennbar können diese mittels einer Trans
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 13cm]{assets/transformation.png}
-	\caption{Die Eingabevektoren werden mittels einer Funktion $\Phi(x)$ transformiert. Die transformierten Vektoren sind nach der Transformation linear trennbar.}
+	\caption{Die Eingabevektoren werden mittels einer Funktion $\Phi(x)$ transformiert. Die transformierten Vektoren sind linear trennbar.}
 	\label{fig:phi_transformation1}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 13cm]{assets/2d_to_3d_phi.png}
-	\caption{Die Eingabevektoren werden mittels einer Funktion $\Phi(x)$ in einen höherdimensionalen Raum transformiert. Die transformierten Vektoren sind nach der Transformation durch eine Ebene (blau) linear trennbar.}
+	\caption{Die Eingabevektoren werden mittels einer Funktion $\Phi(x)$ in einen höherdimensionalen Raum transformiert. Die transformierten Vektoren sind durch eine Ebene linear trennbar.}
 	\label{fig:phi_transformation2}
 \end{figure}
 
@@ -506,9 +506,9 @@ Wie in \autoref{eq:soft_margin_with_transform} ersichtlich sind die einzigen Zus
 
 Die Stützvektoren dieser Methode befinden sich in dem neuen Raum $\mathbb{R}^{L}$, weil auch nur die transformierten Eingabevektoren betrachtet werden. Durch die, mitunter nichtlineare, Transformation $\Phi$ ist es so möglich mittels einer \ac{SVM} nichtlineare Trennungen durchführen zu können. \\
 
-Das Problem dieses Ansatzes ist die Wahl der Transformationsfunktion $\Phi(x)$. Im Normalfall ist eine solche Funktion nicht bekannt. Trotzdem ist die Erkenntnis, dass die Dimension der Vektoren das Optimierungsproblem nicht groß beeinflusst und dass durch eine Transformation nichtlineare Trenngrenzen bestimmt werden können, äußerst relevant für die weitere Betrachtung. In \autoref{sec:_kernel} wird beschrieben wie sogar die Zusatzkosten des Skalarprodukts umgangen werden können.
+Das Problem dieses Ansatzes ist die Wahl der Transformationsfunktion $\Phi(x)$. Im Normalfall ist eine solche Funktion nicht bekannt. Trotzdem ist die Erkenntnis, dass die Dimension der Vektoren das Optimierungsproblem nicht groß beeinflusst und dass durch eine Transformation nichtlineare Trenngrenzen bestimmt werden können, äußerst relevant für die weitere Betrachtung. In \autoref{sec:kernel} wird beschrieben wie die Zusatzkosten der Skalarprodukte auch umgangen werden können.
 
-\subsection{Kernel Methode}
+\subsection{Kernel Methode} \label{sec:kernel}
 
 
 
