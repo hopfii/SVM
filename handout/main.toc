@@ -19,12 +19,14 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.3}Soft-Margin Support Vector Machine}{13}{section.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.4}Nichtlineare Trennung}{15}{section.1.4}%
+\contentsline {section}{\numberline {1.4}Vergleich Soft-Margin und Hard-Margin Support Vector Machine}{15}{section.1.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.4.1}Transformation der Problemstellung}{15}{subsection.1.4.1}%
+\contentsline {section}{\numberline {1.5}Nichtlineare Trennung}{16}{section.1.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.4.2}Kernel Methode}{17}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.5.1}Transformation der Problemstellung}{16}{subsection.1.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{18}{section*.14}%
+\contentsline {subsection}{\numberline {1.5.2}Kernel Methode}{18}{subsection.1.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{19}{section*.15}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

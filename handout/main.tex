@@ -464,7 +464,25 @@ Wendet man die in \autoref{sec:lagrange} beschriebenen Schritte auf das in \auto
 	\end{alignat}
 \end{subequations}
 
-Sehr bemerkenswert hier ist, dass der einzige Unterschied zu \autoref{final_lagrange} die Beschränkung der Lagrange Multiplikatoren durch $C$ ist. Umgekehrt bedeutet dies, dass eine Hard-Margin SVM durch \autoref{final_lagrange_soft} beschrieben werden kann wenn der Parameter $C$ sehr groß gewählt wird.
+Sehr bemerkenswert hier ist, dass der einzige Unterschied zu \autoref{final_lagrange} die Beschränkung der Lagrange Multiplikatoren durch $C$ ist. Umgekehrt bedeutet dies, dass eine Hard-Margin SVM durch \autoref{final_lagrange_soft} beschrieben werden kann wenn der Parameter $C$ sehr groß gewählt wird. \\
+
+\section{Vergleich Soft-Margin und Hard-Margin Support Vector Machine}
+
+Ein großer Vorteil der Soft-Margin \ac{SVM} ist die Verminderung des Einflusses von Ausreißern auf die Trenngrenze. Bei der Hard-Margin \ac{SVM} kann mitunter ein Ausreißer, der näher als alle anderen Punkte bei der anderen Klasse liegt, die Lage der Trenngrenze bestimmen. Die so bestimmte Trenngrenze liegt mitunter viel näher bei der abzugrenzenden Klasse als eine optimale Trenngrenze liegen würde. Ein Beispiel für eine solche Situation ist in \autoref{fig:hard_vs_soft_svm} dargestellt. Die Soft-Margin \ac{SVM} hat die Möglichkeit Fehlklassifikationen zuzulassen und kann dadurch bessere liegende Trennebenen finden die zu stabileren Klassfikationsergebnissen für neue Daten führt.\\
+
+Aufgrund des zuvor genannten Verhaltens tendiert die Hard-Margin \ac{SVM} im Allgemeinen zu Overfitting. Aus diesem Grund sollte die Soft-Margin \ac{SVM} bevorzugt werden und der Parameter $C$ abhängig von den gegebenen Trainingsdaten gewählt werden.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 13cm]{assets/hard_vs_soft_margin.png}
+	\caption{Die Hard-Margin \ac{SVM} trennt die Klassen zwar ohne Fehler, die Lage der Trennebene ist allerdings sehr nahe bei den grünen Punkten. Dadurch werden neue Eingabevektoren, die nahe bei der Trenngrenze liegen, mit großer Wahrscheinlichkeit falsch klassifiziert. Die Soft-Margin SVM \glqq{}opfert\grqq{} eine Fehlklassifikation für eine viel bessere, stabilere Lage der Trenngrenze.}
+	\label{fig:hard_vs_soft_svm}
+\end{figure}
+
+
+
+
 
 
 \section{Nichtlineare Trennung}
