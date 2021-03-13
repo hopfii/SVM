@@ -558,7 +558,7 @@ Wie bereits zuvor erwähnt hängt das Problem ausschließlich von den Skalarprod
 Durch die Einführung einer Kernel-Funktion $K(x, x') = z_{1}^{T} z_{2} = \Phi(x)^{T} \Phi(x')$, die das Skalarprodukt der transformierten Eingabevektoren berechnet ohne die Eingabevektoren tatsächlich in den neuen Raum zu transformieren, kann das Problem der Berechnung von hochdimensionalen Skalarprodukten umgangen werden. \\
 
 
-\subsubsection{Beispiel Kernel-Funktion}
+\subsubsection{Beispiel Kernel-Funktion} \label{sec:example_kernel}
 Die Idee einer Kernel-Funktion wird nun anhand eines einfachen Beispiels gezeigt. Folgende Kernel-Funktion für $x, x' \in \mathbb{R}^2$ sei gegeben:
 
 \begin{equation} \label{eq:example1_kernel}
@@ -593,6 +593,26 @@ Vergleicht man nun das Ergebnisse von \autoref{eq:example1_kernel} und \autoref{
 $\Phi$ transformiert in diesem Beispiel 2-dimensionale Vektoren nach $\mathbb{R}^6$. Mittels der Kernel-Funktion kann das Skalarprodukt der transformierten Vektoren durch $K(x, x') = (1 + x^{T}x')^{2}$ berechnet werden ohne dass die Vektoren $x$ und $x'$ tatsächlich in den neuen Raum transformiert werden müssen. \\
 
 In dem Beispiel wurde die Berechnung von 6-dimensionalen Skalarprodukten durchgeführt durch die Berechnung mittels der Kernel-Funktion, die lediglich 2-dimensionale Skalarprodukte berechnen muss. Führt die Funktion $\Phi$ eine Transformation in eine viel höhere oder unendlich hohe Dimension aus ist der Vorteil einer solchen Kernel-Funktion sofort ersichtlich.
+
+\subsubsection{Polynomieller Kernel}
+Die in \autoref{sec:example_kernel} verwendete Kernel-Funktion kann verallgemeinert werden. Seien die Eingabevektoren $x \in \mathbb{R}^d$ und die Transformationsfunktion $\Phi: \mathbb{R}^d \rightarrow \mathbb{Z}$ ein Polynom der Ordnung $Q$, dann kann eine Kernel-Funktion wie folgt definiert werden:
+
+\begin{equation} \label{eq:poly_kernel}
+	\begin{aligned}
+		K(x, x') &= (1 + x^{T}x')^{Q} = \\
+		&= (1 + x_{1} x_{1}' + x_{2} x_{2}' + \dots + x_{d} x_{d}')^{Q}
+	\end{aligned}
+\end{equation}
+
+Die in \autoref{eq:poly_kernel} beschriebene Kernel-Funktion wird polynomieller Kernel genannt. Weil durch das Polynom eine Vielzahl an Faktoren entsteht kann zur Kompensation dieser Faktoren die Kernel-Funktion wie folgt adaptiert werden:
+
+  \begin{equation} \label{eq:poly_kernel2}
+  	\begin{aligned}
+  		K(x, x') &= (a x^{T}x' + b)^{Q}
+  	\end{aligned}
+  \end{equation}
+
+Mittels dieser Kernel-Funktion kann die Berechnung eines Skalarprodukts eines beliebig großen Polynoms des Grades $Q$ durch die Berechnung eines Skalarprodukts in $\mathbb{R}^{d}$ und der Exponentation mit $Q$ durchgeführt werden ohne dass die Vektoren tatsächlich in den Polynomraum transformiert werden müssen.  
 
 
 
