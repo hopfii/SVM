@@ -31,6 +31,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.5.2.2}Polynomieller Kernel}{20}{subsubsection.1.5.2.2}%
 \defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {1.5.2.3}Radialer Basis Funktions Kernel}{20}{subsubsection.1.5.2.3}%
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Bibliography}{21}{section*.15}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

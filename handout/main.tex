@@ -614,6 +614,28 @@ Die in \autoref{eq:poly_kernel} beschriebene Kernel-Funktion wird polynomieller 
 
 Mittels dieser Kernel-Funktion kann die Berechnung eines Skalarprodukts eines beliebig großen Polynoms des Grades $Q$ durch die Berechnung eines Skalarprodukts in $\mathbb{R}^{d}$ und der Exponentation mit $Q$ durchgeführt werden ohne dass die Vektoren tatsächlich in den Polynomraum transformiert werden müssen.  
 
+\subsubsection{Radialer Basis Funktions Kernel}
+
+Eine weitere mögliche Kernel-Funktion ist der Radialer Basis Funktions Kernel:
+\begin{equation} \label{eq:rbfk}
+	\begin{aligned}
+		K(x, x') &= \exp{\gamma \norm{x - x'}^2}
+	\end{aligned}
+\end{equation}
+
+Die zu diesem Kernel zugehörige Transformationsfunktion $\Phi$ bildet in einen unendlich dimensionalen Raum ab. Dies kann wie folgt gezeigt werden (für den einfachsten Fall):
+
+\begin{equation} \label{eq:proof_rbfk_infinite}
+	\begin{aligned}
+		K(x, x') &= \exp{(-(x - x')^{2})} =\\
+		&= \exp{(-x^{2} + 2xx' - x'^{2})} = \\
+		&= \exp{(-x^{2})} \exp{(2xx')} \exp{(-x'^{2})} = \\
+		&= \exp{(-x^{2})} \sum_{k=0}^{\infty} \frac{2^{k} (x)^{k} (x')^{k}}{k!} \exp{(-x'^{2})}
+	\end{aligned}
+\end{equation}
+
+Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$. Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden. Damit wurde gezeigt dass der Radiale Basis Funktions Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet. 
+
 
 
 % THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
