@@ -636,7 +636,44 @@ Die zu diesem Kernel zugehörige Transformationsfunktion $\Phi$ bildet in einen 
 
 Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$. Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden. Damit wurde gezeigt dass der Radiale Basis Funktions Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet. 
 
+\subsubsection{SVM Definition mit Kernel}
 
+Ein Input $x$ kann mit einer \ac{SVM} wie folgt klassifiziert werden:
+
+\begin{equation} \label{eq:svm_def_kernel}
+	\begin{aligned}
+		y(x) &= sign(w^{T} z + b)
+	\end{aligned}
+\end{equation}
+
+Das Ziel der neuen Definition ist die Vermeidung von einzeln auftretenden transformierten Eingabevektoren $z$ in den Formeln um das gesamte Problem mittels einer Kernel-Funktion $K(x, x')$ ausdrücken zu können. Dadurch muss die Transformation $\Phi$ nie direkt auf einen Vektor angewandt werden und lediglich die Skalarprodukte mittels der Kernel-Funktion berechnet werden.
+
+\begin{equation} \label{eq:kernel_w}
+	\begin{aligned}
+		w &= \sum_{z_{n} \text{ ist SV}} \alpha_{n} y_{n} z_{n}
+	\end{aligned}
+\end{equation}
+
+Setzt man \autoref{eq:kernel_w} in \autoref{eq:svm_def_kernel} ein erhält man:
+
+\begin{equation} \label{eq:svm_def_kernel2}
+	\begin{aligned}
+		y(x) &= sign(\sum_{\alpha_{n} > 0} \alpha_{n} y_{n} z_{n}^{T} z + b) = \\
+		&= sign(\sum_{\alpha_{n} > 0} \alpha_{n} y_{n} K(x_{n}, x) + b)
+	\end{aligned}
+\end{equation}
+
+Für $b$ ergibt sich durh Einsetzen von \autoref{eq:kernel_w} für einen Stützvektor $x_{k}$:
+
+\begin{equation}
+	\begin{aligned}
+		b &= \frac{1}{y_{k}} - w^{T} z_{k} = \\
+		&= \frac{1}{y_{k}} - \sum_{\alpha_{n} > 0} \alpha_{n} y_{n} K(x_{n}, x_{k}) = \\
+		&= y_{k} - \sum_{\alpha_{n} > 0} \alpha_{n} y_{n} K(x_{n}, x_{k}) = \\
+	\end{aligned}
+\end{equation}
+
+Die komplette \ac{SVM} ist jetzt definiert durch die Verwendung der Kernel-Funktion. Es wird keine einzige tatsächliche Transformation eines Eingabevektors mittels $\Phi$ benötigt und es können beliebig dimensionale Räume durch die Verwendung von entsprechenden Kernel-Funktionen verwendet werden ohne je einen Vektor in diesen Raum transformieren zu müssen.  
 
 % THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
 \nocite{*}
