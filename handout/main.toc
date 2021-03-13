@@ -25,8 +25,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.5.1}Transformation der Problemstellung}{16}{subsection.1.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.5.2}Kernel Methode}{18}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.5.2}Kernel Trick}{18}{subsection.1.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{19}{section*.15}%
+\contentsline {subsubsection}{\numberline {1.5.2.1}Beispiel Kernel-Funktion}{19}{subsubsection.1.5.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{21}{section*.15}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

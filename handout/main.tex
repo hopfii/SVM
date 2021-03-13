@@ -487,9 +487,9 @@ Aufgrund des zuvor genannten Verhaltens tendiert die Hard-Margin \ac{SVM} im All
 
 \section{Nichtlineare Trennung}
 
-Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind, 
+Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind,.
 
-\subsection{Transformation der Problemstellung}
+\subsection{Transformation der Problemstellung} \label{transform_phi}
 
 Sind die Eingabevektoren nicht linear trennbar können diese mittels einer Transformation $\Phi(x): \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ in einen Raum, in dem diese trennbar sind, transformiert werden. Beispiele für solche Transformationen sind in \autoref{fig:phi_transformation1} und \autoref{fig:phi_transformation2} dargestellt.
 
@@ -526,7 +526,73 @@ Die Stützvektoren dieser Methode befinden sich in dem neuen Raum $\mathbb{R}^{L
 
 Das Problem dieses Ansatzes ist die Wahl der Transformationsfunktion $\Phi(x)$. Im Normalfall ist eine solche Funktion nicht bekannt. Trotzdem ist die Erkenntnis, dass die Dimension der Vektoren das Optimierungsproblem nicht groß beeinflusst und dass durch eine Transformation nichtlineare Trenngrenzen bestimmt werden können, äußerst relevant für die weitere Betrachtung. In \autoref{sec:kernel} wird beschrieben wie die Zusatzkosten der Skalarprodukte auch umgangen werden können.
 
-\subsection{Kernel Methode} \label{sec:kernel}
+\subsection{Kernel Trick} \label{sec:kernel}
+
+Wie in \autoref{transform_phi} beschrieben können die Eingabevektoren mittels einer Funktion $\Phi$ in einen anderen, beliebigen Raum transformiert werden. In diesem Kapitel wird diese Idee der Transformation verallgemeinert betrachtet. \\
+
+Für die Betrachtung wird das Optimierungsproblem und die Formeln für $w$ und $b$ für die Soft-Margin \ac{SVM} so abgeändert, dass statt allen Eingabevektoren $x$ deren transformierte Form $z = \Phi(x)$ eingesetzt wird:
+
+\begin{subequations} 
+	\begin{alignat}{2}
+		&\!\max_{\alpha}        &\qquad&  	\Lagr(\alpha) = \sum_{n=1}^{N} \alpha_{n} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} z_{n}^{T} z_{m}\\
+		&\text{mit } &      & 0 \leq \alpha_{n} \leq C \text{ für } n=1..N\\
+		&       & & \sum_{n=1}^{N} \alpha_{n} y_{n} = 0\text{ für } n=1..N
+	\end{alignat}
+\end{subequations}
+
+Für die Berechnung von $w$ und $b$ ergibt sich:
+\begin{equation}
+	\begin{aligned}
+		w &= \sum_{n=1}^{N} \alpha_{n} y_{n} z_{n}
+	\end{aligned}
+\end{equation}
+
+\begin{equation}
+	\begin{aligned}
+		b &= \frac{1}{y_{k}} - w^{T} z_{k}
+	\end{aligned}
+\end{equation}
+
+Wie bereits zuvor erwähnt hängt das Problem ausschließlich von den Skalarprodukten der Eingabevektoren, die jetzt in ihrer transformierten Form verwendet werden, ab. Werden die Eingabevektoren mittels $\Phi$ in einen sehr hochdimensionalen, mitunter unendlich dimensionalen, Raum transformiert kann die Berechnung des Skalarprodukts sehr aufwändig bis gar nicht berechnbar werden. \\
+
+Durch die Einführung einer Kernel-Funktion $K(x, x') = z_{1}^{T} z_{2} = \Phi(x)^{T} \Phi(x')$, die das Skalarprodukt der transformierten Eingabevektoren berechnet ohne die Eingabevektoren tatsächlich in den neuen Raum zu transformieren, kann das Problem der Berechnung von hochdimensionalen Skalarprodukten umgangen werden. \\
+
+
+\subsubsection{Beispiel Kernel-Funktion}
+Die Idee einer Kernel-Funktion wird nun anhand eines einfachen Beispiels gezeigt. Folgende Kernel-Funktion für $x, x' \in \mathbb{R}^2$ sei gegeben:
+
+\begin{equation} \label{eq:example1_kernel}
+	\begin{aligned}
+		K(x, x') &= (1 + x^{T}x')^{2} = \\
+		&= (1 + x_{1} x_{1}' + x_{2} x_{2}')^{2} = \\
+		&= 1 + x_{1}^2 x_{1}'^2 + x_{2}^{2} x_{2}'^{2} + 2x_{1} x_{1}' + 2 x_{2} x_{2}' + 2 x_{1} x_{1}'x_{2} x_{2}'
+	\end{aligned}
+\end{equation}
+
+Diese Kernel-Funktion scheint auf den ersten Blick nicht, wie zuvor definiert, einem Skalarprodukt der transformierten Vektoren $\Phi(x)$ und $\Phi(x')$ zu entsprechen.\\
+ 
+Angenommen die verwendete Transformationsfunktion $\Phi$ entspräche:
+
+\begin{equation}
+	\begin{aligned}
+		\Phi(x) &= (1, x_{1}^{2}, x_{2}^{2}, \sqrt{2} x_{1}, \sqrt{2} x_{2}, \sqrt{2} x_{1} x_{2})\\
+	\end{aligned}
+\end{equation}
+
+Angewandt auf die Vektoren $x$ und $x'$:
+\begin{equation} \label{eq:example1_innerprod}
+	\begin{aligned}
+		\Phi(x) &= (1, x_{1}^{2}, x_{2}^{2}, \sqrt{2} x_{1}, \sqrt{2} x_{2}, \sqrt{2} x_{1} x_{2})\\
+		\Phi(x') &= (1, x_{1}'^{2}, x_{2}'^{2}, \sqrt{2} x_{1}', \sqrt{2} x_{2}', \sqrt{2} x_{1}' x_{2}')\\
+		\Phi(x)^T \Phi(x') &= 1 + x_{1}^2 x_{1}'^2 + x_{2}^{2} x_{2}'^{2} + 2x_{1} x_{1}' + 2 x_{2} x_{2}' + 2 x_{1} x_{1}'x_{2} x_{2}'
+	\end{aligned}
+\end{equation}
+
+Vergleicht man nun das Ergebnisse von \autoref{eq:example1_kernel} und \autoref{eq:example1_innerprod} erkennt man, dass die Kernel-Funktion $(1 + x^{T}x')^{2}$ tatsächlich dem Skalarprodukt der mit $\Phi$ transformierten Vektoren $x$ und $x'$ entspricht. \\
+
+$\Phi$ transformiert in diesem Beispiel 2-dimensionale Vektoren nach $\mathbb{R}^6$. Mittels der Kernel-Funktion kann das Skalarprodukt der transformierten Vektoren durch $K(x, x') = (1 + x^{T}x')^{2}$ berechnet werden ohne dass die Vektoren $x$ und $x'$ tatsächlich in den neuen Raum transformiert werden müssen. \\
+
+In dem Beispiel wurde die Berechnung von 6-dimensionalen Skalarprodukten durchgeführt durch die Berechnung mittels der Kernel-Funktion, die lediglich 2-dimensionale Skalarprodukte berechnen muss. Führt die Funktion $\Phi$ eine Transformation in eine viel höhere oder unendlich hohe Dimension aus ist der Vorteil einer solchen Kernel-Funktion sofort ersichtlich.
 
 
 
