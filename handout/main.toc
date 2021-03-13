@@ -37,6 +37,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.5.2.5}Anforderungen an eine Kernel-Funktion}{22}{subsubsection.1.5.2.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{23}{section*.15}%
+\contentsline {section}{\numberline {1.6}Generalisierungsmetrik}{22}{section.1.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{24}{section*.15}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
