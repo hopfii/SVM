@@ -352,7 +352,7 @@ Noch offen ist die Bestimmung des Bias $b$. Weil für Stützvektoren $y_n (w^{T}
 	\end{aligned}
 \end{equation}
 
-\subsection{Lösung mittels Quadratic Programming Solver}
+\subsection{Lösung mittels Quadratic Programming Solver} \label{sec:qp}
 
 Weil es sich bei dem in \autoref{final_lagrange} beschriebene Optimierungsproblem um ein Quadratic Programming Problem handelt kann dieses auch mittels eines Quadratic Programming Solvers gelöst werden. Die Implementationsdetails für diese Lösungsverfahren werden an dieser Stelle nicht weiter ausgeführt. Für die Anwendung eines Quadratic Programming Solvers muss das Problem in die Standardform von \ac{QP} Problemen umformuliert werden.
 
@@ -673,7 +673,48 @@ Für $b$ ergibt sich durh Einsetzen von \autoref{eq:kernel_w} für einen Stützv
 	\end{aligned}
 \end{equation}
 
-Die komplette \ac{SVM} ist jetzt definiert durch die Verwendung der Kernel-Funktion. Es wird keine einzige tatsächliche Transformation eines Eingabevektors mittels $\Phi$ benötigt und es können beliebig dimensionale Räume durch die Verwendung von entsprechenden Kernel-Funktionen verwendet werden ohne je einen Vektor in diesen Raum transformieren zu müssen.  
+Die komplette \ac{SVM} ist jetzt definiert durch die Verwendung der Kernel-Funktion. Es wird keine einzige tatsächliche Transformation eines Eingabevektors mittels $\Phi$ benötigt und es können beliebig dimensionale Räume durch die Verwendung von entsprechenden Kernel-Funktionen verwendet werden ohne je einen Vektor in diesen Raum transformieren zu müssen. \\
+
+Das in \autoref{sec:qp} beschriebene Lösungsverfahren ist nach wie vor gültig, lediglich die $Q$-Matrix muss entsprechend angepasst werden. Es muss nur statt $x_{n}^{T}x_{m}$ $K(x_{n}, x_{m})$ eingesetzt werden:
+
+\begin{subequations} \label{qp1}
+	\begin{alignat}{2}
+		&\!\min_{\alpha}        &\qquad& \Lagr(\alpha) = \frac{1}{2} \alpha^{T} Q \alpha + (-1^T) \alpha \label{eq:qp1}\\
+		&\text{mit} &      & Q = \begin{bmatrix} 
+			y_{1}y_{1} K(x_{1}, x_{1}) & y_{1}y_{2} K(x_{1}, x_{2}) & \dots & y_{1}y_{N} K(x_{1}, x_{N})\\
+			y_{2}y_{1} K(x_{2}, x_{1}) & y_{2}y_{2} K(x_{2}, x_{2}) & \dots & y_{2}y_{N} K(x_{2}, x_{N})\\
+			\vdots & \vdots & \vdots & \vdots\\
+			y_{N}y_{1} K(x_{N}, x_{1}) & y_{N}y_{2} K(x_{N}, x_{2}) & \dots & y_{N}y_{N} K(x_{N}, x_{N})\\ 
+		\end{bmatrix}\\
+		&\text{für} & & y^{T} \alpha = 0\\
+		& & & 0 \leq \alpha \leq \infty
+	\end{alignat}
+\end{subequations} 
+
+Mit dieser Änderung kann das Problem wieder an ein Quadratic Programming Framework übergeben werden um die $\alpha$ Werte zu bestimmen. Die \ac{SVM} lässt sich somit in Kombination mit Kernel-Funktionen auf beliebige binäre Klassifikationsprobleme anwenden. 
+
+
+\subsubsection{Anforderungen an eine Kernel-Funktion}
+Wie in den Kapiteln zuvor gezeigt wurde gibt es eine Vielzahl von verschiedenen Kernel-Funktionen. Damit eine Kernel-Funktion verwendet werden kann muss diese einem Skalarprodukt in einem Raum entsprechen. Um dies überprüfen zu können gibt es zwei Ansätze:
+
+\begin{itemize}
+	\item Für eine vermutlich richtige Kernel-Funktion wird konstruktiv versucht die zugehörige Transformationsfunktion $\Phi$ zu bestimmen. Diese Vorgehensweise wurde in \autoref{sec:example_kernel} durchgeführt.
+	
+	\item Der Kernel $K(x, x')$ ist ein gültiger Kernel wenn die Funktion $K(x, x')$ symmetrisch ist und die Matrix \[ 	
+	\begin{aligned}
+		K &= 
+		\begin{bmatrix} 
+			K(x_{1}, x_{1}) & K(x_{1}, x_{2}) & \dots & K(x_{1}, x_{N})\\
+			K(x_{2}, x_{1}) & K(x_{2}, x_{2}) & \dots & K(x_{2}, x_{N})\\
+			\vdots & \vdots & \vdots & \vdots\\
+			K(x_{N}, x_{1}) & K(x_{N}, x_{2}) & \dots & K(x_{N}, x_{N})\\ 
+		\end{bmatrix}
+	\end{aligned}
+\] positiv semi-definit ist für jedes beliebige $x_1..x_N$. Die Forderung der positiv semi-definiten Matrix wird auch Satz von Mercer genannt und garantiert bei Erfüllung dass eine Funktion $\Phi$ existiert deren Skalarprodukte durch die Kernel-Funktion beschrieben werden können.
+\end{itemize}
+
+
+
 
 % THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
 \nocite{*}
