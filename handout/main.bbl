@@ -63,6 +63,44 @@
       \field{dateera}{ce}
       \true{nocite}
     \endentry
+    \entry{bishop_pattern_2016}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9dfd0135a5e80aa6d81cea2c10fb7f73}{%
+           family={Bishop},
+           familyi={B\bibinitperiod},
+           given={Christopher\bibnamedelima M.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York, {NY}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{9dfd0135a5e80aa6d81cea2c10fb7f73}
+      \strng{fullhash}{9dfd0135a5e80aa6d81cea2c10fb7f73}
+      \strng{bibnamehash}{9dfd0135a5e80aa6d81cea2c10fb7f73}
+      \strng{authorbibnamehash}{9dfd0135a5e80aa6d81cea2c10fb7f73}
+      \strng{authornamehash}{9dfd0135a5e80aa6d81cea2c10fb7f73}
+      \strng{authorfullhash}{9dfd0135a5e80aa6d81cea2c10fb7f73}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This is the first textbook on pattern recognition to present the Bayesian viewpoint. The book presents approximate inference algorithms that permit fast approximate answers in situations where exact answers are not feasible. It uses graphical models to describe probability distributions when no other books apply graphical models to machine learning. No previous knowledge of pattern recognition or machine learning concepts is assumed. Familiarity with multivariate calculus and basic linear algebra is required, and some experience in the use of probabilities would be helpful though not essential as the book includes a self-contained introduction to basic probability theory.}
+      \field{day}{23}
+      \field{edition}{Softcover reprint of the original 1st ed. 2006 Edition}
+      \field{isbn}{978-1-4939-3843-8}
+      \field{month}{8}
+      \field{pagetotal}{758}
+      \field{title}{Pattern Recognition and Machine Learning}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \true{nocite}
+    \endentry
     \entry{boyd_convex_2004}{book}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=ec94d94cc487dd71939a90cbeaaf47d0}{%
@@ -159,6 +197,42 @@
       \verb{url}
       \verb https://doi.org/10.1023/A:1009715923555
       \endverb
+    \endentry
+    \entry{kecman_learning_2001}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=558ea3722dba8ad441f87b21e2b7e290}{%
+           family={Kecman},
+           familyi={K\bibinitperiod},
+           given={Vojislav},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {{MIT} Press}%
+      }
+      \strng{namehash}{558ea3722dba8ad441f87b21e2b7e290}
+      \strng{fullhash}{558ea3722dba8ad441f87b21e2b7e290}
+      \strng{bibnamehash}{558ea3722dba8ad441f87b21e2b7e290}
+      \strng{authorbibnamehash}{558ea3722dba8ad441f87b21e2b7e290}
+      \strng{authornamehash}{558ea3722dba8ad441f87b21e2b7e290}
+      \strng{authorfullhash}{558ea3722dba8ad441f87b21e2b7e290}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{This textbook provides a thorough introduction to the field of learning from experimental data and soft computing. Support vector machines ({SVM}) and neural networks ({NN}) are the mathematical structures, or models, that underlie learning, while fuzzy logic systems ({FLS}) enable us to embed structured human knowledge into workable algorithms. The book assumes that it is not only useful, but necessary, to treat {SVM}, {NN}, and {FLS} as parts of a connected whole. Throughout, the theory and algorithms are illustrated by practical examples, as well as by problem sets and simulated experiments. This approach enables the reader to develop {SVM}, {NN}, and {FLS} in addition to understanding them. The book also presents three case studies: on {NN}-based control, financial time series analysis, and computer graphics. A solutions manual and all of the {MATLAB} programs needed for the simulated experiments are available.}
+      \field{day}{8}
+      \field{edition}{Reprint Edition}
+      \field{isbn}{978-0-262-52790-3}
+      \field{month}{6}
+      \field{pagetotal}{576}
+      \field{shorttitle}{Learning and Soft Computing}
+      \field{title}{Learning and Soft Computing: Support Vector Machines, Neural Networks, and Fuzzy Logic Models}
+      \field{year}{2001}
+      \field{dateera}{ce}
+      \true{nocite}
     \endentry
     \entry{platt_sequential_1998}{report}{}
       \name{author}{1}{}{%
