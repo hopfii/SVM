@@ -368,7 +368,7 @@ Noch offen ist die Bestimmung des Bias $b$. Weil für Stützvektoren $y_n (w^{T}
 
 \section{Lösung mittels Quadratic Programming Solver} \label{sec:qp}
 
-Weil es sich bei dem in \autoref{final_lagrange} beschriebene Optimierungsproblem um ein Quadratic Programming Problem handelt kann dieses auch mittels eines Quadratic Programming Solvers gelöst werden. Die Implementationsdetails für diese Lösungsverfahren werden an dieser Stelle nicht weiter ausgeführt. Für die Anwendung eines Quadratic Programming Solvers muss das Problem in die Standardform von \ac{QP} Problemen umformuliert werden.
+Weil es sich bei dem in \autoref{final_lagrange} beschriebene Optimierungsproblem um ein Quadratic Programming Problem handelt kann dieses auch mittels eines Quadratic Programming Solvers gelöst werden. Die Implementationsdetails für diese Lösungsverfahren werden an dieser Stelle nicht weiter ausgeführt. Für die Anwendung eines Quadratic Programming Solvers muss das Problem in die Standardform von \ac{QP} Problemen umformuliert werden:
 
 \begin{equation} \label{std_QP_problem}
 	\begin{aligned}
@@ -405,9 +405,9 @@ Als nächsten Schritt müssen wir die Koeffizienten aus den Summen extrahieren, 
 An dieser Stelle ist zu bemerken dass es sich bei der Matrix $Q$ um eine $N \times N$ Matrix handelt. Für eine große Anzahl an Trainingsdaten ist dies sehr problematisch beziehungsweise nicht mehr lösbar. Hier können andere Optimierungsverfahren wie beispielsweise in \textcite{platt_sequential_1998} beschrieben verwendet werden. \\
 
 
-Das Problem in dieser Darstellung können wir direkt an ein Quadratic-Programming Solver Framework übergeben und erhalten einen Vektor $\alpha = (\alpha_{1}, \alpha_{2}, ..., \alpha_{n})$ als Ergebnis. \\
+In dieser Darstellung kann das Problem direkt an ein Quadratic-Programming Solver Framework übergeben werden. Als Ergebnis erhalten wir einen Vektor $\alpha = (\alpha_{1}, \alpha_{2}, ..., \alpha_{n})$. \\
 
-Daraus können wir, wie bereits zuvor erwähnt, $w$ und $b$ bestimmen:
+Daraus kann, wie bereits zuvor erwähnt, $w$ und $b$ bestimmt werden:
 
 \begin{equation} \label{weights_calc_qp}
 	\begin{aligned}
@@ -415,7 +415,7 @@ Daraus können wir, wie bereits zuvor erwähnt, $w$ und $b$ bestimmen:
 	\end{aligned}
 \end{equation}
 
-Für die Biasberechnung benötigen wir einen beliebigen Stützvektor $x_{k}$. Wir finden einen Stützvektor, indem wir den Ergebnisvektor $\alpha$ betrachten. Ein Stützvektor $x_{k}$ muss $\alpha_{k} \neq 0$ aufweisen.
+Für die Biasberechnung wird ein beliebiger Stützvektor $x_{k}$ benötigt. Dieser kann bestimmt werden indem der Ergebnisvektor $\alpha$ betrachtet wird. Ein Stützvektor $x_{k}$ muss $\alpha_{k} \neq 0$ aufweisen.
 \begin{equation} \label{bias_calc_qp}
 	\begin{aligned}
 		b &= \frac{1}{y_{k}} - w^{T} x_{k}
@@ -501,7 +501,7 @@ Aufgrund des zuvor genannten Verhaltens tendiert die Hard-Margin \ac{SVM} im All
 
 \chapter{Nichtlineare Trennung}
 
-Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind, kann eine \ac{SVM} auch in ihrer Grundform nicht linear trennbare Eingabevektoren trennen. In \autoref{transform_phi} wird zuerst eine Intuition für die Transformation aufgebaut. Diese Intuition wird anschließend in \autoref{sec:kernel} weiter formalisiert und verallgemeinert. 
+Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind, kann eine \ac{SVM} auch nicht linear trennbare Eingabevektoren trennen. In \autoref{transform_phi} wird zuerst eine Intuition für die Transformation aufgebaut. Diese Intuition wird anschließend in \autoref{sec:kernel} weiter formalisiert und verallgemeinert. 
 
 \section{Transformation der Problemstellung} \label{transform_phi}
 
@@ -602,7 +602,7 @@ Angewandt auf die Vektoren $x$ und $x'$:
 	\end{aligned}
 \end{equation}
 
-Vergleicht man nun das Ergebnisse von \autoref{eq:example1_kernel} und \autoref{eq:example1_innerprod} erkennt man, dass die Kernel-Funktion $(1 + x^{T}x')^{2}$ tatsächlich dem Skalarprodukt der mit $\Phi$ transformierten Vektoren $x$ und $x'$ entspricht. \\
+Werden die Ergebnisse von \autoref{eq:example1_kernel} und \autoref{eq:example1_innerprod} verglichen erkennt man, dass die Kernel-Funktion $(1 + x^{T}x')^{2}$ tatsächlich dem Skalarprodukt der mit $\Phi$ transformierten Vektoren $x$ und $x'$ entspricht. \\
 
 $\Phi$ transformiert in diesem Beispiel 2-dimensionale Vektoren nach $\mathbb{R}^6$. Mittels der Kernel-Funktion kann das Skalarprodukt der transformierten Vektoren durch $K(x, x') = (1 + x^{T}x')^{2}$ berechnet werden ohne dass die Vektoren $x$ und $x'$ tatsächlich in den neuen Raum transformiert werden müssen. \\
 
@@ -651,8 +651,7 @@ Die zu diesem Kernel zugehörige Transformationsfunktion $\Phi$ bildet in einen 
 Durch die Taylorexpansion von $\exp{(2xx')}$ wird die Unendlichkeit dieses Raums sichtbar. Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$. Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden. Damit wurde gezeigt dass der \ac{RBF} Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet. 
 
 \subsection{SVM Definition mit Kernel}
-
-Ein Input $x$ kann mit einer \ac{SVM} wie folgt klassifiziert werden:
+Ein Input $x$, transformiert mit einer Funktion $z = \Phi(x)$, kann mit einer \ac{SVM} wie folgt klassifiziert werden:
 
 \begin{equation} \label{eq:svm_def_kernel}
 	\begin{aligned}
@@ -660,7 +659,7 @@ Ein Input $x$ kann mit einer \ac{SVM} wie folgt klassifiziert werden:
 	\end{aligned}
 \end{equation}
 
-Das Ziel der neuen Definition ist die Vermeidung von einzeln auftretenden transformierten Eingabevektoren $z$ in den Formeln um das gesamte Problem mittels einer Kernel-Funktion $K(x, x')$ ausdrücken zu können. Dadurch muss die Transformation $\Phi$ nie direkt auf einen Vektor angewandt werden und lediglich die Skalarprodukte mittels der Kernel-Funktion berechnet werden.
+Diese Definition setzt voraus, dass die Funktion $\Phi$ bekannt ist. Das Ziel der neuen Definition ist die Vermeidung von einzeln auftretenden transformierten Eingabevektoren $z$ in den Formeln um das gesamte Problem mittels einer Kernel-Funktion $K(x, x')$ ausdrücken zu können ohne die Funktion $\Phi$ tatsächlich kennen zu müssen.
 
 \begin{equation} \label{eq:kernel_w}
 	\begin{aligned}
@@ -687,11 +686,11 @@ Für $b$ ergibt sich durh Einsetzen von \autoref{eq:kernel_w} für einen beliebi
 	\end{aligned}
 \end{equation}
 
-Die \ac{SVM} ist nun vollständig definiert durch die Verwendung der Kernel-Funktion ohne dass die Transformationsfunktion $\Phi$ bekannt sein muss. Es wird keine einzige tatsächliche Transformation eines Eingabevektors mittels $\Phi$ benötigt und es können beliebig dimensionale Räume durch die Verwendung von entsprechenden Kernel-Funktionen verwendet werden ohne je einen Vektor in diesen Raum transformieren zu müssen. \\
+Die \ac{SVM} ist nun vollständig definiert durch die Verwendung der Kernel-Funktion ohne dass die Transformationsfunktion $\Phi$ bekannt sein muss. Es wird keine einzige tatsächliche Transformation eines Eingabevektors mittels $\Phi$ benötigt und es können beliebig dimensionale Räume durch die Verwendung von entsprechenden Kernel-Funktionen verwendet werden. \\
 
 Da die Funktion $\Phi$ überhaupt nicht bekannt sein muss impliziert das, dass beliebige Kernel-Funktionen verwendet werden können. Das ist in der Tat möglich, allerdings müssen die Kernel-Funktionen bestimmte Eigenschaften erfüllen. Diese werden in \autoref{sec:kernel_conditions} erläutert.\\
 
-Das in \autoref{sec:qp} beschriebene Lösungsverfahren ist nach wie vor gültig, lediglich die $Q$-Matrix muss entsprechend angepasst werden. Es muss nur statt $x_{n}^{T}x_{m}$ $K(x_{n}, x_{m})$ eingesetzt werden:
+Das in \autoref{sec:qp} beschriebene Lösungsverfahren ist für das neue Problem nach wie vor gültig, lediglich die $Q$-Matrix muss entsprechend angepasst werden. Es muss nur statt $x_{n}^{T}x_{m}$ $K(x_{n}, x_{m})$ eingesetzt werden:
 
 \begin{subequations} \label{qp1}
 	\begin{alignat}{2}
@@ -726,7 +725,7 @@ Wie in den Kapiteln zuvor gezeigt wurde gibt es eine Vielzahl von verschiedenen 
 			K(x_{N}, x_{1}) & K(x_{N}, x_{2}) & \dots & K(x_{N}, x_{N})\\ 
 		\end{bmatrix}
 	\end{aligned}
-\] positiv semi-definit ist für jedes beliebige $x_1..x_N$. Die Forderung der positiv semi-definiten Matrix wird auch Satz von Mercer genannt und garantiert bei Erfüllung dass eine Funktion $\Phi$ existiert deren Skalarprodukte durch die Kernel-Funktion beschrieben werden können.
+\] positiv semi-definit ist für jedes beliebige $x_1..x_N$. Die Forderung der positiv semi-definiten Matrix wird auch Satz von Mercer genannt und garantiert bei Erfüllung dass eine Funktion $\Phi$ existiert die in einen Raum abbildet dessen Skalarprodukte durch die Kernel-Funktion beschrieben werden können. 
 \end{itemize}
 
 
