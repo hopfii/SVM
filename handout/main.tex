@@ -96,11 +96,11 @@
 
 
 \chapter{Intuition}
-Das Ziel einer \ac{SVM} ist die lineare Separation von zwei verschiedenen Klassen. Die Separation wird durch eine Ebene durchgeführt. Die Lage der Ebene wird so gewählt, dass um die Ebene ein möglichst breites Band entsteht. \autoref{fig:intuition_margin} zeigt Beispiele für solche Trennungen. Weiters gibt zwei Arten von \acp{SVM}:
+Das Ziel einer \ac{SVM} ist die lineare Separation von zwei verschiedenen Klassen. Die Separation wird durch eine Ebene durchgeführt. Die Lage der Ebene wird so gewählt, dass um die Ebene ein möglichst breites Band entsteht. \autoref{fig:intuition_margin} zeigt Beispiele für solche Trennungen. Weiters gibt es zwei Arten von \acp{SVM}:
 
 \begin{itemize}
 	\item Eine Hard-Margin SVM trennt die Klassen so, dass keine Fehlklassifikationen entstehen. 
-	\item Eine Soft-Margin SVM erlaubt einzelne Fehlklassifikationen, damit eine mitunter bessere Trennebene gefunden werden kann.
+	\item Eine Soft-Margin SVM erlaubt einzelne Fehlklassifikationen damit eine mitunter bessere Trennebene gefunden werden kann.
 \end{itemize}
 
 Diese beiden Arten von \acp{SVM} werden in den folgenden Kapiteln genauer betrachtet. 
@@ -115,7 +115,7 @@ Die Qualität der Trennung wird bei einer \ac{SVM} durch die Breite des Trennban
 
 
 \chapter{Hard-Margin Support Vector Machine} \label{sec:hard_margin}
-Das Ziel einer Hard-Margin \ac{SVM} ist die Trennung zweier Klassen ohne Fehler mit einem möglichst breiten Trennband. Diese Aussage wird in diesem Kapitel mathematisch formuliert und als Optimierungsproblem dargestellt. Weiters wird beschrieben wie das Problem in die Standardform von \ac{QP} Problemen transformiert werden kann. 
+Wie bereits in der Einführung erwähnt ist das Ziel einer Hard-Margin \ac{SVM} ist die Trennung zweier Klassen ohne Fehler mit einem möglichst breiten Trennband. Diese Aussage wird in diesem Kapitel mathematisch formuliert und als Optimierungsproblem dargestellt. Weiters wird beschrieben wie dieses Problem in die Standardform von \ac{QP} Problemen transformiert werden kann was für die Lösung nötig ist. 
 
 \section{Problemdefinition} \label{sec:problem_def}
 Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{K}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{K}$ und ein zugehöriges Label $y_{n} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
@@ -217,7 +217,7 @@ Weil der Punkt $x$ auf der Ebene liegt gilt $w^{T} x + b = 0$ (\autoref{plane_eq
 	\end{aligned}
 \end{equation}
 
-Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenngrenze liegende Punkt ist, so gilt aus \autoref{dec_rule} gilt $y_{k} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ unter der Annahme, dass der Punkt richtig klassifiziert wurde. Somit ergibt sich der kleinste Abstand zur Trennebene $D = d(\hat{x})$, welcher zugleich der halben Breite des Trennbands entspricht, als:
+Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenngrenze liegende Punkt ist, so gilt aus \autoref{dec_rule} $y_{k} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ unter der Annahme, dass der Punkt richtig klassifiziert wurde. Somit ergibt sich der kleinste Abstand zur Trennebene $D = d(\hat{x})$, welcher zugleich der halben Breite des Trennbands entspricht, als:
 \begin{equation} \label{distance_to_plane_simplified2}
 	\begin{aligned}
 		D &= \frac{1}{\norm{w}}
@@ -235,7 +235,7 @@ Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenn
 \section{Optimierungsproblem}
 
 \autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x}$. Der Normalabstand ist gleichbedeutend mit der Hälfte der Breite des Trennbands, wobei für die Optimierung der Faktor $2$ keine Rolle spielt und vernachlässigt werden kann. \\
-Das Ziel einer \ac{SVM} ist die Maximierung der Breite des Trennbands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{K}$. Bei der in diesem Kapitel hergeleiteten Version der \ac{SVM} müssen die Eingabevektoren linear separierbar sein. Diese Art der \ac{SVM} wird auch Hard-Margin SVM genannt. Die zweite Version, bei der nicht alle Eingabevektoren linear trennbar sind, heißt Soft-Margin SVM und wird in \autoref{sec:soft_margin} beschrieben. \\
+Das Ziel einer \ac{SVM} ist die Maximierung der Breite des Trennbands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{K}$. 
 
 Bei dem beschriebenen Problem handelt es sich um ein Optimierungsproblem mit Nebenbedingungen:
 
@@ -300,7 +300,7 @@ Das Problem kann nun als Lagrangegleichung dargestellt werden:
 	\end{aligned}
 \end{equation}
 
-Die Ergebnisse von \autoref{gradient_lagrange_w} und \autoref{partial_lagrange_b} können in \autoref{eq:optProb4} eingesetzt werden. Hierfür wird zuerst die Summe in \autoref{eq:optProb4} in Teilsummen aufgeteilt:
+Die Ergebnisse von \autoref{gradient_lagrange_w} und \autoref{partial_lagrange_b} können in \autoref{eq:optProb4} eingesetzt werden. Hierfür wird zuerst die Summe in \autoref{eq:optProb4} in Teilsummen zerlegt:
 
 \begin{equation} \label{lagrange_substituted}
 	\begin{aligned}
