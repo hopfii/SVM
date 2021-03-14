@@ -91,17 +91,20 @@
 \begin{acronym}
  \acro{SVM}{Support Vector Machine}
  \acro{QP}{Quadratic Programming}
+ \acro{RBF}{Radial Basis Function}
 \end{acronym}
 
 
 \chapter{Intuition}
-\todo{intuition summary}
+Das Ziel einer \ac{SVM} ist die lineare Separation von zwei verschiedenen Klassen. Die Separation wird durch eine Ebene durchgeführt. Die Lage der Ebene wird so gewählt, dass um die Ebene ein möglichst breites Band entsteht. \autoref{fig:intuition_margin} zeigt Beispiele für solche Trennungen. Weiters gibt zwei Arten von \acp{SVM}:
 
+\begin{itemize}
+	\item Eine Hard-Margin SVM trennt die Klassen so, dass keine Fehlklassifikationen entstehen. 
+	\item Eine Soft-Margin SVM erlaubt einzelne Fehlklassifikationen, damit eine mitunter bessere Trennebene gefunden werden kann.
+\end{itemize}
 
-Ziel: Ebene so wählen dass möglichst breites Band zwischen den 2 verschiedenen Klassen entsteht. \\
-
-Hard Margin SVM: Trennebene trennt Daten, alle Eingabevektoren werden richtig klassifziert
-Soft Margin SVM: Trennebene trennt Daten, Eingabevektoren können falsch klassifiziert werden, Fehlklassifikationen werden minimiert
+Diese beiden Arten von \acp{SVM} werden in den folgenden Kapiteln genauer betrachtet. 
+Die Qualität der Trennung wird bei einer \ac{SVM} durch die Breite des Trennbands beurteilt. 
 
 \begin{figure}[H]
 	\centering
@@ -112,9 +115,9 @@ Soft Margin SVM: Trennebene trennt Daten, Eingabevektoren können falsch klassif
 
 
 \chapter{Hard-Margin Support Vector Machine} \label{sec:hard_margin}
-\todo{hard-margin SVM chapter summary}
+Das Ziel einer Hard-Margin \ac{SVM} ist die Trennung zweier Klassen ohne Fehler mit einem möglichst breiten Trennband. Diese Aussage wird in diesem Kapitel mathematisch formuliert und als Optimierungsproblem dargestellt. Weiters wird beschrieben wie das Problem in die Standardform von \ac{QP} Problemen transformiert werden kann. 
 
-\section{Problemdefinition}
+\section{Problemdefinition} \label{sec:problem_def}
 Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{K}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{K}$ und ein zugehöriges Label $y_{n} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
 
 \begin{equation} \label{plane_eq}
@@ -498,7 +501,7 @@ Aufgrund des zuvor genannten Verhaltens tendiert die Hard-Margin \ac{SVM} im All
 
 \chapter{Nichtlineare Trennung}
 
-Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind,.
+Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind, kann eine \ac{SVM} auch in ihrer Grundform nicht linear trennbare Eingabevektoren trennen. In \autoref{transform_phi} wird zuerst eine Intuition für die Transformation aufgebaut. Diese Intuition wird anschließend in \autoref{sec:kernel} weiter formalisiert und verallgemeinert. 
 
 \section{Transformation der Problemstellung} \label{transform_phi}
 
@@ -627,7 +630,7 @@ Mittels dieser Kernel-Funktion kann die Berechnung eines Skalarprodukts eines be
 
 \subsection{Radial Basis Function Kernel}
 
-Eine weitere mögliche Kernel-Funktion ist der Radial Basis Function Kernel:
+Eine weitere mögliche Kernel-Funktion ist der \ac{RBF} Kernel:
 \begin{equation} \label{eq:rbfk}
 	\begin{aligned}
 		K(x, x') &= \exp{\gamma \norm{x - x'}^2}
@@ -645,7 +648,7 @@ Die zu diesem Kernel zugehörige Transformationsfunktion $\Phi$ bildet in einen 
 	\end{aligned}
 \end{equation}
 
-Durch die Taylorexpansion von $\exp{(2xx')}$ wird die Unendlichkeit dieses Raums sichtbar. Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$. Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden. Damit wurde gezeigt dass der Radial Basis Function Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet. 
+Durch die Taylorexpansion von $\exp{(2xx')}$ wird die Unendlichkeit dieses Raums sichtbar. Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$. Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden. Damit wurde gezeigt dass der \ac{RBF} Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet. 
 
 \subsection{SVM Definition mit Kernel}
 
@@ -674,7 +677,7 @@ Setzt man \autoref{eq:kernel_w} in \autoref{eq:svm_def_kernel} ein erhält man:
 	\end{aligned}
 \end{equation}
 
-Für $b$ ergibt sich durh Einsetzen von \autoref{eq:kernel_w} für einen Stützvektor $x_{k}$:
+Für $b$ ergibt sich durh Einsetzen von \autoref{eq:kernel_w} für einen beliebigen Stützvektor $x_{k}$:
 
 \begin{equation}
 	\begin{aligned}
@@ -684,7 +687,9 @@ Für $b$ ergibt sich durh Einsetzen von \autoref{eq:kernel_w} für einen Stützv
 	\end{aligned}
 \end{equation}
 
-Die komplette \ac{SVM} ist jetzt definiert durch die Verwendung der Kernel-Funktion. Es wird keine einzige tatsächliche Transformation eines Eingabevektors mittels $\Phi$ benötigt und es können beliebig dimensionale Räume durch die Verwendung von entsprechenden Kernel-Funktionen verwendet werden ohne je einen Vektor in diesen Raum transformieren zu müssen. \\
+Die \ac{SVM} ist nun vollständig definiert durch die Verwendung der Kernel-Funktion ohne dass die Transformationsfunktion $\Phi$ bekannt sein muss. Es wird keine einzige tatsächliche Transformation eines Eingabevektors mittels $\Phi$ benötigt und es können beliebig dimensionale Räume durch die Verwendung von entsprechenden Kernel-Funktionen verwendet werden ohne je einen Vektor in diesen Raum transformieren zu müssen. \\
+
+Da die Funktion $\Phi$ überhaupt nicht bekannt sein muss impliziert das, dass beliebige Kernel-Funktionen verwendet werden können. Das ist in der Tat möglich, allerdings müssen die Kernel-Funktionen bestimmte Eigenschaften erfüllen. Diese werden in \autoref{sec:kernel_conditions} erläutert.\\
 
 Das in \autoref{sec:qp} beschriebene Lösungsverfahren ist nach wie vor gültig, lediglich die $Q$-Matrix muss entsprechend angepasst werden. Es muss nur statt $x_{n}^{T}x_{m}$ $K(x_{n}, x_{m})$ eingesetzt werden:
 
@@ -705,8 +710,8 @@ Das in \autoref{sec:qp} beschriebene Lösungsverfahren ist nach wie vor gültig,
 Mit dieser Änderung kann das Problem wieder an ein Quadratic Programming Framework übergeben werden um die $\alpha$ Werte zu bestimmen. Die \ac{SVM} lässt sich somit in Kombination mit Kernel-Funktionen auf beliebige binäre Klassifikationsprobleme anwenden. 
 
 
-\subsection{Anforderungen an eine Kernel-Funktion}
-Wie in den Kapiteln zuvor gezeigt wurde gibt es eine Vielzahl von verschiedenen Kernel-Funktionen. Damit eine Kernel-Funktion verwendet werden kann muss diese einem Skalarprodukt in einem Raum entsprechen. Um dies überprüfen zu können gibt es zwei Ansätze:
+\subsection{Anforderungen an eine Kernel-Funktion} \label{sec:kernel_conditions}
+Wie in den Kapiteln zuvor gezeigt wurde gibt es eine Vielzahl von verschiedenen Kernel-Funktionen. Wenn eine neue Funktion als Kernel-Funktion verwendet werden soll muss diese einem Skalarprodukt in einem Raum entsprechen. Um dies überprüfen zu können gibt es zwei verschiedene Ansätze:
 
 \begin{itemize}
 	\item Für eine vermutlich richtige Kernel-Funktion wird konstruktiv versucht die zugehörige Transformationsfunktion $\Phi$ zu bestimmen. Diese Vorgehensweise wurde in \autoref{sec:example_kernel} durchgeführt.

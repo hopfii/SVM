@@ -43,6 +43,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7.2}One vs One}{28}{section.7.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Weiterführende Ressourcen}{29}{section*.21}%
+\contentsline {chapter}{Weiterführende Ressourcen}{29}{section*.20}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
