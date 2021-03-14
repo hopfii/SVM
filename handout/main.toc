@@ -31,7 +31,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.5.2.2}Polynomieller Kernel}{20}{subsubsection.1.5.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.5.2.3}Radialer Basis Funktions Kernel}{20}{subsubsection.1.5.2.3}%
+\contentsline {subsubsection}{\numberline {1.5.2.3}Radial Basis Function Kernel}{20}{subsubsection.1.5.2.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.5.2.4}SVM Definition mit Kernel}{21}{subsubsection.1.5.2.4}%
 \defcounter {refsection}{0}\relax 

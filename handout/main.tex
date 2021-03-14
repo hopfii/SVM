@@ -614,9 +614,9 @@ Die in \autoref{eq:poly_kernel} beschriebene Kernel-Funktion wird polynomieller 
 
 Mittels dieser Kernel-Funktion kann die Berechnung eines Skalarprodukts eines beliebig großen Polynoms des Grades $Q$ durch die Berechnung eines Skalarprodukts in $\mathbb{R}^{d}$ und der Exponentation mit $Q$ durchgeführt werden ohne dass die Vektoren tatsächlich in den Polynomraum transformiert werden müssen.  
 
-\subsubsection{Radialer Basis Funktions Kernel}
+\subsubsection{Radial Basis Function Kernel}
 
-Eine weitere mögliche Kernel-Funktion ist der Radialer Basis Funktions Kernel:
+Eine weitere mögliche Kernel-Funktion ist der Radial Basis Function Kernel:
 \begin{equation} \label{eq:rbfk}
 	\begin{aligned}
 		K(x, x') &= \exp{\gamma \norm{x - x'}^2}
@@ -634,7 +634,7 @@ Die zu diesem Kernel zugehörige Transformationsfunktion $\Phi$ bildet in einen 
 	\end{aligned}
 \end{equation}
 
-Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$. Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden. Damit wurde gezeigt dass der Radiale Basis Funktions Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet. 
+Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$. Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden. Damit wurde gezeigt dass der Radial Basis Function Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet. 
 
 \subsubsection{SVM Definition mit Kernel}
 
