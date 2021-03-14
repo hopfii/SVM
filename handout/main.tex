@@ -26,9 +26,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{interval}
-
-\nocite{*}
-
+\usepackage{todonotes}
 
 
 \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
@@ -37,6 +35,10 @@
 
 
 \begin{document}
+
+% REMOVE THIS BEFORE SUBMITTING
+\listoftodos
+
 
 % Titelblatt:
 % \newpage\mbox{}\newpage
@@ -90,9 +92,9 @@
 \end{acronym}
 
 
-
 \chapter{Intuition}
-TODO
+\todo{intuition summary}
+
 
 Ziel: Ebene so wählen dass möglichst breites Band zwischen den 2 verschiedenen Klassen entsteht. \\
 
@@ -108,8 +110,7 @@ Soft Margin SVM: Trennebene trennt Daten, Eingabevektoren können falsch klassif
 
 
 \chapter{Hard-Margin Support Vector Machine} \label{sec:hard_margin}
-
-TODO ZUSAMMENFASSUNG HERE
+\todo{hard-margin SVM chapter summary}
 
 \section{Problemdefinition}
 Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{K}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{K}$ und ein zugehöriges Label $y_{n} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
@@ -737,12 +738,14 @@ Je kleiner dieses Verhältnis ist, desto weniger Vektoren wurden für die Bestim
 
 \chapter{Multiclass Separation}
 https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/
-
+\todo{multiclass separation summary text}
 \section{One vs All}
-TODO
+\todo{one vs all section}
 
 \section{One vs One}
-TODO
+\todo{one vs one section}
+
+
 
 
 % THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
