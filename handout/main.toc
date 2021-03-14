@@ -39,6 +39,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.6}Generalisierungsmetrik}{22}{section.1.6}%
 \defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.7}Multiclass Separation}{23}{section.1.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.7.1}One vs All}{23}{subsection.1.7.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.7.2}One vs One}{23}{subsection.1.7.2}%
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Bibliography}{24}{section*.15}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
