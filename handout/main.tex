@@ -87,9 +87,7 @@
 
 
 
-\chapter{Einführung}
-
-\section{Intuition}
+\chapter{Intuition}
 Ziel: Ebene so wählen dass möglichst breites Band zwischen den 2 verschiedenen Klassen entsteht. \\
 
 Hard Margin SVM: Trennebene trennt Daten, alle Eingabevektoren werden richtig klassifziert
@@ -103,11 +101,11 @@ Soft Margin SVM: Trennebene trennt Daten, Eingabevektoren können falsch klassif
 \end{figure}
 
 
-\section{Hard-Margin Support Vector Machine} \label{sec:hard_margin}
+\chapter{Hard-Margin Support Vector Machine} \label{sec:hard_margin}
 
 TODO ZUSAMMENFASSUNG HERE
 
-\subsection{Problemdefinition}
+\section{Problemdefinition}
 Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{K}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{K}$ und ein zugehöriges Label $y_{n} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
 
 \begin{equation} \label{plane_eq}
@@ -222,7 +220,7 @@ Trifft man nun die Annahme, dass $x_{n} = \hat{x}$ der am nächsten zu der Trenn
 \end{figure}
 
 
-\subsection{Optimierungsproblem}
+\section{Optimierungsproblem}
 
 \autoref{distance_to_plane_simplified2} beschreibt den Normalabstand zu dem am nächsten an der Ebene liegenden Punkt $\hat{x}$. Der Normalabstand ist gleichbedeutend mit der Hälfte der Breite des Trennbands, wobei für die Optimierung der Faktor $2$ keine Rolle spielt und vernachlässigt werden kann. \\
 Das Ziel einer \ac{SVM} ist die Maximierung der Breite des Trennbands für $N$ Eingabevektoren $\{x_{1}..x_{N}\}, x_{n} \in \mathbb{R}^{K}$. Bei der in diesem Kapitel hergeleiteten Version der \ac{SVM} müssen die Eingabevektoren linear separierbar sein. Diese Art der \ac{SVM} wird auch Hard-Margin SVM genannt. Die zweite Version, bei der nicht alle Eingabevektoren linear trennbar sind, heißt Soft-Margin SVM und wird in \autoref{sec:soft_margin} beschrieben. \\
@@ -255,7 +253,9 @@ Durch Anwendung von \autoref{abs_value_trick} in \autoref{eq:constraint1}, Umfor
 
 Die Verallgemeinerung von \autoref{eq:constraint1} auf \autoref{eq:constraint12} auf beliebige Punkte ist so möglich, weil durch \autoref{dec_rule} sichergestellt ist, dass für beliebige Punkte $y_{n}(w^{T} x_{n} + b) \geq 1$ gilt.
 
-\subsection{Lagrange Optimierung} \label{sec:lagrange}
+
+
+\section{Lagrange Optimierung} \label{sec:lagrange}
 
 Das beschriebene Optimierungsproblem beinhaltet eine Ungleichung in \autoref{eq:constraint12}. Um die Lagrangegleichung aufstellen zu können wird zuerst die Nebenbedingung umgeformt:
 \begin{subequations} \label{min_problem}
@@ -352,7 +352,9 @@ Noch offen ist die Bestimmung des Bias $b$. Weil für Stützvektoren $y_n (w^{T}
 	\end{aligned}
 \end{equation}
 
-\subsection{Lösung mittels Quadratic Programming Solver} \label{sec:qp}
+
+
+\section{Lösung mittels Quadratic Programming Solver} \label{sec:qp}
 
 Weil es sich bei dem in \autoref{final_lagrange} beschriebene Optimierungsproblem um ein Quadratic Programming Problem handelt kann dieses auch mittels eines Quadratic Programming Solvers gelöst werden. Die Implementationsdetails für diese Lösungsverfahren werden an dieser Stelle nicht weiter ausgeführt. Für die Anwendung eines Quadratic Programming Solvers muss das Problem in die Standardform von \ac{QP} Problemen umformuliert werden.
 
@@ -415,7 +417,7 @@ Die \ac{SVM} ist nun vollständig definiert, neue Eingabevektoren $x$ können wi
 	\end{aligned}
 \end{equation}
 
-\section{Soft-Margin Support Vector Machine} \label{sec:soft_margin}
+\chapter{Soft-Margin Support Vector Machine} \label{sec:soft_margin}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 12cm]{assets/soft_margin_example.png}
@@ -466,7 +468,7 @@ Wendet man die in \autoref{sec:lagrange} beschriebenen Schritte auf das in \auto
 
 Sehr bemerkenswert hier ist, dass der einzige Unterschied zu \autoref{final_lagrange} die Beschränkung der Lagrange Multiplikatoren durch $C$ ist. Umgekehrt bedeutet dies, dass eine Hard-Margin SVM durch \autoref{final_lagrange_soft} beschrieben werden kann wenn der Parameter $C$ sehr groß gewählt wird. \\
 
-\section{Vergleich Soft-Margin und Hard-Margin Support Vector Machine}
+\chapter{Vergleich Soft-Margin und Hard-Margin Support Vector Machine}
 
 Ein großer Vorteil der Soft-Margin \ac{SVM} ist die Verminderung des Einflusses von Ausreißern auf die Trenngrenze. Bei der Hard-Margin \ac{SVM} kann mitunter ein Ausreißer, der näher als alle anderen Punkte bei der anderen Klasse liegt, die Lage der Trenngrenze bestimmen. Die so bestimmte Trenngrenze liegt mitunter viel näher bei der abzugrenzenden Klasse als eine optimale Trenngrenze liegen würde. Ein Beispiel für eine solche Situation ist in \autoref{fig:hard_vs_soft_svm} dargestellt. Die Soft-Margin \ac{SVM} hat die Möglichkeit Fehlklassifikationen zuzulassen und kann dadurch bessere liegende Trennebenen finden die zu stabileren Klassfikationsergebnissen für neue Daten führt.\\
 
@@ -485,11 +487,11 @@ Aufgrund des zuvor genannten Verhaltens tendiert die Hard-Margin \ac{SVM} im All
 
 
 
-\section{Nichtlineare Trennung}
+\chapter{Nichtlineare Trennung}
 
 Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind,.
 
-\subsection{Transformation der Problemstellung} \label{transform_phi}
+\section{Transformation der Problemstellung} \label{transform_phi}
 
 Sind die Eingabevektoren nicht linear trennbar können diese mittels einer Transformation $\Phi(x): \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ in einen Raum, in dem diese trennbar sind, transformiert werden. Beispiele für solche Transformationen sind in \autoref{fig:phi_transformation1} und \autoref{fig:phi_transformation2} dargestellt.
 
@@ -526,7 +528,7 @@ Die Stützvektoren dieser Methode befinden sich in dem neuen Raum $\mathbb{R}^{L
 
 Das Problem dieses Ansatzes ist die Wahl der Transformationsfunktion $\Phi(x)$. Im Normalfall ist eine solche Funktion nicht bekannt. Trotzdem ist die Erkenntnis, dass die Dimension der Vektoren das Optimierungsproblem nicht groß beeinflusst und dass durch eine Transformation nichtlineare Trenngrenzen bestimmt werden können, äußerst relevant für die weitere Betrachtung. In \autoref{sec:kernel} wird beschrieben wie die Zusatzkosten der Skalarprodukte auch umgangen werden können.
 
-\subsection{Kernel Trick} \label{sec:kernel}
+\section{Kernel Trick} \label{sec:kernel}
 
 Wie in \autoref{transform_phi} beschrieben können die Eingabevektoren mittels einer Funktion $\Phi$ in einen anderen, beliebigen Raum transformiert werden. In diesem Kapitel wird diese Idee der Transformation verallgemeinert betrachtet. \\
 
@@ -558,7 +560,7 @@ Wie bereits zuvor erwähnt hängt das Problem ausschließlich von den Skalarprod
 Durch die Einführung einer Kernel-Funktion $K(x, x') = z_{1}^{T} z_{2} = \Phi(x)^{T} \Phi(x')$, die das Skalarprodukt der transformierten Eingabevektoren berechnet ohne die Eingabevektoren tatsächlich in den neuen Raum zu transformieren, kann das Problem der Berechnung von hochdimensionalen Skalarprodukten umgangen werden. \\
 
 
-\subsubsection{Beispiel Kernel-Funktion} \label{sec:example_kernel}
+\subsection{Beispiel Kernel-Funktion} \label{sec:example_kernel}
 Die Idee einer Kernel-Funktion wird nun anhand eines einfachen Beispiels gezeigt. Folgende Kernel-Funktion für $x, x' \in \mathbb{R}^2$ sei gegeben:
 
 \begin{equation} \label{eq:example1_kernel}
@@ -594,7 +596,7 @@ $\Phi$ transformiert in diesem Beispiel 2-dimensionale Vektoren nach $\mathbb{R}
 
 In dem Beispiel wurde die Berechnung von 6-dimensionalen Skalarprodukten durchgeführt durch die Berechnung mittels der Kernel-Funktion, die lediglich 2-dimensionale Skalarprodukte berechnen muss. Führt die Funktion $\Phi$ eine Transformation in eine viel höhere oder unendlich hohe Dimension aus ist der Vorteil einer solchen Kernel-Funktion sofort ersichtlich.
 
-\subsubsection{Polynomieller Kernel}
+\subsection{Polynomieller Kernel}
 Die in \autoref{sec:example_kernel} verwendete Kernel-Funktion kann verallgemeinert werden. Seien die Eingabevektoren $x \in \mathbb{R}^d$ und die Transformationsfunktion $\Phi: \mathbb{R}^d \rightarrow \mathbb{Z}$ ein Polynom der Ordnung $Q$, dann kann eine Kernel-Funktion wie folgt definiert werden:
 
 \begin{equation} \label{eq:poly_kernel}
@@ -614,7 +616,7 @@ Die in \autoref{eq:poly_kernel} beschriebene Kernel-Funktion wird polynomieller 
 
 Mittels dieser Kernel-Funktion kann die Berechnung eines Skalarprodukts eines beliebig großen Polynoms des Grades $Q$ durch die Berechnung eines Skalarprodukts in $\mathbb{R}^{d}$ und der Exponentation mit $Q$ durchgeführt werden ohne dass die Vektoren tatsächlich in den Polynomraum transformiert werden müssen.  
 
-\subsubsection{Radial Basis Function Kernel}
+\subsection{Radial Basis Function Kernel}
 
 Eine weitere mögliche Kernel-Funktion ist der Radial Basis Function Kernel:
 \begin{equation} \label{eq:rbfk}
@@ -636,7 +638,7 @@ Die zu diesem Kernel zugehörige Transformationsfunktion $\Phi$ bildet in einen 
 
 Durch die Taylorexpansion von $\exp{(2xx')}$ wird die Unendlichkeit dieses Raums sichtbar. Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$. Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden. Damit wurde gezeigt dass der Radial Basis Function Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet. 
 
-\subsubsection{SVM Definition mit Kernel}
+\subsection{SVM Definition mit Kernel}
 
 Ein Input $x$ kann mit einer \ac{SVM} wie folgt klassifiziert werden:
 
@@ -694,7 +696,7 @@ Das in \autoref{sec:qp} beschriebene Lösungsverfahren ist nach wie vor gültig,
 Mit dieser Änderung kann das Problem wieder an ein Quadratic Programming Framework übergeben werden um die $\alpha$ Werte zu bestimmen. Die \ac{SVM} lässt sich somit in Kombination mit Kernel-Funktionen auf beliebige binäre Klassifikationsprobleme anwenden. 
 
 
-\subsubsection{Anforderungen an eine Kernel-Funktion}
+\subsection{Anforderungen an eine Kernel-Funktion}
 Wie in den Kapiteln zuvor gezeigt wurde gibt es eine Vielzahl von verschiedenen Kernel-Funktionen. Damit eine Kernel-Funktion verwendet werden kann muss diese einem Skalarprodukt in einem Raum entsprechen. Um dies überprüfen zu können gibt es zwei Ansätze:
 
 \begin{itemize}
@@ -714,7 +716,7 @@ Wie in den Kapiteln zuvor gezeigt wurde gibt es eine Vielzahl von verschiedenen 
 \end{itemize}
 
 
-\section{Generalisierungsmetrik}
+\chapter{Generalisierungsmetrik}
 Um das Generalisisierungsverhalten einer \ac{SVM} für $N$ Eingabevektoren beurteilen zu können kann folgendes Verhältnis betrachtet werden:
 
 \begin{equation}
@@ -727,13 +729,13 @@ Um das Generalisisierungsverhalten einer \ac{SVM} für $N$ Eingabevektoren beurt
 Je kleiner dieses Verhältnis ist, desto weniger Vektoren wurden für die Bestimmung der Trenngrenze verwendet. Ein großes $\mathbb{E}$ hat mit hoher Wahrscheinlichkeit Overfitting zur Folge.
 
 
-\section{Multiclass Separation}
+\chapter{Multiclass Separation}
 https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/
 
-\subsection{One vs All}
+\section{One vs All}
 TODO
 
-\subsection{One vs One}
+\section{One vs One}
 TODO
 
 

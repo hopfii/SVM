@@ -3,48 +3,46 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Abkürzungsverzeichnis}{3}{section*.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {1}Einführung}{4}{chapter.1}%
+\contentsline {chapter}{\numberline {1}Intuition}{4}{chapter.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.1}Intuition}{4}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Hard-Margin Support Vector Machine}{5}{chapter.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Hard-Margin Support Vector Machine}{4}{section.1.2}%
+\contentsline {section}{\numberline {2.1}Problemdefinition}{5}{section.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.1}Problemdefinition}{5}{subsection.1.2.1}%
+\contentsline {section}{\numberline {2.2}Optimierungsproblem}{8}{section.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.2}Optimierungsproblem}{8}{subsection.1.2.2}%
+\contentsline {section}{\numberline {2.3}Lagrange Optimierung}{9}{section.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.3}Lagrange Optimierung}{9}{subsection.1.2.3}%
+\contentsline {section}{\numberline {2.4}Lösung mittels Quadratic Programming Solver}{12}{section.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.4}Lösung mittels Quadratic Programming Solver}{12}{subsection.1.2.4}%
+\contentsline {chapter}{\numberline {3}Soft-Margin Support Vector Machine}{14}{chapter.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.3}Soft-Margin Support Vector Machine}{13}{section.1.3}%
+\contentsline {chapter}{\numberline {4}Vergleich Soft-Margin und Hard-Margin Support Vector Machine}{16}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.4}Vergleich Soft-Margin und Hard-Margin Support Vector Machine}{15}{section.1.4}%
+\contentsline {chapter}{\numberline {5}Nichtlineare Trennung}{18}{chapter.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.5}Nichtlineare Trennung}{16}{section.1.5}%
+\contentsline {section}{\numberline {5.1}Transformation der Problemstellung}{18}{section.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.5.1}Transformation der Problemstellung}{16}{subsection.1.5.1}%
+\contentsline {section}{\numberline {5.2}Kernel Trick}{20}{section.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.5.2}Kernel Trick}{18}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Beispiel Kernel-Funktion}{20}{subsection.5.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.5.2.1}Beispiel Kernel-Funktion}{19}{subsubsection.1.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Polynomieller Kernel}{21}{subsection.5.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.5.2.2}Polynomieller Kernel}{20}{subsubsection.1.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Radial Basis Function Kernel}{22}{subsection.5.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.5.2.3}Radial Basis Function Kernel}{20}{subsubsection.1.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}SVM Definition mit Kernel}{22}{subsection.5.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.5.2.4}SVM Definition mit Kernel}{21}{subsubsection.1.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Anforderungen an eine Kernel-Funktion}{23}{subsection.5.2.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.5.2.5}Anforderungen an eine Kernel-Funktion}{22}{subsubsection.1.5.2.5}%
+\contentsline {chapter}{\numberline {6}Generalisierungsmetrik}{25}{chapter.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.6}Generalisierungsmetrik}{22}{section.1.6}%
+\contentsline {chapter}{\numberline {7}Multiclass Separation}{26}{chapter.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.7}Multiclass Separation}{23}{section.1.7}%
+\contentsline {section}{\numberline {7.1}One vs All}{26}{section.7.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.7.1}One vs All}{23}{subsection.1.7.1}%
+\contentsline {section}{\numberline {7.2}One vs One}{26}{section.7.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.7.2}One vs One}{23}{subsection.1.7.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{24}{section*.15}%
+\contentsline {chapter}{Bibliography}{27}{section*.15}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
