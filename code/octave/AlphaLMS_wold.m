@@ -37,7 +37,7 @@ function [w, error_save, iteration] = AlphaLMS_wold(x, d, alpha, delta)
             total_error = total_error + err^2;
         end
         % display current total error and current iteration
-        disp("Total error: "), disp(total_error), disp(" Iteration: "), disp(iteration);
+        % disp("Total error: "), disp(total_error), disp(" Iteration: "), disp(iteration);
         % check if the normalized difference between the old and the new weight matrix is smaller than delta
         % if yes, we are finished -> abort while true loop
         if(norm((w_old - w)) < delta);

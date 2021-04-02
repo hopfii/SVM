@@ -13,7 +13,7 @@ yl=min(x(:,2));
 % calculate x2 max
 yu = max(x(:,2));
 [weight, bias] = Hard_Margin_SVM(x, d);
-[w, num_of_misclassifications] = PseudoInv(x, d);
+w = Madalin_nn(x', d');
 [w_alpha, E, iter] = AlphaLMS_wold(x', d', 0.05, 1.0e-16);
 set_global_weight(weight);
 set_global_bias(bias);
