@@ -1,9 +1,9 @@
 % input values
 x = [1,2,3,4,4,2,3,4,5,6,7,6;2,1,3,1,9,10,9,8,8,9,5,2];
-x = x'
+x = x';
 % class values (vector with k columns
 d = [1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1];
-d = d'
+d = d';
 % calculate x1 min
 xl=min(x(:,1));
 % calculate x1 max
@@ -38,7 +38,7 @@ set(h, "interpreter", "tex");
 % set legend location
 legend("location", "northeast");
 % stop holding figure
-hold off
+hold off;
 % print image to file
 print -dpng -r300 linearcompsmall.png;
 
