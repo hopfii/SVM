@@ -1,5 +1,17 @@
+% Note: to use this function, some requirements need to be fulfilled.
+% Matlab: install the Optimization Toolbox (HOME -> Addons -> Get Addons -> serach for Optimization Toolbox)
+% Octave: load the optim package (on the command line, enter "pkg load optim").
+% If the package is not there, install it with: "pkg install -forge optim"
+% Function for a hard margin support vector machine
+% Input parameters:
+% X = the training data, where each row is an input-pattern
+% D = the class data belonging to the training data, where each row is a class
+% Return values:
+% weight = the calculated weight vector w (for classification with w*x + bias)
+% bias = the bias (for classification with w*x + bias)
 function [weight, bias] = Hard_Margin_SVM(X,Y)
-    [rows,cols] = size(X);
+    % get the number of rows for X
+    [rows,_] = size(X);
     % calculate Q and c (from 1/2 * x' * Q * x + c * x)
     K = ones(rows,rows);
     for i=1:rows
