@@ -11,7 +11,7 @@
 % bias = the bias (for classification with w*x + bias)
 function [weight, bias] = Hard_Margin_SVM(X,Y)
     % get the number of rows for X
-    [rows,_] = size(X);
+    [rows,cols] = size(X);
     % calculate Q and c (from 1/2 * x' * Q * x + c * x)
     K = ones(rows,rows);
     for i=1:rows
