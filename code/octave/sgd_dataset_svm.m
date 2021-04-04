@@ -1,8 +1,8 @@
 % input values
 load("K40M2-NN-binary.mat");
-X=X'
+X=X';
 D = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
-D=D'
+D=D';
 % use the algorithm to calculate best weight matrix and error vector
 [weight, bias] = Hard_Margin_SVM(Dimensionality_Transform(X), D);
 set_global_weight(weight);
@@ -26,10 +26,10 @@ xlabel("x1");
 % label y axis
 ylabel("x2");
 % hold figure
-hold on
+hold on;
 % plot decision boundary
-ContourPlot("NNF_SVM_Transform", xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-yl)), yu+abs(0.1*(yu-yl)), 100, 1);
+ContourPlot("NNF_SVM_Transform", xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-yl)), yu+abs(0.1*(yu-yl)), 200, 1);
 % stop holding figure
-hold off
+hold off;
 % print image to file
 print -dpng -r300 sgddecisionboundarysvm.png;
