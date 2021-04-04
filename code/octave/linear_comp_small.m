@@ -37,7 +37,7 @@ xlabel("x1");
 ylabel("x2");
 hold on;
 % plot decision boundary
-ContourPlot("NNF_SVM", xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-yl)), yu+abs(0.1*(yu-yl)), 100, 1);
+ContourPlot("NNF_SVM", xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-yl)), yu+abs(0.1*(yu-yl)), 500, 1);
 % plot x inputs with decision boundary
 plot([xl, xu], [-(xl*w(1) + w(3))/w(2), -(xu*w(1)+w(3))/w(2)]);
 plot([xl, xu], [-(xl*w_alpha(1) + w_alpha(3))/w_alpha(2), -(xu*w_alpha(1)+w_alpha(3))/w_alpha(2)]);
