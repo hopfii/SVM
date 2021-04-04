@@ -14,6 +14,8 @@ x = [
 ];
 % class values
 d = [1;1;1;1;1;-1;-1;-1;-1;-1;-1;-1];
+% margin parameter
+C = 1000;
 % calculate x1 min
 xl=min(x(:,1));
 % calculate x1 max
@@ -22,7 +24,7 @@ xu = max(x(:,1));
 yl=min(x(:,2));
 % calculate x2 max
 yu = max(x(:,2));
-[weight, bias] = Hard_Margin_SVM(x, d);
+[weight, bias] = SVM(x, d, C);
 w = Madalin_nn(x', d');
 [w_alpha, E, iter] = AlphaLMS_wold(x', d', 0.05, 1.0e-16);
 set_global_weight(weight);

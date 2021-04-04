@@ -3,8 +3,9 @@ load("K40M2-NN-binary.mat");
 X=X';
 D = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
 D=D';
+C = 0.1;
 % use the algorithm to calculate best weight matrix and error vector
-[weight, bias] = Hard_Margin_SVM(Dimensionality_Transform(X), D);
+[weight, bias] = SVM(Dimensionality_Transform(X), D, C);
 set_global_weight(weight);
 set_global_bias(bias);
 % calculate lower x

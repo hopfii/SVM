@@ -6,10 +6,11 @@
 % Input parameters:
 % X = the training data, where each row is an input-pattern
 % D = the class data belonging to the training data, where each row is a class
+% C = parameter that determines "punishment" for errors -> large values: hard margin, small values: soft margin
 % Return values:
 % weight = the calculated weight vector w (for classification with w*x + bias)
 % bias = the bias (for classification with w*x + bias)
-function [weight, bias] = Hard_Margin_SVM(X,Y)
+function [weight, bias] = SVM(X,Y,C)
     % get the number of rows for X
     [rows,cols] = size(X);
     % calculate Q and c (from 1/2 * x' * Q * x + c * x)
@@ -44,9 +45,14 @@ function [weight, bias] = Hard_Margin_SVM(X,Y)
     % disp("Inequality constraints"), disp(A), disp(b);
     % Inequality constraints match
 
+    % soft maring lower and upper bounds
+    lb = zeros(rows,1);
+    ub = C * ones(rows,1);
+
     % solve optimization
-    alpha = quadprog(Q,c,A,b,Aeq,beq);
+    [alpha,fval,exitflag,output,lambda] = quadprog(Q,c,A,b,Aeq,beq,lb,ub);
     disp("alpha"), disp(alpha);
+    disp("lambda"), disp(lambda);
     % alpha does not match -> difference in quadprog???
 
     % determine support vectors
