@@ -18,7 +18,7 @@ def compute_w(multipliers, X, y):
 # load dataset
 # X, y = get_dataset(ls.get_training_examples)
 
-X = np.array([[1, 2], [2, 1], [3, 3], [4, 1], [4, 9], [2, 10], [3, 9], [4, 8], [5, 8], [6, 9], [7, 5], [6, 2]])
+X = np.array([[1, 2], [2, 1], [3, 3], [4, 1],  [6, 2], [4, 9], [2, 10], [3, 9], [4, 8], [5, 8], [6, 9], [7, 5]])
 y = np.array([1., 1., 1., 1., 1., -1., -1., -1., -1., -1., -1., -1.])
 m = X.shape[0]
 print(X)

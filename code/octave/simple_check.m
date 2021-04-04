@@ -5,6 +5,7 @@ x = [
     2,1;
     3,3;
     4,1;
+    6,2;
     4,9;
     2,10;
     3,9;
@@ -12,7 +13,6 @@ x = [
     5,8;
     6,9;
     7,5;
-    6,2;
 ];
 % class values
 d = [1;1;1;1;1;-1;-1;-1;-1;-1;-1;-1];
@@ -25,12 +25,12 @@ yl=min(x(:,2));
 % calculate x2 max
 yu = max(x(:,2));
 [weight, bias] = Hard_Margin_SVM(x, d);
-%weight = [0, 0.00011063];
-%bias = -0.16728432973225912;
+% weight = [0, 0.00011063];
+% bias = 0.9997787475585938;
 set_global_weight(weight);
 set_global_bias(bias);
 % plot x inputs with decision boundary
-plot(x(1:4, 1), x(1:4, 2), 'r+', x(5:11, 1), x(5:11, 2), 'g+');
+plot(x(1:5, 1), x(1:5, 2), 'r+', x(6:12, 1), x(6:12, 2), 'g+');
 % set axis limits
 axis([xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-yl)), yu+abs(0.1*(yu-yl))]);
 % label x axis
