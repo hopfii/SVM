@@ -16,40 +16,67 @@ def compute_w(multipliers, X, y):
     return np.sum(multipliers[i] * y[i] * X[i] for i in range(len(y)))
 
 # load dataset
-X, y = get_dataset(ls.get_training_examples)
+# X, y = get_dataset(ls.get_training_examples)
+
+X = np.array([[1, 2], [2, 1], [3, 3], [4, 1], [4, 9], [2, 10], [3, 9], [4, 8], [5, 8], [6, 9], [7, 5], [6, 2]])
+y = np.array([1., 1., 1., 1., 1., -1., -1., -1., -1., -1., -1., -1.])
 m = X.shape[0]
+print(X)
+print(y)
 
 # Gram matrix - The matrix of all possible inner products of X.
 K = np.array([np.dot(X[i], X[j])
  for j in range(m)
  for i in range(m)]).reshape((m, m))
 Q = cvxopt.matrix(np.outer(y, y) * K)
-
+print("K")
+print(K)
+print("outer")
+print(np.outer(y, y))
+print("Q")
+print(Q)
 q = cvxopt.matrix(-1 * np.ones(m))
+print("c")
+print(q)
 
 # equality constraints (form: Ax = b)
 # for SVM problem: y^T alpha = 0
 A = cvxopt.matrix(y, (1, m))
 b = cvxopt.matrix(0.0)
+print("Equality constraints")
+print(A)
+print(b)
 
 # Inequality constraints: (Gx <= h)
 # for SVM problem:: 0 <= alpha <= inf
 # (-1 * alpha) <= 0 -> violated for alpha < 0
 G = cvxopt.matrix(np.diag(-1 * np.ones(m)))
 h = cvxopt.matrix(np.zeros(m))
+print("Inequality constraints")
+print(G)
+print(h)
 
 # solve problem
 solution = cvxopt.solvers.qp(Q, q, G, h, A, b)
 
 # get lagrange multipliers
 multipliers = np.ravel(solution['x'])
+print("alpha")
+print(multipliers)
 
 # support vectors have positive lagrange multiplier
 has_positive_multiplier = multipliers > 1e-7
+print("Pos multipliers")
+print(has_positive_multiplier)
 sv_multipliers = multipliers[has_positive_multiplier]
+print("sv mults")
+print(sv_multipliers)
 support_vectors = X[has_positive_multiplier]
+print("Support vectors")
+print(support_vectors)
 support_vectors_y = y[has_positive_multiplier]
-
+print("Support vectors y")
+print(support_vectors_y)
 
 w = compute_w(multipliers, X, y)
 w_from_sv = compute_w(sv_multipliers, support_vectors, support_vectors_y)
