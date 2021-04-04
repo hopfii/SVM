@@ -19,29 +19,53 @@ function [weight, bias] = Hard_Margin_SVM(X,Y)
             K(i,j) = dot(X(i,:),X(j,:));
         end
     end
+    % disp("K"), disp(K);
+    % K matches
     outer = Y*Y';
-    Q = outer * K;
+    % outer matches
+    % disp("outer"), disp(outer);
+    Q = outer .* K;
+    % disp("Q"), disp(Q);
+    % Q matches
     % make sure Q (Hessian) is symmetric
     Q=(Q+Q')/2;
     c = ones(rows,1) * -1;
-
+    % disp("c"), disp(c);
+    % c matches
     % Equality constraints
     Aeq = Y';
     beq = 0;
+    % disp("Equality constraints"), disp(Aeq), disp(beq);
+    % Equality constraints match
 
     % Inequality constraints
     A = diag(-1*ones(rows,1));
     b = zeros(rows,1);
+    % disp("Inequality constraints"), disp(A), disp(b);
+    % Inequality constraints match
 
     % solve optimization
     alpha = quadprog(Q,c,A,b,Aeq,beq);
+    disp("alpha"), disp(alpha);
+    % alpha does not match -> difference in quadprog???
 
     % determine support vectors
     positive = alpha > 10^-10;
-    % pos_alphas = alpha(positive);
+    % disp("Positive multipliers"), disp(positive);
+    % pos multipliers match
+    pos_alphas = alpha(positive);
+    disp("pos alphas"), disp(pos_alphas);
+    % since alpha does not match, these do not match either
     support_vecs = X(positive,:);
+    % disp("Support vecs"), disp(support_vecs);
+    % support vectors match
     support_class_vecs = Y(positive);
+    % disp("Support class vecs"), disp(support_class_vecs);
+    % support class vectors match
 
     % calculate weight and bias
     weight = sum(alpha.*X.*Y);
+    disp(weight);
     bias = (1/support_class_vecs(1,:)) - dot(weight,support_vecs(1,:)');
+    disp(bias);
+    % weight and bias do not match

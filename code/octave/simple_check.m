@@ -25,6 +25,8 @@ yl=min(x(:,2));
 % calculate x2 max
 yu = max(x(:,2));
 [weight, bias] = Hard_Margin_SVM(x, d);
+%weight = [0, 0.00011063];
+%bias = -0.16728432973225912;
 set_global_weight(weight);
 set_global_bias(bias);
 % plot x inputs with decision boundary
@@ -35,6 +37,7 @@ axis([xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-yl)), yu+abs(0.1*
 xlabel("x1");
 % label y axis
 ylabel("x2");
+% hold figure
 hold on;
 % plot decision boundary
 ContourPlot("NNF_SVM", xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-yl)), yu+abs(0.1*(yu-yl)), 100, 1);
