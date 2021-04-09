@@ -9,8 +9,10 @@
 % C = parameter that determines "punishment" for errors -> large values: hard margin, small values: soft margin
 % Return values:
 % weight = the calculated weight vector w (for classification with w*x + bias)
-% bias = the bias (for classification with w*x + bias)
-function [weight, bias] = SVM(X,Y,C)
+% bias = the bias (for classification with w*x + bias), calculated from one support vector
+% sup_weight = weight vector calculated from support vectors
+% avg_bias = bias calculated as average over all suport vectors
+function [weight, bias, sup_weight, avg_bias] = SVM(X,Y,C)
     % get the number of rows for X
     [rows,cols] = size(X);
     % calculate Q and c (from 1/2 * x' * Q * x + c * x)
@@ -28,7 +30,7 @@ function [weight, bias] = SVM(X,Y,C)
     Q = outer .* K;
     % disp("Q"), disp(Q);
     % Q matches
-    % make sure Q (Hessian) is symmetric
+    % make sure Q is symmetric
     Q=(Q+Q')/2;
     c = ones(rows,1) * -1;
     % disp("c"), disp(c);
@@ -69,9 +71,11 @@ function [weight, bias] = SVM(X,Y,C)
     % disp("Support class vecs"), disp(support_class_vecs);
     % support class vectors match
 
-    % calculate weight and bias
+    % calculate weight
     weight = sum(alpha.*X.*Y);
-    disp(weight);
+    % calculate weight from support vectors
+    sup_weight = sum(pos_alphas.*support_vecs.*support_class_vecs);
+    % calculate bias from one support vector
     bias = (1/support_class_vecs(1,:)) - dot(weight,support_vecs(1,:)');
-    disp(bias);
-    % weight and bias do not match
+    % calculate bias from average of support vectors
+    avg_bias = sum(support_class_vecs - support_vecs*weight.')/max(size(support_class_vecs));

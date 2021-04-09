@@ -16,6 +16,7 @@ x = [
 ];
 % class values
 d = [1;1;1;1;1;-1;-1;-1;-1;-1;-1;-1];
+% punishment parameter
 C = 1000;
 % calculate x1 min
 xl=min(x(:,1));
@@ -25,9 +26,9 @@ xu = max(x(:,1));
 yl=min(x(:,2));
 % calculate x2 max
 yu = max(x(:,2));
-[weight, bias] = SVM(x, d, C);
-% weight = [0, 0.00011063];
-% bias = 0.9997787475585938;
+% train SVM
+[weight, bias, sup_weight, avg_bias] = SVM(x, d, C);
+% set global variables
 set_global_weight(weight);
 set_global_bias(bias);
 % plot x inputs with decision boundary
@@ -46,6 +47,11 @@ ContourPlot("NNF_SVM", xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-
 hold off
 % print image to file
 print -dpng -r300 svmsimple.png;
+% display values
+disp("Weight: "), disp(weight);
+disp("Weight from support vectors: "), disp(sup_weight);
+disp("Bias from one support vector: "), disp(bias);
+disp("Bias averaged over all support vectors: "), disp(avg_bias);
 
 
 
