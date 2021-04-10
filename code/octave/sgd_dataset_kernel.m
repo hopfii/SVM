@@ -4,9 +4,16 @@ X=X';
 D = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
 D=D';
 C = 0.1;
+k_func = "polynomial_kernel";
+set_global_b_kernel(1);
+set_global_a_kernel(1);
+set_global_exponent_kernel(2);
+set_global_kernel_func(k_func);
 % use the algorithm to calculate best weight matrix and error vector
-[weight, bias, sw, ab] = SVM(Dimensionality_Transform(X), D, C);
-set_global_weight(weight);
+[pos_alpha, bias, s_vec, s_c_vec] = SVM_Kernel(X, D, C, k_func);
+set_global_alpha(pos_alpha);
+set_global_x(s_vec);
+set_global_y(s_c_vec);
 set_global_bias(bias);
 % calculate lower x
 xl=min(X(:,1));
@@ -29,8 +36,8 @@ ylabel("x2");
 % hold figure
 hold on;
 % plot decision boundary
-ContourPlot("NNF_SVM_Transform", xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-yl)), yu+abs(0.1*(yu-yl)), 200, 1);
+ContourPlot("NNF_SVM_Kernel", xl-abs(0.1*(xu-xl)), xu+abs(0.1*(xu-xl)), yl-abs(0.1*(yu-yl)), yu+abs(0.1*(yu-yl)), 200, 1);
 % stop holding figure
 hold off;
 % print image to file
-print -dpng -r300 sgddecisionboundarysvm.png;
+print -dpng -r300 sgddecisionboundarykernel.png;
