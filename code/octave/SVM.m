@@ -47,7 +47,7 @@ function [weight, bias, sup_weight, avg_bias] = SVM(X,Y,C)
     % disp("Inequality constraints"), disp(A), disp(b);
     % Inequality constraints match
 
-    % soft maring lower and upper bounds
+    % soft margin lower and upper bounds
     lb = zeros(rows,1);
     ub = C * ones(rows,1);
 
