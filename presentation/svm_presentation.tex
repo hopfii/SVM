@@ -68,8 +68,30 @@
 	
 \end{frame}
 
-\frame{
-	\frametitle{A test with images}
+
+\begin{frame}{Trennungsebene}
+	
+	Trenngrenze:
+	\begin{equation} \label{plane_eq}
+		\begin{aligned}
+			w^{T} x_{n} + b &= 0 \\
+		\end{aligned}
+	\end{equation}
+	\pause
+	
+	Klassifikation über Vorzeichen:
+	\begin{subequations} \label{svm_classify1}
+		\begin{alignat}{2}
+			y = sign(w^{T} x + b)  & \qquad & \text{ gleichbedeutend mit} \\
+			w^{T} x + b > 0 & & \text{ für } y = +1\\
+			w^{T} x + b < 0 & & \text{ für } y = -1
+		\end{alignat}
+	\end{subequations}
+
+\end{frame}
+
+
+\begin{frame} {A test with images}
 	\framesubtitle{subcaption testing with images}
 	\begin{minipage}{0.5\textwidth}
 
@@ -89,7 +111,7 @@
 		\label{fig:intuition_margin}
 	\end{figure}
 	\end{minipage}
-}
+\end{frame}
 
 \begin{frame}
 	\begin{subequations} \label{svm_classify1}
