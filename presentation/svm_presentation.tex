@@ -1,5 +1,8 @@
-\documentclass{beamer}
+\documentclass[ngerman]{beamer}
 \usetheme{metropolis}
+
+% use \cref instead of autoref, autoref does not work with beamer
+\usepackage{cleveref}
 
 % some imports from handout, probably dont need all but whatever
 \usepackage[utf8]{inputenc}
@@ -7,7 +10,6 @@
 \usepackage{graphicx}       
 \usepackage[german]{babel}
 \usepackage{csquotes}     
-\usepackage{acronym}
 \usepackage{eurosym}
 \usepackage{float}
 \usepackage{rotating}
@@ -20,7 +22,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{interval}
-\usepackage{todonotes}
+
 
 % argmin command
 \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
@@ -63,6 +65,7 @@
 			\item Some 
 			\item text 
 			\item on left side of slide here..
+			\item \cref{fig:intuition_margin} zeigt blabla.
 		\end{itemize}
 		\pause
 	\end{minipage} \hfill
@@ -85,7 +88,7 @@
 		\end{alignat}
 	\end{subequations}
 
-	In \autoref{svm_classify1} wird ..
+	In \cref{svm_classify1} wird ..
 \end{frame}
 
 
