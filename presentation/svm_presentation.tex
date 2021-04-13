@@ -25,6 +25,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{interval}
+\usepackage{textpos}
 \usepackage[style=authoryear, backend=biber]{biblatex}
 \addbibresource{references.bib}
 
@@ -39,9 +40,20 @@
 % show current page number in footer
 \setbeamertemplate{footline}[frame number]
 
-
 % No navigation symbols at the slides' bottom
 \beamertemplatenavigationsymbolsempty
+
+% command for creating a frame with one full-slide image without caption
+% first arg: frame title, second arg: path to img
+\newcommand {\imageframe}[2] {
+	\begin{frame}{#1}
+		\begin{center}
+			\begin{figure}
+			\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{#2}
+		\end{figure}
+		\end{center}
+	\end{frame}
+}
 
 
 
@@ -56,22 +68,26 @@
     \maketitle
 \end{frame}
 
+
+\begin{frame}{Table of contents}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents[hideallsubsections]
+\end{frame}
+
+
 \section{Einführung}
 
 
-\begin{frame}{Frame Title}
-\begin{itemize}
-	\item Eine Hard-Margin SVM trennt die Klassen so, dass keine Fehlklassifikationen entstehen. 
-	\pause 
-	\item Eine Soft-Margin SVM erlaubt einzelne Fehlklassifikationen damit eine mitunter bessere Trennebene gefunden werden kann.
-\end{itemize}
-	
-\end{frame}
+\imageframe{Intuition}{assets/trennband.png}
+
+
+
+\section{Hard-Margin Support Vector Machine}
 
 
 \begin{frame}{Trennungsebene}
 	
-	Trenngrenze:
+	Für die Trennungsebene gilt:
 	\begin{equation} \label{plane_eq}
 		\begin{aligned}
 			w^{T} x_{n} + b &= 0 \\
@@ -81,12 +97,27 @@
 	
 	Klassifikation über Vorzeichen:
 	\begin{subequations} \label{svm_classify1}
-		\begin{alignat}{2}
-			y = sign(w^{T} x + b)  & \qquad & \text{ gleichbedeutend mit} \\
+		\begin{alignat*}{2}
+			y = sign(w^{T} x + b)  & \qquad & \text{ ist gleichbedeutend mit} \\
 			w^{T} x + b > 0 & & \text{ für } y = +1\\
 			w^{T} x + b < 0 & & \text{ für } y = -1
-		\end{alignat}
+		\end{alignat*}
 	\end{subequations}
+
+\end{frame}
+
+
+
+\begin{frame}{Soft-Margin SVM}
+Formuliert als Optimierungsproblem:
+	
+\begin{subequations} \label{final_lagrange_soft}
+	\begin{alignat*}{2}
+		&\!\max_{\alpha}        &\qquad&  	\Lagr(\alpha) = \sum_{n=1}^{N} \alpha_{n} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m} \\
+		&\text{mit } &      & 0 \leq \alpha_{n} \leq C \text{ für } n=1..N \\
+		&       & & \sum_{n=1}^{N} \alpha_{n} y_{n} = 0\text{ für } n=1..N
+	\end{alignat*}
+\end{subequations}
 
 \end{frame}
 
@@ -127,9 +158,14 @@
 	Footcite example \footcite{platt_sequential_1998} \\
 	
 	\textcite{burges_tutorial_1998}
-	
-	
 \end{frame}
+
+
+\section{Soft-Margin Support Vector Machine}
+
+\section{Vergleich Hard- \& Soft-Margin Support Vector Machine}
+
+\section{Nichtlineare Trennung}
 
 
 
