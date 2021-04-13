@@ -4,6 +4,9 @@
 % use \cref instead of autoref, autoref does not work with beamer
 \usepackage{cleveref}
 
+\usepackage{appendixnumberbeamer}
+
+
 % some imports from handout, probably dont need all but whatever
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}   
@@ -22,6 +25,8 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{interval}
+\usepackage[style=verbose,backend=bibtex]{biblatex}
+\addbibresource{references.bib}
 
 
 % argmin command
@@ -34,6 +39,7 @@
 % show current page number in footer
 \setbeamertemplate{footline}[frame number]
 
+
 % No navigation symbols at the slides' bottom
 \beamertemplatenavigationsymbolsempty
 
@@ -41,11 +47,17 @@
 
 \title{Support Vector Machines}
 \author{André Hopfgartner \& Matthias Rupp}
+\institute{Vorarlberg University of Applied Sciences}
+\date{08.06.2021}
+
 \begin{document}
-	
+
 \begin{frame}[plain]
     \maketitle
 \end{frame}
+
+\section{Einführung}
+
 
 \begin{frame}{Frame Title}
 \begin{itemize}
@@ -88,11 +100,27 @@
 		\end{alignat}
 	\end{subequations}
 
-	In \cref{svm_classify1} wird ..
+	In \cref{svm_classify1} wird .. \\
+	
+	Footcite example \footcite{platt_sequential_1998}
+	
+	
 \end{frame}
 
 
 
+\begin{frame}[standout]
+	Fragen?
+\end{frame}
+
+\begin{frame}
+	\frametitle{bibliography}
+	\printbibliography
+\end{frame}
+
+
 
 \end{document}
+
+
 

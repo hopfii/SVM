@@ -1,13 +1,45 @@
+\defcounter {refsection}{0}\relax 
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\defcounter {refsection}{0}\relax 
 \headcommand {\beamer@framepages {1}{1}}
-\headcommand {\slideentry {0}{0}{2}{2/3}{}{0}}
-\headcommand {\beamer@framepages {2}{3}}
-\headcommand {\slideentry {0}{0}{3}{4/5}{}{0}}
-\headcommand {\beamer@framepages {4}{5}}
-\headcommand {\slideentry {0}{0}{4}{6/6}{}{0}}
-\headcommand {\beamer@framepages {6}{6}}
-\headcommand {\beamer@partpages {1}{6}}
-\headcommand {\beamer@subsectionpages {1}{6}}
-\headcommand {\beamer@sectionpages {1}{6}}
-\headcommand {\beamer@documentpages {6}}
-\headcommand {\gdef \inserttotalframenumber {4}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@sectionpages {1}{1}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@subsectionpages {1}{1}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\sectionentry {1}{Einführung}{2}{Einführung}{0}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\slideentry {1}{0}{1}{2/2}{}{0}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@framepages {2}{2}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\slideentry {1}{0}{2}{3/4}{}{0}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@framepages {3}{4}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\slideentry {1}{0}{3}{5/6}{}{0}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@framepages {5}{6}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\slideentry {1}{0}{4}{7/7}{}{0}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@framepages {7}{7}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\slideentry {1}{0}{5}{8/8}{}{0}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@framepages {8}{8}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@sectionpages {2}{8}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@subsectionpages {2}{8}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\sectionentry {2}{Literatur}{9}{Literatur}{0}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\slideentry {2}{0}{0}{9/9}{}{0}}
+\defcounter {refsection}{0}\relax 
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\beamer@partpages {1}{9}}
+\headcommand {\beamer@subsectionpages {2}{9}}
+\headcommand {\beamer@sectionpages {2}{9}}
+\headcommand {\beamer@documentpages {9}}
+\headcommand {\gdef \inserttotalframenumber {5}}
