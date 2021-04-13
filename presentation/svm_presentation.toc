@@ -1,4 +1,0 @@
-\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\babel@toc {german}{}
-\defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {1}{Einführung}{2}{0}{1}
