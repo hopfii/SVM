@@ -118,7 +118,7 @@ Die Qualität der Trennung wird bei einer \ac{SVM} durch die Breite des Trennban
 Wie bereits in der Einführung erwähnt ist das Ziel einer Hard-Margin \ac{SVM} ist die Trennung zweier Klassen ohne Fehler mit einem möglichst breiten Trennband. Diese Aussage wird in diesem Kapitel mathematisch formuliert und als Optimierungsproblem dargestellt. Weiters wird beschrieben wie dieses Problem in die Standardform von \ac{QP} Problemen transformiert werden kann was für die Lösung nötig ist. 
 
 \section{Problemdefinition} \label{sec:problem_def}
-Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{K}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{K}$ und ein zugehöriges Label $y_{n} \in \{\-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
+Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{K}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{K}$ und ein zugehöriges Label $y_{n} \in \{-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
 
 \begin{equation} \label{plane_eq}
     \begin{aligned}
@@ -126,13 +126,13 @@ Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{K}$, ein Bias $b \in \mathbb{R
     \end{aligned}
 \end{equation}
 
-Mit einer bereits trainierten \ac{SVM} können neue, noch unklassifizierte Eingabevektoren $x$ wie folgt klassifiziert werden:
+Mit einer bereits trainierten \ac{SVM} können neue, noch unklassifizierte Eingabevektoren $x_{n}$ wie folgt klassifiziert werden:
 
 \begin{subequations} \label{svm_classify1}
 	\begin{alignat}{2}
-		y = sign(w^{T} x + b)  & \qquad & \text{ gleichbedeutend mit} \\
-		w^{T} x + b > 0 & & \text{ für } y = +1\\
-		w^{T} x + b < 0 & & \text{ für } y = -1
+		y = sign(w^{T} x_{n} + b)  & \qquad & \text{ gleichbedeutend mit} \\
+		w^{T} x_{n} + b > 0 & & \text{ für } y_{n} = +1\\
+		w^{T} x_{n} + b < 0 & & \text{ für } y_{n} = -1
 	\end{alignat}
 \end{subequations}
 
@@ -157,12 +157,12 @@ Durch \autoref{decision_rules} wird sichergestellt, dass Werte aus dem Intervall
 
 
 
- \autoref{decision_rules} kann weiter verallgemeinert werden durch beidseitige Multiplikation mit $y_{k}$:
+ \autoref{decision_rules} kann weiter verallgemeinert werden durch beidseitige Multiplikation mit $y_{n}$:
 
 \begin{subequations} \label{decision_rules2}
 	\begin{alignat}{2}
-		y_{k} (w^{T} x_{n} + b) \geq 1 & \qquad & \text{ für } y_{k} = +1\\
-		y_{k} (w^{T} x_{n} + b) \geq 1 & & \text{ für } y_{k} = -1
+		y_{n} (w^{T} x_{n} + b) \geq 1 & \qquad & \text{ für } y_{n} = +1\\
+		y_{n} (w^{T} x_{n} + b) \geq 1 & & \text{ für } y_{n} = -1
 	\end{alignat}
 \end{subequations}
 
@@ -171,7 +171,7 @@ Durch \autoref{decision_rules} wird sichergestellt, dass Werte aus dem Intervall
 Für den Fall, dass $x_{n} = \hat{x}$ genau an der Grenze des Trennbands liegt, gilt somit:
 \begin{equation} \label{dec_rule}
 	\begin{aligned}
-		y_{k} (w^{T} \hat{x} + b) &= 1
+		y_{n} (w^{T} \hat{x} + b) &= 1
 	\end{aligned}
 \end{equation}
 

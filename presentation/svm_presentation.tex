@@ -111,45 +111,139 @@
 
 
 \begin{frame}{Mathematische Formulierung}
-	
+Gegeben sei ein Gewichtsvektor $w \in \mathbb{R}^{K}$, ein Bias $b \in \mathbb{R}$, ein beliebiger Punkt $x_{n} \in \mathbb{R}^{K}$ und ein zugehöriges Label $y_{n} \in \{-1, +1\}$. Eine Ebene im Raum kann allgemein definiert werden durch:
+
+\begin{equation} \label{plane_eq}
+	\begin{aligned}
+		w^{T} x_{n} + b &= 0 \\
+	\end{aligned}
+\end{equation}
+
+Ziel der SVM: $w$ und $b$ bestimmen für optimale Trennung
+
 \end{frame}
 
 
-\begin{frame}{Trennungsebene}
-	
-	Für die Trennungsebene gilt:
-	\begin{equation} \label{plane_eq}
-		\begin{aligned}
-			w^{T} x_{n} + b &= 0 \\
-		\end{aligned}
-	\end{equation}
-	\pause
-	
-	Klassifikation über Vorzeichen:
-	\begin{subequations} \label{svm_classify1}
+\begin{frame}{Klassifikation}
+	Annahme: $w$ und $b$ bereits bekannt\\
+	Wie klassifiziert man einen Punkt $x_{n}$? \\ \pause
+	Liegt $x_{n}$ über oder unter Ebene = Vorzeichen:
+	\begin{subequations}
 		\begin{alignat*}{2}
-			y = sign(w^{T} x + b)  & \qquad & \text{ ist gleichbedeutend mit} \\
-			w^{T} x + b > 0 & & \text{ für } y = +1\\
-			w^{T} x + b < 0 & & \text{ für } y = -1
+			y = sign(w^{T} x_{n} + b)  & \qquad & \text{ ist gleichbedeutend mit} \\
+			w^{T} x_{n} + b > 0 & & \text{ für } y_{n} = +1\\
+			w^{T} x_{n} + b < 0 & & \text{ für } y_{n} = -1
 		\end{alignat*}
 	\end{subequations}
 
+	Bisher: Punkte können genau auf der Grenze liegen wenn $w^{T} x_{n} + b = 0$ \\
 \end{frame}
 
 
 
-\begin{frame}{Soft-Margin SVM}
-Formuliert als Optimierungsproblem:
+\begin{frame}{Einführung eines Trennbandes}	
+	Striktere Regel: Um Ebene soll Band frei bleiben \\
+	\begin{subequations} \label{decision_rules}
+		\begin{alignat*}{2}
+			w^{T} x_{n} + b \geq +1 & \qquad & \text{ für } y_{n} = +1\\
+			w^{T} x_{n} + b \leq -1 & & \text{ für } y_{n} = -1
+		\end{alignat*}
+	\end{subequations}
+
+	\begin{center}
+		\begin{figure}
+			\includegraphics[width=\textwidth,height=0.6\textheight,keepaspectratio]{assets/trennband.png}
+		\end{figure}
+	\end{center}
+
+\end{frame}
+
+\begin{frame}{Einführung eines Trennbandes}
+	Beidseitige Multiplikation mit $y_{n}$
+	\begin{subequations}
+		\begin{alignat*}{2}
+			y_{n} (w^{T} x_{n} + b) \geq 1 & \qquad & \text{ für } y_{n} = +1\\
+			y_{n} (w^{T} x_{n} + b) \geq 1 & & \text{ für } y_{n} = -1
+		\end{alignat*}
+	\end{subequations}
+
+	\pause 
+	Für den Fall, dass $x_{n} = \hat{x}$ genau an der Grenze des Trennbands liegt, gilt somit:
+	\begin{equation}
+		\begin{aligned}
+			y_{n} (w^{T} \hat{x} + b) &= 1
+		\end{aligned}
+	\end{equation}
+\end{frame}
+
+
+
+\begin{frame}{Normalabstand eines Punktes zur Ebene}
+	Gesucht: Normalabstand $d$ eines Punktes $x_{n} \in \mathbb{R}^{K}$ zur Ebene \\
 	
-\begin{subequations} \label{final_lagrange_soft}
-	\begin{alignat*}{2}
-		&\!\max_{\alpha}        &\qquad&  	\Lagr(\alpha) = \sum_{n=1}^{N} \alpha_{n} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m} \\
-		&\text{mit } &      & 0 \leq \alpha_{n} \leq C \text{ für } n=1..N \\
-		&       & & \sum_{n=1}^{N} \alpha_{n} y_{n} = 0\text{ für } n=1..N
-	\end{alignat*}
-\end{subequations}
+	\begin{center}
+		\begin{figure}
+			\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{assets/projection.png}
+		\end{figure}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Normalabstand eines Punktes zur Ebene}
+	\begin{equation*}
+		\begin{aligned}
+			d &= | \frac{w^{T}}{\lVert w \rVert} (x_{n} - x) | = \\
+			&= \frac{1}{\norm{w}} | (w^{T} x_{n} - w^{T} x) | =\\
+			&= \frac{1}{\norm{w}} | (w^{T} x_{n} + b - (w^{T} x + b)) |
+		\end{aligned}
+	\end{equation*}
+
+	\begin{center}
+		\begin{figure}
+			\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{assets/projection.png}
+		\end{figure}
+	\end{center}
 
 \end{frame}
+
+
+\begin{frame}{Normalabstand eines Punktes zur Ebene}
+	\begin{equation*}
+		\begin{aligned}
+			d &= \frac{1}{\norm{w}} | (w^{T} x_{n} + b - (w^{T} x + b)) |
+		\end{aligned}
+	\end{equation*}
+
+	Weil der Punkt $x$ auf der Ebene liegt gilt $w^{T} x + b = 0$ und somit für den Normalabstand eines beliebigen Punktes $x_{n}$:
+	
+	\begin{equation*}
+		\begin{aligned}
+			d &= \frac{1}{\norm{w}} | (w^{T} x_{n} + b) |
+		\end{aligned}
+	\end{equation*}
+\end{frame}
+
+
+\begin{frame}{Breite des Trennbands}
+	
+	\begin{equation*}
+		\begin{aligned}
+			d &= \frac{1}{\norm{w}} | (w^{T} x_{n} + b) |
+		\end{aligned}
+	\end{equation*}
+
+	Annahme: $x_{n} = \hat{x}$ ist der am nächsten zur Ebene liegende Punkt auf der Grenze des Trennbands\\
+	Weil $y_{n} (w^{T} \hat{x} + b) = 1 = |w^{T} \hat{x} + b|$ gilt ergibt sich der minimale Normalabstand $D$: \\
+	
+	\begin{equation*}
+		\begin{aligned}
+			D &= \frac{1}{\norm{w}}
+		\end{aligned}
+	\end{equation*}
+
+	 Weil $D$ der minimale Normalabstand zur Ebene ist, ist $2D$ die Breite des freien Trennbands.
+
+\end{frame}
+
 
 
 \begin{frame} {A test with images}
@@ -174,7 +268,7 @@ Formuliert als Optimierungsproblem:
 	\end{minipage}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{citation tests}
 	\begin{subequations} \label{svm_classify1}
 		\begin{alignat}{2}
 			y = sign(w^{T} x + b)  & \qquad & \text{ gleichbedeutend mit} \\
