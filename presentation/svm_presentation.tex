@@ -264,6 +264,165 @@ Ziel der SVM: $w$ und $b$ bestimmen für optimale Trennung
 \end{frame}
 
 
+\begin{frame}{Optimierungsproblem}
+	
+\begin{subequations}
+	\begin{alignat*}{2}
+		&\!\max_{w}        &\qquad&  \frac{1}{\norm{w}} \\
+		&\text{mit } &      & \min_{n=1..N} |w^{T} x_{n} + b| = 1
+	\end{alignat*}
+\end{subequations}
+
+\begin{equation*}
+	\begin{aligned}
+		\min_{n=1..N} |w^{T} x_{n} + b| = 1 \text{  ist der am nächsten zur Ebene liegende Punkt } \hat{x}
+	\end{aligned}
+\end{equation*}
+
+
+
+Beidseitige Multiplikation mit $y_{n}$ zur Vermeidung des Betrags:
+\begin{equation*}
+	\begin{aligned}
+		|w^{T} x_{n} + b| &= y_{n} (w^{T} x_{n} + b)
+	\end{aligned}
+\end{equation*}
+	
+\end{frame}
+
+
+\begin{frame}{Optimierungsproblem}
+	Nach Umformung (Maximierung in Minimierung) und Verallgemeinerung der Nebenbedingung auf beliebige Punkte $x_{n}$:
+	\begin{subequations}
+		\begin{alignat*}{2}
+			&\!\min_{w}        &\qquad&  \frac{1}{2} w^{T} w \\
+			&\text{mit } &      & y_n (w^{T} x_{n} + b) \geq 1 \text{ für } n=1..N 
+		\end{alignat*}
+	\end{subequations}
+
+	Bemerkungen:
+	\begin{itemize}
+		\item Faktor $\frac{1}{2}$ wird so gewählt weil dieser später wegfällt
+		\item $w^{T} w $ und $\norm{w}$ sind aus Optimierungssicht gleichbedeutend, Problem ist in dieser Form aber besser optimierbar
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Lagrange Optimierung}
+	Optimierungsproblem mit Ungleichung als Nebenbedingung \\
+	Umformen der Nebenbedingung:
+	\begin{subequations}
+		\begin{alignat*}{2}
+			&\!\min_{w}        &\qquad&  \frac{1}{2} w^{T} w\\
+			&\text{mit } &      & y_n (w^{T} x_{n} + b)-1 \geq 0 \text{ für } n=1..N
+		\end{alignat*}
+	\end{subequations}
+\end{frame}
+
+\begin{frame}{Aufstellen der Lagrange Gleichung}
+	Ungleichung wird von zu optimierender Funktion abgezogen und Lagrange Multiplikatoren eingeführt:
+	\begin{subequations}
+		\begin{alignat*}{2}
+			&\!\min_{w, b}        &\qquad&  \Lagr (w, b, \alpha) = \frac{1}{2} w^{T} w - \sum_{n=1}^{N} \alpha_{n} (y_n (w^{T} x_{n} + b)-1)\\
+			&\max_{\alpha_{n}} &      & \alpha_{n} \geq 0 \text{ für } n=1..N
+		\end{alignat*}
+	\end{subequations}
+
+	Lösung durch $0$ setzen der partiellen Ableitungen:
+	\begin{equation*}
+		\begin{aligned}
+			\nabla_{w} \Lagr &\overset{!}{=} \vec{0} \\
+			\frac{\partial}{\partial b} \Lagr &\overset{!}{=} 0 \\
+		\end{aligned}
+	\end{equation*}
+	
+\end{frame}
+
+\begin{frame}{Lösen der Lagrange Gleichung}
+
+	Nach $w$:
+	\begin{equation*}
+		\begin{aligned}
+			\nabla_{w} \Lagr &= w - \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n} \overset{!}{=} \vec{0} \\
+			w &= \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}
+		\end{aligned}
+	\end{equation*}
+
+	Nach $b$:
+	\begin{equation*}
+		\begin{aligned}
+			\frac{\partial}{\partial b} \Lagr &= - \sum_{n=1}^{N} \alpha_{n} y_{n} \overset{!}{=} 0 \\
+			\sum_{n=1}^{N} \alpha_{n} y_{n} &= 0
+		\end{aligned}
+	\end{equation*}
+\end{frame}
+
+\begin{frame}{Rücksubstitution in Lagrange Gleichung}
+Aufteilen der Summe:
+\begin{equation*}
+	\begin{aligned}
+		\Lagr(w, b, \alpha) &= \frac{1}{2} w^{T} w - \sum_{n=1}^{N} \alpha_{n} (y_n (w^{T} x_{n} + b)-1) = \\
+		&= \frac{1}{2} w^{T} w - [\sum_{n=1}^{N} \alpha_{n} y_{n} b - \sum_{n=1}^{N} \alpha_{n} + \sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n}]
+	\end{aligned}
+\end{equation*}
+
+Aus Ableitung nach $b$ wissen wir $\sum_{n=1}^{N} \alpha_{n} y_{n} = 0$:
+
+\begin{equation*}
+	\begin{aligned}
+		\Lagr(w, b, \alpha) &= \frac{1}{2} w^{T} w - [-\sum_{n=1}^{N} \alpha_{n} + \sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n}]
+	\end{aligned}
+\end{equation*}
+
+\end{frame}
+
+
+\begin{frame}{Rücksubstitution in Lagrange Gleichung}
+Vergleicht man den Term $\sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n}$ mit dem Ergebnis der partiellen Ableitung nach $w$ ($w = \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}$) erkennt man, dass gilt:
+
+\begin{equation*}
+	\begin{aligned}
+		\sum_{n=1}^{N} \alpha_{n} y_{n} w^{T} x_{n} = w^T w
+	\end{aligned}
+\end{equation*}
+
+Eingesetzt in Lagrange Gleichung:
+\begin{equation*}
+	\begin{aligned}
+		\Lagr(\alpha) &= \sum_{n=1}^{N }\alpha_{n} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m}
+	\end{aligned}
+\end{equation*}
+
+\end{frame}
+
+
+\begin{frame}{Maximierung ohne Nebenbedingung}
+	Quadratic Programming Problem ($x_{n}^{T} x_{m}$):
+	\begin{subequations}
+		\begin{alignat*}{2}
+			&\!\max_{\alpha}        &\qquad&  	\Lagr(\alpha) = \sum_{n=1}^{N} \alpha_{n} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m}\\
+			&\text{mit } &      & \alpha_{n} \geq 0 \text{ für } n=1..N \\
+			&       & & \sum_{n=1}^{N} \alpha_{n} y_{n} = 0\text{ für } n=1..N
+		\end{alignat*}
+	\end{subequations}
+
+	Lösung mittels QP-Solver \\
+	Ergebnis: $\alpha$ Vektor mit $\alpha_{n}$ Lagrange-Multiplikatoren
+
+\end{frame}
+
+\begin{frame}{Bestimmung Gewichtsvektor}
+	
+	$\alpha$ Vektor mit $\alpha_{n}$ Faktoren ist bekannt aus QP-Solver\\
+	
+	Bestimmen von $w$:
+	\begin{equation*}
+		\begin{aligned}
+			w &= \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}
+		\end{aligned}
+	\end{equation*}
+\end{frame}
+
 
 \begin{frame} {A test with images}
 	\framesubtitle{subcaption testing with images}
