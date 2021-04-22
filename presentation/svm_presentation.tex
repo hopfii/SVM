@@ -412,16 +412,49 @@ Eingesetzt in Lagrange Gleichung:
 
 \end{frame}
 
+
+\begin{frame}{Schlupfterm}
+	Reminder Ausgangsproblem:
+	\begin{subequations}
+		\begin{alignat*}{2}
+			&\!\min_{w, b}        &\qquad&  \Lagr (w, b, \alpha) = \frac{1}{2} w^{T} w - \sum_{n=1}^{N} \alpha_{n} (y_n (w^{T} x_{n} + b)-1)\\
+			&\max_{\alpha_{n}} &      & \alpha_{n} \geq 0 \text{ für } n=1..N
+		\end{alignat*}
+	\end{subequations}
+	
+	
+	 $\alpha_{n} (y_n (w^{T} x_{n} + b)-1)$ (\glqq Schlupf \grqq) wird $0$ wenn:
+	 \begin{itemize}
+	 	\item $\alpha_{n} = 0$ oder 
+	 	\item $(y_n (w^{T} x_{n} + b)-1) = 0$
+	 \end{itemize}
+	 
+	 Umgekehrt: Alle $x_{n}$ mit $\alpha_{n} \neq 0$ haben Schlupf $0$, liegen also am nächsten zur Trennebene. \\
+	 
+	 Diese Vektoren werden \textbf{Stützvektoren} genannt.
+\end{frame}
+
 \begin{frame}{Bestimmung Gewichtsvektor}
 	
 	$\alpha$ Vektor mit $\alpha_{n}$ Faktoren ist bekannt aus QP-Solver\\
-	
-	Bestimmen von $w$:
+	Viele $\alpha_{i}$ werden $0$ sein, die $\alpha_{i} \neq 0$ gehören zu den Stützvektoren $x_{i}$. \\
+	Damit kann Formel für $w$
 	\begin{equation*}
 		\begin{aligned}
 			w &= \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}
 		\end{aligned}
 	\end{equation*}
+
+	vereinfacht werden:
+	\begin{equation*}
+	\begin{aligned}
+		w &= \sum_{n \text{ ist Sützvektor}} \alpha_{n} y_{n} x_{n}
+	\end{aligned}
+	\end{equation*}
+
+	Die Bezeichnung Stützvektor ergibt sich, weil die Ebene durch diese Vektoren \glqq gestützt \grqq wird. Alle Vektoren mit $\alpha_{n} = 0$ haben keinen Einfluss!
+
+
 \end{frame}
 
 
