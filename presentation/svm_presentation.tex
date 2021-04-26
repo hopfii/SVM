@@ -453,8 +453,20 @@ Eingesetzt in Lagrange Gleichung:
 	\end{equation*}
 
 	Die Bezeichnung Stützvektor ergibt sich, weil die Ebene durch diese Vektoren \glqq gestützt \grqq wird. Alle Vektoren mit $\alpha_{n} = 0$ haben keinen Einfluss!
+\end{frame}
 
-
+\begin{frame}{Bestimmung Bias}
+	
+	$y_n (w^{T} x_{n} + b) = 1$ gilt für Stützvektoren, daher kann mit beliebigem Stützvektor $x_{n}$ der Bias bestimmt werden:
+	
+	\begin{equation*}
+		\begin{aligned}
+			b &= \frac{1}{y_{n}} - w^{T} x_{n} = \\
+			&= y_{n} - w^{T} x_{n} 
+		\end{aligned}
+	\end{equation*}
+	
+	
 \end{frame}
 
 
