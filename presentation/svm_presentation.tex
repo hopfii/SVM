@@ -497,7 +497,7 @@ Eingesetzt in Lagrange Gleichung:
 		\end{aligned}
 	\end{equation*}
 	
-	In QP-Standardform:
+	In QP-Standardform $\rightarrow$ Lösungs-Frameworks:
 	
 	\begin{subequations}
 		\begin{alignat*}{2}
@@ -515,6 +515,37 @@ Eingesetzt in Lagrange Gleichung:
 
 	$Q$ ist $N \times N$ Matrix. Problematisch bei großen Trainingssets!
 \end{frame}
+
+\begin{frame}{Lösung mittels QP-Solver}
+	Ergebnis des QP-Solvers: $\alpha = (\alpha_{1}, \alpha_{2}, ..., \alpha_{n})$ \\
+	
+	Berechnung von $w$ und $b$ wie zuvor gezeigt:
+	
+	\begin{equation*}
+		\begin{aligned}
+			w &= \sum_{n=1}^{N} \alpha_{n} y_{n} x_{n}
+		\end{aligned}
+	\end{equation*}
+
+	Mit beliebigem Stützvektor $x_{k}$:
+	\begin{equation*}
+		\begin{aligned}
+			b &= \frac{1}{y_{k}} - w^{T} x_{k}
+		\end{aligned}
+	\end{equation*}
+
+	Klassifikation neuer Eingaben $x$:
+	\begin{equation*}
+		\begin{aligned}
+			y &= sign(w^{T} x + b)
+		\end{aligned}
+	\end{equation*}
+
+\end{frame}
+
+
+
+
 
 
 
