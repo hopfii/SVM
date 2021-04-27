@@ -543,6 +543,41 @@ Eingesetzt in Lagrange Gleichung:
 
 \end{frame}
 
+\section{Soft-Margin Support Vector Machine}
+
+\begin{frame}{Einführung Soft-Margin SVM}
+	Annahme bisher: Daten linear trennbar ohne Fehler \\
+	
+	\begin{center}
+		\begin{figure}
+			\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{assets/soft_margin_example.png}
+		\end{figure}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Einführung Soft-Margin SVM}
+	Problem: bisheriger Algorithmus terminiert nicht bei Fehlern \\
+	Lösung: Einführung von positiven Fehlervariablen $\xi_{n} \in \mathbb{R}^{K}, \xi_{n} \geq 0$:
+	
+	\begin{subequations}
+		\begin{alignat*}{2}
+			w^{T} x_{n} + b \geq +1 - \xi_{n}& \qquad & \text{ für } y_{n} = +1\\
+			w^{T} x_{n} + b \leq -1 + \xi_{n}& & \text{ für } y_{n} = -1
+		\end{alignat*}
+	\end{subequations}
+
+	Wann kann einzelne Fehlklassifikation auftreten? Wenn $\xi_{n} > 1$ \\
+	
+	Obere Grenze Anzahl Fehler:
+	\begin{equation*}
+		\begin{aligned}
+			E = C(\sum_{n=1}^{N} \xi_{n})
+		\end{aligned}
+	\end{equation*}
+
+	$C \in \mathbb{R}, C \geq 0$: \glqq Straffaktor\grqq für Fehler
+\end{frame}
+
 
 
 
