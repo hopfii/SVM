@@ -470,8 +470,51 @@ Eingesetzt in Lagrange Gleichung:
 \end{frame}
 
 
+\section{Lösung mittels QP-Solver}
 
+\begin{frame}{Lösung mittels QP-Solver}
+	
+	Standardform von QP-Problemen:
+	\begin{equation*} \label{std_QP_problem}
+		\begin{aligned}
+			\min_{x} &= \frac{1}{2} x^{T} Q x + c x + d 
+		\end{aligned}
+	\end{equation*}
+	
+	Umformung Maximierung in Minimierung weil $\max -f(x) = \min f(x)$:
+	\begin{equation*} \label{qp_adapt1}
+		\begin{aligned}
+			\min_{\alpha} \Lagr(\alpha) &= \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m} - \sum_{n=1}^{N} \alpha_{n}
+		\end{aligned}
+	\end{equation*}
+\end{frame}
 
+\begin{frame}{Problem in QP-Standardform}
+	
+	\begin{equation*}
+		\begin{aligned}
+			\min_{\alpha} \Lagr(\alpha) &= \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} x_{n}^{T} x_{m} - \sum_{n=1}^{N} \alpha_{n}
+		\end{aligned}
+	\end{equation*}
+	
+	In QP-Standardform:
+	
+	\begin{subequations}
+		\begin{alignat*}{2}
+			&\!\min_{\alpha}        &\qquad& \Lagr(\alpha) = \frac{1}{2} \alpha^{T} Q \alpha + (-1^T) \alpha \label{eq:qp1}\\
+			&\text{mit} &      & Q = \begin{bmatrix} 
+				y_{1}y_{1}x_{1}^{T}x_{1} & y_{1}y_{2}x_{1}^{T}x_{2} & \dots & y_{1}y_{N}x_{1}^{T}x_{N}\\
+				y_{2}y_{1}x_{2}^{T}x_{1} & y_{2}y_{2}x_{2}^{T}x_{2} & \dots & y_{2}y_{N}x_{2}^{T}x_{N}\\
+				\vdots & \vdots & \vdots & \vdots\\
+				y_{N}y_{1}x_{N}^{T}x_{1} & y_{N}y_{2}x_{N}^{T}x_{2} & \dots & y_{N}y_{N}x_{N}^{T}x_{N}\\ 
+			\end{bmatrix}
+		\end{alignat*}
+	\end{subequations}
+
+	\pause
+
+	$Q$ ist $N \times N$ Matrix. Problematisch bei großen Trainingssets!
+\end{frame}
 
 
 
