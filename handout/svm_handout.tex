@@ -27,6 +27,9 @@
 \usepackage{subcaption}
 \usepackage{interval}
 \usepackage{todonotes}
+%\usepackage{algorithm}
+%\usepackage{algorithmicx}
+\usepackage{booktabs}
 
 % argmin command
 \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
@@ -732,6 +735,44 @@ Wie in den Kapiteln zuvor gezeigt wurde gibt es eine Vielzahl von verschiedenen 
 \end{itemize}
 
 
+\chapter{Pseudocode und Beispiele} \label{ch:pseudobsp}
+In diesem Kapitel werden Pseudocodes für die verschiedenen Varienten von SVMs präsentiert, von einer Hard-Margin SVM bis zu einer SVM mit RBF-Kernel.
+Weiters werden anhand von Beispielen die Funktionsweisen und Eigenschaften der verschiedenen SVMs demonstriert.
+
+\section{Hard-Margin SVM Pseudocode}\label{sec:hsvmpseudo}
+Es folgt der Pseudocode mit Anmerkungen für eine Hard-Margin Support Vector Machine.
+\begin{table}[H]\label{tab:hmpc}
+\begin{tabular}{|l r|}
+    \hline
+    \textbf{Hard-Margin SVM} & \textbf{Zeile} \\
+    \hline
+    Initialisiere $x, y$ & 1\\
+    $Q = (yy^{\mathbf{T}})K$ & 2\\
+    $c = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
+    $A = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
+    $b = \left( 0, 0, \ldots, 0 \right)$ & 5\\
+    $A_{eq} = Y^{\mathbf{T}}$ & 6\\
+    $b_{eq} = 0$ & 7\\
+    $\alpha = QPSolver\left( Q, c, A, b, A_{eq}, b_{eq} \right)$ & 8\\
+    $w = \sum_{n=SV} \alpha_{n} y_{n} x_{n} $  & 9\\
+    $b = \frac{1}{y_{n}} - w^{\mathbf{T}}x_{n}$ & 10\\
+    \hline
+\end{tabular}
+\begin{tabular}{|l|}
+    \hline
+    \textbf{Anmerkungen} \\
+    \hline
+    Zeile 1: Initialisieren von Werte- und Klassenvektoren\\
+    Zeile 2: Berechnen der Matrix Q \\
+    Zeile 3: Berechnen von c \\
+    Zeile 4, 5: Berechnen der Ungleichheitsbedingungen\\
+    Zeile 6, 7: Berechnen der Gleichheitsbedingungen\\
+    Zeile 8: Lösen mittels Quadratic Programming \\
+    Zeile 9: Berechnung Gewichte mit Stützvektoren \\
+    Zeile 10: Berechnung bias mit beliebigem Stützvektor \\
+    \hline
+\end{tabular}
+\end{table}
 
 
 % THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
