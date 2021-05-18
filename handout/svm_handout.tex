@@ -735,7 +735,6 @@ Wie in den Kapiteln zuvor gezeigt wurde gibt es eine Vielzahl von verschiedenen 
 \chapter{Pseudocode und Beispiele} \label{ch:pseudobsp}
 In diesem Kapitel werden Pseudocodes von verschiedensten Varianten von SVMs präsentiert, von einer Hard-Margin \ac{SVM} bis zu einer Soft-Margin \ac{SVM} mit \ac{RBF}-Kernel.
 Weiters werden anhand von Beispielen die Funktionsweisen und Eigenschaften der verschiedenen SVMs anschaulich demonstriert.
-
 \section{Hard-Margin SVM Pseudocode}\label{sec:hsvmpseudo}
 Es folgt der Pseudocode mit Anmerkungen für eine Hard-Margin Support Vector Machine.
 \begin{table}[H]\label{tab:hmpc}
@@ -743,16 +742,20 @@ Es folgt der Pseudocode mit Anmerkungen für eine Hard-Margin Support Vector Mac
     \hline
     \textbf{Hard-Margin SVM} & \textbf{Zeile} \\
     \hline
-    Initialisiere $x, y$ & 1\\
-    $Q = (yy^{\mathbf{T}})K$ & 2\\
-    $c = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
-    $A = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
-    $b = \left( 0, 0, \ldots, 0 \right)$ & 5\\
-    $A_{eq} = Y^{\mathbf{T}}$ & 6\\
+    Initialisiere $\mathbf{x}, \mathbf{y}$ & 1\\
+    $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
+    $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
+    $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
+    $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
+    $\mathbf{A_{eq}} = Y^{\mathbf{T}}$ & 6\\
     $b_{eq} = 0$ & 7\\
-    $\alpha = QPSolver\left( Q, c, A, b, A_{eq}, b_{eq} \right)$ & 8\\
-    $w = \sum_{n=SV} \alpha_{n} y_{n} x_{n} $  & 9\\
-    $b = \frac{1}{y_{n}} - w^{\mathbf{T}}x_{n}$ & 10\\
+    $\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 8 \\
+    $\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$ & 9 \\
+    $\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}} \right)$ & 10\\
+    $\mathbf{w} = \sum\limits_{n=SV} \alpha_{n} y_{n} x_{n}$  & 11\\
+    & \\[-1em]
+    $bias = \frac{1}{y_{n}} - \mathbf{w}^{\mathbf{T}}x_{n}$ & 12\\
+    & \\
     \hline
 \end{tabular}
 \begin{tabular}{|l|}
@@ -792,7 +795,48 @@ Alle Entscheidungsgrenzen trennen den Datensatz sauber.
 Im Gegensatz zur Hard-Margin \ac{SVM} ist bei den anderen Algorithmen der Abstand der Punkte zur Grenze unerheblich.
 
 \section{Soft-Margin SVM Pseudocode}\label{sec:smsvmpseudo}
-% TODO add after checking hard margin pseudocode (only small differences)
+Der Pseudocode für die Soft-Margin SVM unterscheidet sich nur geringfügig von der für die Hard-Margin SVM.
+Man erweitert den Algorithmus um einen Bestrafungsparameter C und die untere und obere Grenze.
+\begin{table}[H]\label{tab:smpc}
+\begin{tabular}{|l r|}
+    \hline
+    \textbf{Soft-Margin SVM} & \textbf{Zeile} \\
+    \hline
+    Initialisiere $\mathbf{x}, \mathbf{y}, C$ & 1\\
+    $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
+    $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
+    $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
+    $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
+    $\mathbf{A_{eq}} = Y^{\mathbf{T}}$ & 6\\
+    $b_{eq} = 0$ & 7\\
+    \textcolor{red}{$\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$} & 8 \\
+    \textcolor{red}{$\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$} & 9 \\
+    \textcolor{red}{$\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}}, \mathbf{lb}, \mathbf{ub} \right)$} & 10\\
+    $\mathbf{w} = \sum\limits_{n=SV} \alpha_{n} y_{n} x_{n}$  & 11\\
+    & \\[-1em]
+    $bias = \frac{1}{y_{n}} - \mathbf{w}^{\mathbf{T}}x_{n}$ & 12\\
+    & \\
+    \hline
+\end{tabular}
+\begin{tabular}{|l|}
+    \hline
+    \textbf{Anmerkungen} \\
+    \hline
+    Zeile 1: Initialisieren von Werte- und Klassenvektoren und Bestrafungsparameter C\\
+    Zeile 2: Berechnen der Matrix Q \\
+    Zeile 3: Berechnen von c \\
+    Zeile 4, 5: Berechnen der Ungleichheitsbedingungen\\
+    Zeile 6, 7: Berechnen der Gleichheitsbedingungen\\
+    Zeile 8: untere Grenze \\
+    (kann auch $\left( -\infty, -\infty, \ldots, -\infty \right)$ gewählt werden) \\
+    Zeile 9: Berechnung obere Grenze mit C \\
+    Zeile 10: Lösen mittels Quadratic Programming \\
+    Zeile 11: Berechnung Gewichte mit Stützvektoren \\
+    Zeile 12: Berechnung bias mit beliebigem Stützvektor \\
+    \hline
+\end{tabular}
+\end{table}
+
 
 \section{Soft-Margin SVM Beispiel}\label{sec:smscmbsp}
 Im Gegensatz zur Hard-Margin \ac{SVM} kann bei der Soft-Margin \ac{SVM} der Mindestabstand, oder genauer der Bestrafungsfaktor für Abweichungen von diesem, eingestellt werden.
@@ -809,8 +853,53 @@ Die beiden Ausreißer werden hierbei quasi ignoriert.
 Anders bei der Hard-Margin SVM, die durch die Ausreißer stark beeinträchtigt wird und keine Trenngrenze findet.
 Wird der Bestrafungsparameter $C$ sehr hoch eingestellt, so verhält sich eine Soft-Margin \ac{SVM} identisch zu einer Hard-Margin \ac{SVM}.
 
-\section{Kernel-Trick, Polynomieller Kernel - Pseudocode}\label{sec:plykernpseudo}
-% TODO same as Soft-Margin SVM pseudocode
+\section{Kernel-Trick - Pseudocode}\label{sec:kernpseudo}
+Bei der Erweiterung mit dem Kerneltrick kann die Soft-Margin SVM als Basis gewählt werden.
+Im Algorithmus ändert sich hierbei nur die Berechnung von $\mathbf{K}$ (siehe Anmerkung) und die des bias. %TODO hier Anmerkung refernzieren)
+Weiters wird anstatt des Gewichtsvektors $\mathbf{w}$ der Vektor $\alpha$ zurückgegeben und dessen positiven Teile $\alpha > 0$ für die Klassifikation verwendet.
+\begin{table}[H]\label{tab:kernelpc}
+\begin{tabular}{|l r|}
+    \hline
+    \textbf{Soft-Margin SVM mit Kernel-Trick} & \textbf{Zeile} \\
+    \hline
+    Initialisiere $\mathbf{x}, \mathbf{y}, C$ & 1\\
+    $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
+    $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
+    $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
+    $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
+    $\mathbf{A_{eq}} = Y^{\mathbf{T}}$ & 6\\
+    $b_{eq} = 0$ & 7\\
+    $\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 8 \\
+    $\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$ & 9 \\
+    $\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}}, \mathbf{lb}, \mathbf{ub} \right)$ & 10\\
+    \textcolor{red}{$bias = y_{k} - \sum\limits_{\alpha_{n} > 0} \alpha_{n} y_{n} KF\left( x_{n}, x_{k} \right) $} & 11 \\
+    & \\
+    \hline
+\end{tabular}
+\begin{tabular}{|l|}
+    \hline
+    \textbf{Anmerkungen} \\
+    \hline
+    Zeile 1: Initialisieren von Werte- und Klassenvektoren und Bestrafungsparameter C\\
+    Zeile 2: Berechnen der Matrix Q \\
+    Zeile 3: Berechnen von c \\
+    Zeile 4, 5: Berechnen der Ungleichheitsbedingungen\\
+    Zeile 6, 7: Berechnen der Gleichheitsbedingungen\\
+    Zeile 8: untere Grenze \\
+    (kann auch $\left( -\infty, -\infty, \ldots, -\infty \right)$ gewählt werden) \\
+    Zeile 9: Berechnung obere Grenze mit C \\
+    Zeile 10: Lösen mittels Quadratic Programming \\
+    Zeile 11: Berechnung bias \\
+    $x_{k}$ ist ein beliebiger Stützvektor, $y_{k}$ die dazugehörende Klasse. \\
+    Aufgrund von Rechenungenauigkeiten empfiehlt sich ein Vergleich von $\alpha_{n}$ mit nicht exakt $0$ \\
+    sondern einem sehr kleinen Wert, e.g. $10^{-10}$ \\
+    \hline
+\end{tabular}
+\end{table}
+$KF$ ist hierbei die Kernel-Funktion.
+Der Algorithmus ist für alle Kernel (e.g. RBF oder polynomiell) gleich.
+Natürlich muss die für die Soft-Margin SVM verwendete Klassifizierung auch angepasst werden.
+% TODO: pseudocode für das? (Beyer hatte für Klassifizierungen nie Pseudocode, nicht sicher ob wirs brauchen)
 
 \section{Kernel-Trick, Polynomieller Kernel - Beispiel}\label{sec:plykernbsp}
 Ein polynomieller Kernel der Form $(a x^{T}x' + b)^{Q}$ wird für dieses Beispiel verwendet.
@@ -835,9 +924,6 @@ In \autoref{fig:plykern_solve} ist die Entscheidungsgrenze für dieses Polynom a
     \label{fig:plykern_solve}
 \end{figure}
 Die Punkte werden, auch bei diesem nichtlinearen Problem, sauber getrennt.
-
-\section{Kernel-Trick, RBF Kernel - Pseudocode}\label{sec:rbfkern_pseudo}
-% TODO like poly-kernel
 
 \section{Kernel-Trick, RBF Kernel - Beispiel}\label{sec:rbfkern_bsp}
 Anders als beim polynomiellen Kernel muss beim \ac{RBF} Kernel nicht nach einem Polynom gesucht werden.
