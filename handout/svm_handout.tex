@@ -27,6 +27,8 @@
 \usepackage{subcaption}
 \usepackage{interval}
 \usepackage{todonotes}
+\usepackage{xcolor}
+\usepackage{graphics}
 
 % argmin command
 \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
@@ -774,6 +776,25 @@ Es folgt der Pseudocode mit Anmerkungen für eine Hard-Margin Support Vector Mac
 \end{tabular}
 \end{table}
 
+\subsection{Berechnung von $\mathbf{K}$}\label{subsec:k_ber}
+Im Folgenden der Pseudocode für die Berechnung von $\mathbf{K}$.
+\begin{table}[H]\label{knokernel}
+    \begin{tabular}{|l r|}
+        \hline
+        $\mathbf{K}$ \textbf{Berechnung} & \textbf{Zeile} \\
+        \hline
+        Initialisiere $\mathbf{x}$ & 1 \\
+        For $i=1$ To $N$ & 2 \\
+        \quad For $j=2$ To $N$ & 3 \\
+        \quad\quad $\mathbf{K}\left( i, j \right) = x_{i} \cdot x_{j}$ & 4 \\
+        \quad Ende For & 5 \\
+        Ende For & 6 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+$N$ ist hierbei die Suchraumdimensionalität.
+
 \section{Hard-Margin SVM - Beispiel}\label{sec:hmsvmbsp}
 Mit einer Hard-Margin \ac{SVM} können linear separierbare Punkte getrennt werden.
 \autoref{fig:hmsvmbsp_simple} zeigt ein Beispiel.
@@ -900,6 +921,27 @@ $KF$ ist hierbei die Kernel-Funktion.
 Der Algorithmus ist für alle Kernel (e.g. RBF oder polynomiell) gleich.
 Natürlich muss die für die Soft-Margin SVM verwendete Klassifizierung auch angepasst werden.
 % TODO: pseudocode für das? (Beyer hatte für Klassifizierungen nie Pseudocode, nicht sicher ob wirs brauchen)
+
+\subsection{Berechnung von $\mathbf{K}$ mit Kernelfunktion}\label{subsec:kberkern}
+Im Folgenden der Pseudocode für die Berechnung von $\mathbf{K}$, wenn der Kernel Trick verwendet wird.
+Die einzige Änderung ist, dass anstatt des Skalarproduktes die Kernelfunktion verwendet wird.
+\begin{table}[H]\label{tab:kkernel}
+    \begin{tabular}{|l r|}
+        \hline
+        $\mathbf{K}$ \textbf{Berechnung} & \textbf{Zeile} \\
+        \hline
+        Initialisiere $\mathbf{x}$ & 1 \\
+        For $i=1$ To $N$ & 2 \\
+        \quad For $j=2$ To $N$ & 3 \\
+        \textcolor{red}{\quad\quad $\mathbf{K}\left( i, j \right) = KF\left( x_{i}, x_{j} \right)$} & 4 \\
+        \quad Ende For & 5 \\
+        Ende For & 6 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+$N$ ist hierbei wieder die Suchraumdimensionalität, $KF$ ist die Kernelfunktion.
+Durch diese Berechnung spart man sich die Transformation der Eingabe in höhere Dimensionen, die Essenz des Kernel Tricks.
 
 \section{Kernel-Trick, Polynomieller Kernel - Beispiel}\label{sec:plykernbsp}
 Ein polynomieller Kernel der Form $(a x^{T}x' + b)^{Q}$ wird für dieses Beispiel verwendet.
