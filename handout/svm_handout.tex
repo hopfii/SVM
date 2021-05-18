@@ -502,7 +502,7 @@ Aufgrund des zuvor genannten Verhaltens tendiert die Hard-Margin \ac{SVM} im All
 
 \chapter{Nichtlineare Trennung}
 
-Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind, kann eine \ac{SVM} auch nicht linear trennbare Eingabevektoren trennen. In \autoref{transform_phi} wird zuerst eine Intuition für die Transformation aufgebaut. Diese Intuition wird anschließend in \autoref{sec:kernel} weiter formalisiert und verallgemeinert. 
+Wird eine nichtlineare Trennung von Eingabevektoren gewünscht lässt sich dies nicht direkt durch eine \ac{SVM} realisieren, da eine \ac{SVM} in ihrer Grundform ausschließlich linear trennen kann. Werden die Eingabevektoren allerdings mittels einer Funktion so transformiert, dass diese linear trennbar sind, kann eine \ac{SVM} auch nichtlinear trennbare Eingabevektoren trennen. In \autoref{transform_phi} wird zuerst eine Intuition für die Transformation aufgebaut. Diese Intuition wird anschließend in \autoref{sec:kernel} weiter formalisiert und verallgemeinert. 
 
 \section{Transformation der Problemstellung} \label{transform_phi}
 
@@ -733,8 +733,8 @@ Wie in den Kapiteln zuvor gezeigt wurde gibt es eine Vielzahl von verschiedenen 
 
 
 \chapter{Pseudocode und Beispiele} \label{ch:pseudobsp}
-In diesem Kapitel werden Pseudocodes für die verschiedenen Varienten von SVMs präsentiert, von einer Hard-Margin SVM bis zu einer SVM mit RBF-Kernel.
-Weiters werden anhand von Beispielen die Funktionsweisen und Eigenschaften der verschiedenen SVMs demonstriert.
+In diesem Kapitel werden Pseudocodes von verschiedensten Varianten von SVMs präsentiert, von einer Hard-Margin \ac{SVM} bis zu einer Soft-Margin \ac{SVM} mit \ac{RBF}-Kernel.
+Weiters werden anhand von Beispielen die Funktionsweisen und Eigenschaften der verschiedenen SVMs anschaulich demonstriert.
 
 \section{Hard-Margin SVM Pseudocode}\label{sec:hsvmpseudo}
 Es folgt der Pseudocode mit Anmerkungen für eine Hard-Margin Support Vector Machine.
@@ -772,7 +772,7 @@ Es folgt der Pseudocode mit Anmerkungen für eine Hard-Margin Support Vector Mac
 \end{table}
 
 \section{Hard-Margin SVM - Beispiel}\label{sec:hmsvmbsp}
-Mit einer Hard-Margin SVM kann man beispielsweise linear separierbare Punkte trennen.
+Mit einer Hard-Margin \ac{SVM} können linear separierbare Punkte getrennt werden.
 \autoref{fig:hmsvmbsp_simple} zeigt ein Beispiel.
 \begin{figure}[H]
     \centering
@@ -780,74 +780,74 @@ Mit einer Hard-Margin SVM kann man beispielsweise linear separierbare Punkte tre
     \caption{Linear separierbarer Datensatz mit Grenze von Hard-Margin SVM}
     \label{fig:hmsvmbsp_simple}
 \end{figure}
-Man sieht, dass die Grenze einen Mindestabstand zu allen Punkten (eben den "Hard margin") hat.
-\autoref{fig:hmsvm_comp} zeigt einen Vergleich zwischen Hard-Margin SVM, einem Algorithmus mit Pseudo-inverse und $\alpha$-LMS.
+Wie ersichtlich hat die Grenze, die \glqq hard margin\grqq einen Mindestabstand zu allen Punkten.
+\autoref{fig:hmsvm_comp} zeigt den Vergleich zwischen einer Hard-Margin SVM, einem Algorithmus mit Pseudoinversen und $\alpha$-LMS.
 \begin{figure}[H]
     \centering
     \includegraphics[width = 16cm]{../code/octave/images/linearcompsmall}
-    \caption{Linear separierbarer Datensatz mit Grenze von Hard-Margin SVM, Pseudo-Inverser und $\alpha$-LMS}
+    \caption{Linear separierbarer Datensatz mit Grenze von Hard-Margin SVM, Pseudoinverser und $\alpha$-LMS}
     \label{fig:hmsvm_comp}
 \end{figure}
 Alle Entscheidungsgrenzen trennen den Datensatz sauber.
-Im Gegensatz zur Hard-Margin SVM ist bei den anderen Algorithmen der Abstand der Punkte zur Grenze unerheblich.
+Im Gegensatz zur Hard-Margin \ac{SVM} ist bei den anderen Algorithmen der Abstand der Punkte zur Grenze unerheblich.
 
 \section{Soft-Margin SVM Pseudocode}\label{sec:smsvmpseudo}
 % TODO add after checking hard margin pseudocode (only small differences)
 
 \section{Soft-Margin SVM Beispiel}\label{sec:smscmbsp}
-Im Gegensatz zur Hard-Margin SVM kann bei der Soft-Margin SVM der Mindestabstand, oder genauer der Bestrafungsfaktor für Abweichungen von diesem, eingestellt werden.
-So kann mit einer geringen Bestrafung auch bei nicht-linear separierbaren Datensätzen ein gutes Ergebnis erzielt werden, vorausgesetzt die Klassen sind nur leicht durchmischt.
-Ein Beispiel, mit einer Grenze von einer Hard-Margin SVM zum Vergleich, sieht man in \autoref{fig:smsvm_notlinear}.
+Im Gegensatz zur Hard-Margin \ac{SVM} kann bei der Soft-Margin \ac{SVM} der Mindestabstand, oder genauer der Bestrafungsfaktor für Abweichungen von diesem, eingestellt werden.
+So kann mit einer geringen Bestrafung auch bei nichtlinear separierbaren Datensätzen ein gutes Ergebnis erzielt werden, vorausgesetzt die Klassen sind nur leicht durchmischt.
+Ein Beispiel, mit einer Grenze von einer Hard-Margin SVM zum Vergleich, ist in \autoref{fig:smsvm_notlinear} dargestellt.
 \begin{figure}[H]
     \centering
     \includegraphics[width = 16cm]{../code/octave/images/svmsimplenotlinear}
-    \caption{Nicht linear separierbarer Datensatz mit Grenze von Hard-Margin SVM und Soft-Margin SVM}
+    \caption{Nichtlinear separierbarer Datensatz mit Grenze von Hard-Margin \ac{SVM} und Soft-Margin \ac{SVM}}
     \label{fig:smsvm_notlinear}
 \end{figure}
-Man sieht, dass die Soft-Margin SVM trotz der zwei Punkte, die eine lineare Trennung verhindern, eine gute Grenze zieht.
-Die beiden Ausreißer werden quasi ignoriert.
-Anders bei der Hard-Margin SVM, die durch die Ausreißer stark beeinträchtigt wird.
-Stellt man den Bestrafungsparameter $C$ sehr hoch ein, verhält sich eine Soft-Margin SVM genau wie eine Hard-Margin SVM.
+Es ist ersichtlich, dass die Soft-Margin \ac{SVM} trotz der zwei Punkte, die eine lineare Trennung verhindern, eine gute Grenze zieht.
+Die beiden Ausreißer werden hierbei quasi ignoriert.
+Anders bei der Hard-Margin SVM, die durch die Ausreißer stark beeinträchtigt wird und keine Trenngrenze findet.
+Wird der Bestrafungsparameter $C$ sehr hoch eingestellt, so verhält sich eine Soft-Margin \ac{SVM} identisch zu einer Hard-Margin \ac{SVM}.
 
 \section{Kernel-Trick, Polynomieller Kernel - Pseudocode}\label{sec:plykernpseudo}
 % TODO same as Soft-Margin SVM pseudocode
 
 \section{Kernel-Trick, Polynomieller Kernel - Beispiel}\label{sec:plykernbsp}
 Ein polynomieller Kernel der Form $(a x^{T}x' + b)^{Q}$ wird für dieses Beispiel verwendet.
-Beim polynomiellen Kernel gilt es herauszufinden, durch welches Polynom sich eine Trennung der eigentlich nichtlinearen Problemstellung erreichen läßt.
+Beim polynomiellen Kernel gilt es herauszufinden, durch welches Polynom sich eine Trennung der eigentlich nichtlinearen Problemstellung erreichen lässt.
 Hierfür benötigt man entweder Erfahrung oder Experimente.
 Für das folgende Experiment gilt $b = 1, a = 1$, der Exponent $Q$ wird variiert. %TODO mention C=0.1?
 \autoref{fig:plykern_qvary} zeigt die Entscheidungsgrenzen für verschiedene $Q$ für den Datensatz KM40M2-NN aus Übung 5b) des Aufgabenblattes. %TODO Referenz?
 \begin{figure}[H]
     \centering
     \includegraphics[width = 16cm]{../code/octave/images/kernelexptest}
-    \caption{Nicht linear separierbarer Datensatz mit Grenze von SVM mit polynomiellem Kernel für $Q=2,\ldots,6$}
+    \caption{Nichtlinear separierbarer Datensatz mit Grenze von \ac{SVM} mit polynomiellem Kernel für $Q=2,\ldots,6$}
     \label{fig:plykern_qvary}
 \end{figure}
-Man kann die verschiedenen Grenzen beobachten.
-Da sich durch den Kerneltrick der Rechenaufwand in Grenzen hält, kann man über die Variation von $Q$ und gegebenfalls auch $a, b$ gut experimentieren, um ein geeignetes Polynom zu finden.
-Bei genaurer Betrachtung bietet sich bei diesem Beispiel ein Exponent von $Q=4$ an.
-In \autoref{fig:plykern_solve} sieht man nur diese Entscheidungsgrenze.
+Man kann die verschiedenen Grenzen beobachten und graphisch analysieren.
+Da sich durch den Kerneltrick der Rechenaufwand in Grenzen hält, kann über die Variation von $Q$ und gegebenenfalls auch $a, b$ gut experimentiert werden, um ein geeignetes Polynom zu finden.
+Bei genauerer Betrachtung bietet sich bei diesem Beispiel ein Exponent von $Q=4$ an.
+In \autoref{fig:plykern_solve} ist die Entscheidungsgrenze für dieses Polynom abgebildet.
 \begin{figure}[H]
     \centering
     \includegraphics[width = 16cm]{../code/octave/images/sgddatasetkernelsolve}
-    \caption{Nicht linear separierbarer Datensatz mit Grenze von SVM mit polynomiellem Kernel für $Q=4$}
+    \caption{Nichtlinear separierbarer Datensatz mit Grenze von \ac{SVM} mit polynomiellem Kernel für $Q=4$}
     \label{fig:plykern_solve}
 \end{figure}
-Man kann sehen, dass die Punkte sauber getrennt werden, auch bei einem nichtlinearen Problem.
+Die Punkte werden, auch bei diesem nichtlinearen Problem, sauber getrennt.
 
 \section{Kernel-Trick, RBF Kernel - Pseudocode}\label{sec:rbfkern_pseudo}
 % TODO like poly-kernel
 
 \section{Kernel-Trick, RBF Kernel - Beispiel}\label{sec:rbfkern_bsp}
-Anders als beim polynomiellen Kernel muss beim RBF Kernel nicht nach einem Polynom gesucht werden.
+Anders als beim polynomiellen Kernel muss beim \ac{RBF} Kernel nicht nach einem Polynom gesucht werden.
 Dafür muss der Parameter $\gamma$ korrekt eingestellt werden.
 % Weiter muss auch auf den Bestrafungsparameter $C$ geachtet werden.
 Für $\gamma = 1$ ergibt sich, angewandt auf den Datensatz KM40M2-NN, \autoref{fig:rbfkern_dataset}. %TODO mention C=200?
 \begin{figure}[H]
     \centering
     \includegraphics[width = 16cm]{../code/octave/images/sgdrbfkernel}
-    \caption{Nicht linear separierbarer Datensatz mit Grenze von SVM mit RBF Kernel für $\gamma=1$}
+    \caption{Nichtlinear separierbarer Datensatz mit Grenze von \ac{SVM} mit \ac{RBF}-Kernel für $\gamma=1$}
     \label{fig:rbfkern_dataset}
 \end{figure}
 Man sieht, dass die Punkte schön getrennt werden.
