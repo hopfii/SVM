@@ -26,6 +26,7 @@
 \usepackage{subcaption}
 \usepackage{interval}
 \usepackage{textpos}
+\usepackage{xcolor}
 \usepackage[style=authoryear, backend=biber]{biblatex}
 \addbibresource{references.bib}
 
@@ -674,6 +675,44 @@ Eingesetzt in Lagrange Gleichung:
 
 \section{Nichtlineare Trennung}
 
+\section{Pseudocode und Beispiele}
+
+\begin{frame}{Pseudocode Hard-Margin SVM}
+    \begin{tabular}{|l r|}
+        \hline
+        \textbf{Hard-Margin SVM} & \textbf{Zeile} \\
+        \hline
+        Initialisiere $\mathbf{x}, \mathbf{y}$ & 1\\
+        $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
+        $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
+        $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
+        $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
+        $\mathbf{A_{eq}} = y^{\mathbf{T}}$ & 6\\
+        $b_{eq} = 0$ & 7\\
+        $\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 8 \\
+        $\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$ & 9 \\
+        $\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}} \right)$ & 10\\
+        $\mathbf{w} = \sum\limits_{n=SV} \alpha_{n} y_{n} x_{n}$  & 11\\
+        & \\[-1em]
+        $bias = \frac{1}{y_{n}} - \mathbf{w}^{\mathbf{T}}x_{n}$ & 12\\
+        & \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|l|}
+        \hline
+        \textbf{Anmerkungen} \\
+        \hline
+        Zeile 1: Initialisieren von Werte- und Klassenvektoren\\
+        Zeile 2: Berechnen der Matrix Q \\
+        Zeile 3: Berechnen von c \\
+        Zeile 4, 5: Berechnen der Ungleichheitsbedingungen\\
+        Zeile 6, 7: Berechnen der Gleichheitsbedingungen\\
+        Zeile 8: Lösen mittels Quadratic Programming \\
+        Zeile 9: Berechnung Gewichte mit Stützvektoren \\
+        Zeile 10: Berechnung bias mit beliebigem Stützvektor \\
+        \hline
+    \end{tabular}
+\end{frame}
 
 
 \begin{frame}[standout]
