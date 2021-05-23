@@ -701,7 +701,76 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
     => Zusatzkosten: Berechnung höherdimensionaler Skalarprodukte $\Phi(x)^{T} \Phi(x)$
 \end{frame}
 
-\section{Pseudocode und Beispiele}
+\begin{frame}{Probleme und Erkenntnisse}
+    \emph{Problem 1}: Wahl der Transformationsfunktion $\Phi(x)$ \\ \pause
+    \emph{Problem 2}: Eingabevektoren in sehr hochdimensionalen/unendlichen Raum transformiert -> Berechnung Skalarprodukt sehr aufwändig/unmöglich \\ \pause
+    \emph{Erkenntnis 1}: Transformation erlaubt Bestimmung nichtlinearer Trenngrenzen \\ \pause
+    \emph{Erkenntnis 2}: Dimension Vektoren beeinflusst Optimierungsproblem nicht stark \\ \pause
+    \emph{Verbesserung}: Umgehung Zusatzkosten der transformierten Skalarprodukte => Kernel Trick
+\end{frame}
+
+\begin{frame}{Kernel Trick} % TODO: this slide necessary?
+    Es gilt: $z = \Phi(x)$ \\
+    \begin{subequations}
+        \begin{alignat*}{2}
+            &\!\max_{\alpha}        &\qquad&  	\Lagr(\alpha) = \sum_{n=1}^{N} \alpha_{n} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} z_{n}^{T} z_{m}\\
+            &\text{mit } &      & 0 \leq \alpha_{n} \leq C \text{ für } n=1..N\\
+            &       & & \sum_{n=1}^{N} \alpha_{n} y_{n} = 0\text{ für } n=1..N
+        \end{alignat*}
+    \end{subequations}
+    \pause
+    Berechnung von $w$ und $b$:
+    \begin{equation*}
+        \begin{aligned}
+            w &= \sum_{n=1}^{N} \alpha_{n} y_{n} z_{n}
+        \end{aligned}
+    \end{equation*}
+
+    \begin{equation*}
+        \begin{aligned}
+            b &= \frac{1}{y_{k}} - w^{T} z_{k}
+        \end{aligned}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{Kernel Trick}
+    Einführung einer Kernel-Funktion $K(x, x') = z_{1}^{T} z_{2} = \Phi(x)^{T} \Phi(x')$ \\ \pause
+    Berechnet Skalarprodukt der transformierten Eingabevektoren \\
+    Transformiert Eingabevektoren aber nicht tatsächlich in den neuen Raum \\ \pause
+    Berechnung hochdimensionaler Skalarprodukte wird umgangen
+\end{frame}
+
+\begin{frame}{Beispiel Kernel-Funktion}
+    Kernel-Funktion für $x, x' \in \mathbb{R}^2$: \\
+    \begin{equation*} \label{eq:example1_kernel_pres}
+    \begin{aligned}
+        K(x, x') &= (1 + x^{T}x')^{2} = \\ \pause
+        &= (1 + x_{1} x_{1}' + x_{2} x_{2}')^{2} = \\ \pause
+        &= 1 + x_{1}^2 x_{1}'^2 + x_{2}^{2} x_{2}'^{2} + 2x_{1} x_{1}' + 2 x_{2} x_{2}' + 2 x_{1} x_{1}'x_{2} x_{2}'
+    \end{aligned}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{Beispiel Kernel-Funktion}
+    Annahme für verwendete Transformationsfunktion $\Phi$: \\
+    \begin{equation*}
+        \begin{aligned}
+            \Phi(x) &= (1, x_{1}^{2}, x_{2}^{2}, \sqrt{2} x_{1}, \sqrt{2} x_{2}, \sqrt{2} x_{1} x_{2})\\
+        \end{aligned}
+    \end{equation*}
+    Anwendung auf Vektoren $x$ und $x'$: \\ \pause
+    \begin{equation*} \label{eq:example1_innerprod_pres}
+    \begin{aligned}
+        \Phi(x) &= (1, x_{1}^{2}, x_{2}^{2}, \sqrt{2} x_{1}, \sqrt{2} x_{2}, \sqrt{2} x_{1} x_{2})\\ \pause
+        \Phi(x') &= (1, x_{1}'^{2}, x_{2}'^{2}, \sqrt{2} x_{1}', \sqrt{2} x_{2}', \sqrt{2} x_{1}' x_{2}')\\ \pause
+        \Phi(x)^T \Phi(x') &= 1 + x_{1}^2 x_{1}'^2 + x_{2}^{2} x_{2}'^{2} + 2x_{1} x_{1}' + 2 x_{2} x_{2}' + 2 x_{1} x_{1}'x_{2} x_{2}'
+    \end{aligned}
+    \end{equation*} \pause
+    Kernel-Funktion $K(x, x') = (1 + x^{T}x')^{2}$ entspricht Skalarprodukt der mit $\Phi$ transformierten Vektoren $x, x'$
+\end{frame}
+
+
+\section{Pseudocode und Beispiele}\label{sec:pseudobsopres}
 
 \begin{frame}{Pseudocode Hard-Margin SVM}
     \begin{tabular}{|l r|}
