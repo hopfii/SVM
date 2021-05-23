@@ -673,7 +673,33 @@ Eingesetzt in Lagrange Gleichung:
 
 
 
-\section{Nichtlineare Trennung}
+\section{Nichtlineare Trennung}\label{sec:nichtlintrenn}
+\begin{frame}{Einleitung}
+    \emph{Ziel}: nichtlineare Trennung \\
+    \emph{Problem}: SVM trennt ausschließlich linear \\ \pause
+    \emph{Lösung}: Transformation Eingabevektoren in linear trennbaren Raum \\
+    Transformationsfunktion $\Phi(x): \mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$ \\
+    \begin{center}
+        \begin{figure}
+            \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{assets/2d_to_3d_phi}
+            \caption{Transformation Eingabevektoren macht linear trennbar}
+            \label{fig:transmachtlinear}
+        \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Optimierungsproblem transformiert}
+Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
+\begin{subequations} \label{eq:soft_margin_with_transform_pres}
+\begin{alignat*}{2}
+    &\!\max_{\alpha}        &\qquad&  	\Lagr(\alpha) = \sum_{n=1}^{N} \alpha_{n} - \frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{M} y_{n} y_{m} \alpha_{n} \alpha_{m} \Phi(x_{n})^{T} \Phi(x_{m})\\
+    &\text{mit } &      & 0 \leq \alpha_{n} \leq C \text{ für } n=1..N\\
+    &       & & \sum_{n=1}^{N} \alpha_{n} y_{n} = 0\text{ für } n=1..N
+\end{alignat*}
+\end{subequations} \pause
+    Anzahl Lagrangefaktoren $\alpha$ und Dimension der $Q$-Matrix hängen von Anzahl Eingabevektoren ab, nicht von der Dimension \\ \pause
+    => Zusatzkosten: Berechnung höherdimensionaler Skalarprodukte $\Phi(x)^{T} \Phi(x)$
+\end{frame}
 
 \section{Pseudocode und Beispiele}
 
