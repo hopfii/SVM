@@ -576,7 +576,8 @@ Durch die Einführung einer Kernel-Funktion $K(x, x') = z_{1}^{T} z_{2} = \Phi(x
 
 
 \subsection{Beispiel Kernel-Funktion} \label{sec:example_kernel}
-Die Idee einer Kernel-Funktion wird nun anhand eines einfachen Beispiels gezeigt. Folgende Kernel-Funktion für $x, x' \in \mathbb{R}^2$ sei gegeben:
+Die Idee einer Kernel-Funktion wird nun anhand eines einfachen Beispiels gezeigt.
+Folgende Kernel-Funktion für $x, x' \in \mathbb{R}^2$ sei gegeben:
 
 \begin{equation} \label{eq:example1_kernel}
 	\begin{aligned}
@@ -607,12 +608,15 @@ Angewandt auf die Vektoren $x$ und $x'$:
 
 Werden die Ergebnisse von \autoref{eq:example1_kernel} und \autoref{eq:example1_innerprod} verglichen erkennt man, dass die Kernel-Funktion $(1 + x^{T}x')^{2}$ tatsächlich dem Skalarprodukt der mit $\Phi$ transformierten Vektoren $x$ und $x'$ entspricht. \\
 
-$\Phi$ transformiert in diesem Beispiel 2-dimensionale Vektoren nach $\mathbb{R}^6$. Mittels der Kernel-Funktion kann das Skalarprodukt der transformierten Vektoren durch $K(x, x') = (1 + x^{T}x')^{2}$ berechnet werden ohne dass die Vektoren $x$ und $x'$ tatsächlich in den neuen Raum transformiert werden müssen. \\
+$\Phi$ transformiert in diesem Beispiel 2-dimensionale Vektoren nach $\mathbb{R}^6$.
+Mittels der Kernel-Funktion kann das Skalarprodukt der transformierten Vektoren durch $K(x, x') = (1 + x^{T}x')^{2}$ berechnet werden ohne dass die Vektoren $x$ und $x'$ tatsächlich in den neuen Raum transformiert werden müssen. \\
 
-In dem Beispiel wurde die Berechnung von 6-dimensionalen Skalarprodukten durchgeführt durch die Berechnung mittels der Kernel-Funktion, die lediglich 2-dimensionale Skalarprodukte berechnen muss. Führt die Funktion $\Phi$ eine Transformation in eine viel höhere oder unendlich hohe Dimension aus ist der Vorteil einer solchen Kernel-Funktion sofort ersichtlich.
+In dem Beispiel wurde die Berechnung von 6-dimensionalen Skalarprodukten durchgeführt durch die Berechnung mittels der Kernel-Funktion, die lediglich 2-dimensionale Skalarprodukte berechnen muss.
+Führt die Funktion $\Phi$ eine Transformation in eine viel höhere oder unendlich hohe Dimension aus ist der Vorteil einer solchen Kernel-Funktion sofort ersichtlich.
 
 \subsection{Polynomieller Kernel}
-Die in \autoref{sec:example_kernel} verwendete Kernel-Funktion kann verallgemeinert werden. Seien die Eingabevektoren $x \in \mathbb{R}^d$ und die Transformationsfunktion $\Phi: \mathbb{R}^d \rightarrow \mathbb{Z}$ ein Polynom der Ordnung $Q$, dann kann eine Kernel-Funktion wie folgt definiert werden:
+Die in \autoref{sec:example_kernel} verwendete Kernel-Funktion kann verallgemeinert werden.
+Seien die Eingabevektoren $x \in \mathbb{R}^d$ und die Transformationsfunktion $\Phi: \mathbb{R}^d \rightarrow \mathbb{Z}$ ein Polynom der Ordnung $Q$, dann kann eine Kernel-Funktion wie folgt definiert werden:
 
 \begin{equation} \label{eq:poly_kernel}
 	\begin{aligned}
@@ -621,7 +625,8 @@ Die in \autoref{sec:example_kernel} verwendete Kernel-Funktion kann verallgemein
 	\end{aligned}
 \end{equation}
 
-Die in \autoref{eq:poly_kernel} beschriebene Kernel-Funktion wird polynomieller Kernel genannt. Weil durch das Polynom eine Vielzahl an Faktoren entsteht kann zur Kompensation dieser Faktoren die Kernel-Funktion mit den Skalierungsfaktoren $a$ und $b$ erweitert werden:
+Die in \autoref{eq:poly_kernel} beschriebene Kernel-Funktion wird polynomieller Kernel genannt.
+Weil durch das Polynom eine Vielzahl an Faktoren entsteht kann zur Kompensation dieser Faktoren die Kernel-Funktion mit den Skalierungsfaktoren $a$ und $b$ erweitert werden:
 
   \begin{equation} \label{eq:poly_kernel2}
   	\begin{aligned}
@@ -653,7 +658,10 @@ Dies kann wie folgt gezeigt werden (für den einfachsten Fall):
 	\end{aligned}
 \end{equation}
 
-Durch die Taylorexpansion von $\exp{(2xx')}$ wird die Unendlichkeit dieses Raums sichtbar. Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$. Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden. Damit wurde gezeigt dass der \ac{RBF} Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet. 
+Durch die Taylorexpansion von $\exp{(2xx')}$ wird die Unendlichkeit dieses Raums sichtbar.
+Das Ergebnis von \autoref{eq:proof_rbfk_infinite} hat bereits die für ein Skalarprodukt benötigte Symmetrie von $exp(-x^{2})$ - $exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$.
+Die Anteile $\frac{2^k}{k!}$ können gleichmäßig auf $x$ und $x'$ aufgeteilt werden indem je die Wurzel der Anteile zu $x$ und $x'$ multipliziert werden.
+Damit wurde gezeigt dass der \ac{RBF} Kernel das Skalarprodukt in einem unendlich dimensionalen Raum berechnet.
 
 \subsection{SVM Definition mit Kernel}
 Ein Input $x$, transformiert mit einer Funktion $z = \Phi(x)$, kann mit einer \ac{SVM} wie folgt klassifiziert werden:
@@ -664,7 +672,8 @@ Ein Input $x$, transformiert mit einer Funktion $z = \Phi(x)$, kann mit einer \a
 	\end{aligned}
 \end{equation}
 
-Diese Definition setzt voraus, dass die Funktion $\Phi$ bekannt ist. Das Ziel der neuen Definition ist die Vermeidung von einzeln auftretenden transformierten Eingabevektoren $z$ in den Formeln um das gesamte Problem mittels einer Kernel-Funktion $K(x, x')$ ausdrücken zu können ohne die Funktion $\Phi$ tatsächlich kennen zu müssen.
+Diese Definition setzt voraus, dass die Funktion $\Phi$ bekannt ist.
+Das Ziel der neuen Definition ist die Vermeidung von einzeln auftretenden transformierten Eingabevektoren $z$ in den Formeln um das gesamte Problem mittels einer Kernel-Funktion $K(x, x')$ ausdrücken zu können ohne die Funktion $\Phi$ tatsächlich kennen zu müssen.
 
 \begin{equation} \label{eq:kernel_w}
 	\begin{aligned}
@@ -672,7 +681,7 @@ Diese Definition setzt voraus, dass die Funktion $\Phi$ bekannt ist. Das Ziel de
 	\end{aligned}
 \end{equation}
 
-Setzt man \autoref{eq:kernel_w} in \autoref{eq:svm_def_kernel} ein erhält man:
+Setzt man \autoref{eq:kernel_w} in \autoref{eq:svm_def_kernel} ein, erhält man:
 
 \begin{equation} \label{eq:svm_def_kernel2}
 	\begin{aligned}
@@ -681,7 +690,7 @@ Setzt man \autoref{eq:kernel_w} in \autoref{eq:svm_def_kernel} ein erhält man:
 	\end{aligned}
 \end{equation}
 
-Für $b$ ergibt sich durh Einsetzen von \autoref{eq:kernel_w} für einen beliebigen Stützvektor $x_{k}$:
+Für $b$ ergibt sich durch Einsetzen von \autoref{eq:kernel_w} für einen beliebigen Stützvektor $x_{k}$:
 
 \begin{equation}
 	\begin{aligned}

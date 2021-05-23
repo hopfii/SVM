@@ -769,6 +769,136 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
     Kernel-Funktion $K(x, x') = (1 + x^{T}x')^{2}$ entspricht Skalarprodukt der mit $\Phi$ transformierten Vektoren $x, x'$
 \end{frame}
 
+\begin{frame}{Polynomieller Kernel}
+    Verallgemeinerung des Beispiels \\
+    Seien Eingabevektoren $x \in \mathbb{R}^d$ und Transformationsfunktion $\Phi: \mathbb{R}^d \rightarrow \mathbb{Z}$ ein Polynom der Ordnung $Q$ \\
+    Kernel-Funktion: \\
+    \begin{equation*} \label{eq:poly_kernel_pres}
+    \begin{aligned}
+        K(x, x') &= (1 + x^{T}x')^{Q} = \\ \pause
+        &= (1 + x_{1} x_{1}' + x_{2} x_{2}' + \dots + x_{d} x_{d}')^{Q}
+    \end{aligned}
+    \end{equation*} \pause
+    Skalierungsfaktoren $a$ und $b$ für Kompensation Faktoren: \\
+    \begin{equation*} \label{eq:poly_kernel2_pres}
+    \begin{aligned}
+        K(x, x') &= (a x^{T}x' + b)^{Q}
+    \end{aligned}
+    \end{equation*} \pause
+    Berechnung des Skalarprodukts eines Polynoms vom Grad $Q$ ohne Transformation \\ \pause
+    Polynomieller Kernel
+\end{frame}
+
+\begin{frame}{Radial Basis Function Kernel}
+    Weitere Kernel-Funktion: Radials Basis Function (RBF) Kernel: \\ \pause
+    \begin{equation*} \label{eq:rbfk_pres}
+    \begin{aligned}
+        K(x, x') &= \exp{\gamma \norm{x - x'}^2}
+    \end{aligned}
+    \end{equation*} \pause
+    $\gamma$ ist wählbarer Parameter \\ \pause
+    Dem Kernel zugehörige Transformationsfunktion $\Phi$ bildet in unendlich dimensionalen Raum ab
+\end{frame}
+
+\begin{frame}{Beweis unendliche Dimensionalität}
+    Beweis für einfachsten Fall: \\ \pause
+    \begin{equation*} \label{eq:proof_rbfk_infinite_pres}
+    \begin{aligned}
+        K(x, x') &= \exp{(-(x - x')^{2})} =\\ \pause
+        &= \exp{(-x^{2} + 2xx' - x'^{2})} = \\ \pause
+        &= \exp{(-x^{2})} \exp{(2xx')} \exp{(-x'^{2})} = \\ \pause
+        &= \exp{(-x^{2})} \sum_{k=0}^{\infty} \frac{2^{k} (x)^{k} (x')^{k}}{k!} \exp{(-x'^{2})}
+    \end{aligned}
+    \end{equation*} \pause
+    Taylorexpansion von $\exp{(2xx')}$ macht Unendlichkeit Raum sichtbar \\ \pause
+    Hat für Skalarprodukt benötigte Symmetrie $\exp(-x^{2})$ - $\exp(-x'^{2})$ und $(x)^{k}$ - $(x')^{k}$ \\ \pause
+    Anteile $\frac{2^k}{k!}$ gleichmäßig auf $x$ und $x'$ aufteilbar (Wurzel der Anteile zu $x$ und $x'$ multiplizieren)
+\end{frame}
+
+\begin{frame}{SVM mit Kernel}
+    Eingabe $x$, Transformation mit  $z = \Phi(x)$, Klassifikation mit: \\ \pause
+    \begin{equation} \label{eq:svm_def_kernel_pres}
+    \begin{aligned}
+        y(x) &= sign(w^{T} z + b)
+    \end{aligned}
+    \end{equation} \pause
+    Funktion $\Phi$ muss bekannt sein \\ \pause
+    Transformation nötig \\ \pause
+    \emph{Ziel}: Problem mittels Kernel-Funktion $K(x, x')$ ausdrücken, transformierte Vektoren vermeiden
+\end{frame}
+
+\begin{frame}{SVM mit Kernel}
+    \begin{equation} \label{eq:kernel_w_pres}
+    \begin{aligned}
+        w &= \sum_{z_{n} \text{ ist SV}} \alpha_{n} y_{n} z_{n}
+    \end{aligned}
+    \end{equation} \pause
+    Einsetzen \cref{eq:kernel_w_pres} in \cref{eq:svm_def_kernel_pres}: \\ \pause
+    \begin{equation*} \label{eq:svm_def_kernel2_pres}
+    \begin{aligned}
+        y(x) &= sign(\sum_{\alpha_{n} > 0} \alpha_{n} y_{n} z_{n}^{T} z + b) = \\ \pause
+        &= sign(\sum_{\alpha_{n} > 0} \alpha_{n} y_{n} K(x_{n}, x) + b)
+    \end{aligned}
+    \end{equation*} \pause
+    Einsetzen von \cref{eq:kernel_w_pres} für beliebigen Stützvektor für $b$: \pause
+    \begin{equation*}
+        \begin{aligned}
+            b &= \frac{1}{y_{k}} - w^{T} z_{k} = \\ \pause
+            &= \frac{1}{y_{k}} - \sum_{\alpha_{n} > 0} \alpha_{n} y_{n} K(x_{n}, x_{k}) = \\ \pause
+            &= y_{k} - \sum_{\alpha_{n} > 0} \alpha_{n} y_{n} K(x_{n}, x_{k}) = \\
+        \end{aligned}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{SVM mit Kernel}
+    \begin{itemize}
+        \item SVM vollständig definiert \pause
+        \item Transformationsfunktion $\Phi$ muss nicht bekannt sein \pause
+        \item Keine einzige tatsächliche Transformation wird durchgeführt \pause
+        \item Beliebige dimensionale Räume durch entsprechende Kernel-Funktionen verwendbar \pause
+        \item Beliebige Kernel-Funktion verwendbar, solange bestimmte Bedingungen erfüllt werden
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bedingungen für Kernel-Funktion}
+    Kernel-Funktion muss Skalarprodukt in Raum entsprechen \\
+    Zwei verschiedene Ansätze, um das zu zeigen: \\ \pause
+    \begin{itemize}
+        \item Für vermutlich richtige Kernel-Funktion wird konstruktiv versucht, die zugehörige Transformationsfunktion $\Phi$ zu bestimmen
+        \item Kernel ist gültig, wenn $K(x, x')$ symmetrisch und die Matrix \[
+                                                                                \begin{aligned}
+                                                                                    K &=
+                                                                                    \begin{bmatrix}
+                                                                                        K(x_{1}, x_{1}) & K(x_{1}, x_{2}) & \dots & K(x_{1}, x_{N})\\
+                                                                                        K(x_{2}, x_{1}) & K(x_{2}, x_{2}) & \dots & K(x_{2}, x_{N})\\
+                                                                                        \vdots & \vdots & \vdots & \vdots\\
+                                                                                        K(x_{N}, x_{1}) & K(x_{N}, x_{2}) & \dots & K(x_{N}, x_{N})\\
+                                                                                    \end{bmatrix}
+                                                                                \end{aligned}
+        \] positiv semi-definit ist für jedes beliebige $x_1..x_N$. \pause
+        Auch Satz von Mercer genannt, garantiert, dass Funktion $\Phi$ existiert, die in Raum abbildet, dessen Skalarprodukte durch Kernel-Funktion beschrieben werden können
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Anpassung QP-Sovler}
+    Lösung mittels Quadratic Programming Solver weiter möglich \\
+    \emph{Änderung}: In $Q-Matrix$ $K(x_{n}, x_{m})$ statt $x_{n}^{T}x_{m}$ \\ \pause
+    \begin{subequations} \label{subeq:q1_pres}
+    \begin{alignat*}{2}
+        &\!\min_{\alpha}        &\qquad& \Lagr(\alpha) = \frac{1}{2} \alpha^{T} Q \alpha + (-1^T) \alpha \label{eq:qp1}\\
+        &\text{mit} &      & Q = \begin{bmatrix}
+                                     y_{1}y_{1} K(x_{1}, x_{1}) & y_{1}y_{2} K(x_{1}, x_{2}) & \dots & y_{1}y_{N} K(x_{1}, x_{N})\\
+                                     y_{2}y_{1} K(x_{2}, x_{1}) & y_{2}y_{2} K(x_{2}, x_{2}) & \dots & y_{2}y_{N} K(x_{2}, x_{N})\\
+                                     \vdots & \vdots & \vdots & \vdots\\
+                                     y_{N}y_{1} K(x_{N}, x_{1}) & y_{N}y_{2} K(x_{N}, x_{2}) & \dots & y_{N}y_{N} K(x_{N}, x_{N})\\
+        \end{bmatrix}\\
+        &\text{für} & & y^{T} \alpha = 0\\
+        & & & 0 \leq \alpha \leq \infty
+    \end{alignat*}
+    \end{subequations} \pause
+    An QP-Solver übergeben und $\alpha$ erhalten \\ \pause
+    SVM in Kombination mit Kernel-Funktionen auf beliebige binäre Klassifikationsprobleme anwendbar
+\end{frame}
 
 \section{Pseudocode und Beispiele}\label{sec:pseudobsopres}
 
