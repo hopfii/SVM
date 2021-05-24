@@ -969,22 +969,190 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
         & \\
         \hline
     \end{tabular}
-    \begin{tabular}{|l|}
+\end{frame}
+
+\begin{frame}{Anmerkungen zu Pseudocode Hard-Margin SVM}
+    \textbf{Anmerkungen} \\
+    \begin{itemize}
+        \item Zeile 1: Initialisieren von Werte- und Klassenvektoren
+        \item Zeile 2: Berechnen der Matrix Q
+        \item Zeile 3: Berechnen von c
+        \item Zeile 4, 5: Berechnen der Ungleichheitsbedingungen
+        \item Zeile 6, 7: Berechnen der Gleichheitsbedingungen
+        \item Zeile 8: Lösen mittels Quadratic Programming
+        \item Zeile 9: Berechnung Gewichte mit Stützvektoren
+        \item Zeile 10: Berechnung bias mit beliebigem Stützvektor
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pseudocode Berechnung $K$-Matrix}
+    \begin{tabular}{|l r|}
         \hline
-        \textbf{Anmerkungen} \\
+        $\mathbf{K}$ \textbf{Berechnung} & \textbf{Zeile} \\
         \hline
-        Zeile 1: Initialisieren von Werte- und Klassenvektoren\\
-        Zeile 2: Berechnen der Matrix Q \\
-        Zeile 3: Berechnen von c \\
-        Zeile 4, 5: Berechnen der Ungleichheitsbedingungen\\
-        Zeile 6, 7: Berechnen der Gleichheitsbedingungen\\
-        Zeile 8: Lösen mittels Quadratic Programming \\
-        Zeile 9: Berechnung Gewichte mit Stützvektoren \\
-        Zeile 10: Berechnung bias mit beliebigem Stützvektor \\
+        Initialisiere $\mathbf{x}$ & 1 \\
+        For $i=1$ To $N$ & 2 \\
+        \quad For $j=2$ To $N$ & 3 \\
+        \quad\quad $\mathbf{K}\left( i, j \right) = x_{i} \cdot x_{j}$ & 4 \\
+        \quad Ende For & 5 \\
+        Ende For & 6 \\
         \hline
     \end{tabular}
 \end{frame}
 
+\begin{frame}{Beispiel Hard-Margin SVM}
+    Trennung linear separierbarer Punkte mit Hard-Margin SVM \\ \pause
+    \begin{center}
+        \begin{figure}
+            \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/svmsimple}
+            \caption{Beispiel Trenngrenze lineares Problem mit Hard-Margin SVM}
+            \label{fig:bsphmsvm}
+        \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Pseudocode Soft-Margin SVM}
+    \begin{tabular}{|l r|}
+        \hline
+        \textbf{Soft-Margin SVM} & \textbf{Zeile} \\
+        \hline
+        Initialisiere $\mathbf{x}, \mathbf{y}, C$ & 1\\
+        $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
+        $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
+        $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
+        $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
+        $\mathbf{A_{eq}} = \mathbf{y}^{\mathbf{T}}$ & 6\\
+        $b_{eq} = 0$ & 7\\
+        \textcolor{red}{$\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$} & 8 \\
+        \textcolor{red}{$\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$} & 9 \\
+        \textcolor{red}{$\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}}, \mathbf{lb}, \mathbf{ub} \right)$} & 10\\
+        $\mathbf{w} = \sum\limits_{n=SV} \alpha_{n} y_{n} x_{n}$  & 11\\
+        & \\[-1em]
+        $bias = \frac{1}{y_{n}} - \mathbf{w}^{\mathbf{T}}x_{n}$ & 12\\
+        & \\
+        \hline
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{Anmerkungen zu Pseudocode Soft-Margin SVM}
+    \textbf{Anmerkungen} \\
+    \begin{itemize}
+        \item Zeile 1: Initialisieren von Werte- und Klassenvektoren und Bestrafungsparameter C
+        \item Zeile 2: Berechnen der Matrix Q
+        \item Zeile 3: Berechnen von c
+        \item Zeile 4, 5: Berechnen der Ungleichheitsbedingungen
+        \item Zeile 6, 7: Berechnen der Gleichheitsbedingungen
+        \item Zeile 8: untere Grenze (kann auch $\left( -\infty, -\infty, \ldots, -\infty \right)$ gewählt werden)
+        \item Zeile 9: Berechnung obere Grenze mit C
+        \item Zeile 10: Lösen mittels Quadratic Programming
+        \item Zeile 11: Berechnung Gewichte mit Stützvektoren
+        \item Zeile 12: Berechnung bias mit beliebigem Stützvektor
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel Soft-Margin SVM}
+    \begin{center}
+        \begin{figure}
+            \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/svmsimplenotlinear}
+            \caption{Trenngrenze nichtlineares Problem mit Hard-Margin und Soft-Margin SVM}
+            \label{fig:bspsmsvm}
+        \end{figure}
+    \end{center} \pause
+    gute Ergebnisse auch bei "Ausreißern"
+\end{frame}
+
+\begin{frame}{Pseudocode Kernel-Trick}
+    \begin{tabular}{|l r|}
+        \hline
+        \textbf{Soft-Margin SVM mit Kernel-Trick} & \textbf{Zeile} \\
+        \hline
+        Initialisiere $\mathbf{x}, \mathbf{y}, C$ & 1\\
+        $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
+        $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
+        $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
+        $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
+        $\mathbf{A_{eq}} = \mathbf{y}^{\mathbf{T}}$ & 6\\
+        $b_{eq} = 0$ & 7\\
+        $\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 8 \\
+        $\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$ & 9 \\
+        $\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}}, \mathbf{lb}, \mathbf{ub} \right)$ & 10\\
+        \textcolor{red}{$bias = y_{k} - \sum\limits_{\alpha_{n} > 0} \alpha_{n} y_{n} KF\left( x_{n}, x_{k} \right) $} & 11 \\
+        & \\
+        \hline
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{Anmerkungen zu Pseudocode Kernel-Trick}
+    \textbf{Anmerkungen} \\
+    \begin{itemize}
+        \item $KF$ ist die Kernel-Funktion.
+        \item Algorithmus ist für alle Kernel (RBF, polynomiell, \ldots) gleich.
+        \item Klassifizierung muss auch angepasst werden.
+        \item Zeile 1: Initialisieren von Werte- und Klassenvektoren und Bestrafungsparameter C
+        \item Zeile 2: Berechnen der Matrix Q
+        \item Zeile 3: Berechnen von c
+        \item Zeile 4, 5: Berechnen der Ungleichheitsbedingungen
+        \item Zeile 6, 7: Berechnen der Gleichheitsbedingungen
+        \item Zeile 8: untere Grenze (kann auch $\left( -\infty, -\infty, \ldots, -\infty \right)$ gewählt werden)
+        \item Zeile 9: Berechnung obere Grenze mit C
+        \item Zeile 10: Lösen mittels Quadratic Programming
+        \item Zeile 11: Berechnung bias, $x_{k}$ ist ein beliebiger Stützvektor, $y_{k}$ die dazugehörende Klasse. Aufgrund von Rechenungenauigkeiten empfiehlt sich ein Vergleich von $\alpha_{n}$ mit nicht exakt $0$, sondern einem sehr kleinen Wert, e.g. $10^{-10}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pseudocode für $K$-Matrix bei Kernel}
+    \begin{tabular}{|l r|}
+        \hline
+        $\mathbf{K}$ \textbf{Berechnung} & \textbf{Zeile} \\
+        \hline
+        Initialisiere $\mathbf{x}$ & 1 \\
+        For $i=1$ To $N$ & 2 \\
+        \quad For $j=2$ To $N$ & 3 \\
+        \textcolor{red}{\quad\quad $\mathbf{K}\left( i, j \right) = KF\left( x_{i}, x_{j} \right)$} & 4 \\
+        \quad Ende For & 5 \\
+        Ende For & 6 \\
+        \hline
+    \end{tabular} \pause
+    $N$ Suchraumdimensionalität, $KF$ Kernel-Funktion \\
+    Anstatt Skalarprodukt Kernel-Funktion \\
+    Spart Transformation in höhere Dimensionen
+\end{frame}
+
+\begin{frame}{Beispiel Polynomieller Kernel}
+    Kernel: $(a x^{T}x' + b)^{Q}$, $b = 1, a = 1$, Exponent $Q$ wird variiert \\ \pause
+    \begin{center}
+        \begin{figure}
+            \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/kernelexptest}
+            \caption{Trenngrenzen für polynomiellen Kernel mit verschiedenen Exponenten $Q$}
+            \label{fig:bsppolykern}
+        \end{figure}
+    \end{center} \pause
+    $Q = 4$ trennt
+\end{frame}
+
+\begin{frame}{Beispiel Polynomieller Kernel mit $Q=4$}
+    \begin{center}
+        \begin{figure}
+            \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/sgddatasetkernelsolve}
+            \caption{Trenngrenzen für polynomiellen Kernel $(a x^{T}x' + b)^{Q}$ mit $Q=4$}
+            \label{fig:bsppolykernqfour}
+        \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Beispiel RBF Kernel}
+    Parameter $\gamma$ muss richtig eingestellt werden \\ \pause
+    $\gamma=1$ und Datensatz KM40M2-NN \\ \pause
+    \begin{center}
+        \begin{figure}
+            \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/sgdrbfkernel}
+            \caption{Trenngrenzen für RBF Kernel mit $\gamma=1$ auf nicht linear trennbarem Datensatz}
+            \label{fig:bsprbfkernel}
+        \end{figure}
+    \end{center} \pause
+    Blaue Punkte "umschlossen" \\ \pause
+    $\gamma$ falsch -> z.B. eigene Grenze für jeden Punkt
+\end{frame}
 
 \begin{frame}[standout]
 	Fragen?
