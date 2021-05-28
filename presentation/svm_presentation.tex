@@ -1000,14 +1000,19 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 \end{frame}
 
 \begin{frame}{Beispiel Soft-Margin SVM}
-    \begin{center}
+    \begin{columns}
+        \begin{column}{0.8\textwidth}
         \begin{figure}
-            \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/svmsimplenotlinear}
+            \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{../code/octave/images/svmsimplenotlinear}
             \caption{Trenngrenze nichtlineares Problem mit Hard-Margin und Soft-Margin SVM}
             \label{fig:bspsmsvm}
-        \end{figure}
-    \end{center} \pause
-    gute Ergebnisse auch bei "Ausreißern"
+        \end{figure} \pause
+        \end{column}
+        \begin{column}{0.2\textwidth}
+        Gute Ergebnisse auch bei Ausreißern
+            \end{column}
+    \end{columns}
+
 \end{frame}
 
 \begin{frame}{Pseudocode Kernel-Trick}
@@ -1067,14 +1072,11 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 
 \begin{frame}{Beispiel Polynomieller Kernel}
     Kernel: $(a x^{T}x' + b)^{Q}$, $b = 1, a = 1$, Exponent $Q$ wird variiert \\ \pause
-    \begin{center}
         \begin{figure}
             \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/kernelexptest}
             \caption{Trenngrenzen für polynomiellen Kernel mit verschiedenen Exponenten $Q$}
             \label{fig:bsppolykern}
         \end{figure}
-    \end{center} \pause
-    $Q = 4$ trennt
 \end{frame}
 
 \begin{frame}{Beispiel Polynomieller Kernel mit $Q=4$}
@@ -1088,17 +1090,21 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 \end{frame}
 
 \begin{frame}{Beispiel RBF Kernel}
-    Parameter $\gamma$ muss richtig eingestellt werden \\ \pause
-    $\gamma=1$ und Datensatz KM40M2-NN \\ \pause
-    \begin{center}
+    Parameter $\gamma$ muss richtig eingestellt werden, hier: $\gamma=1$ \\ \pause
+    \begin{columns}
+        \begin{column}{0.8\textwidth}
         \begin{figure}
             \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/sgdrbfkernel}
             \caption{Trenngrenzen für RBF Kernel mit $\gamma=1$ auf nicht linear trennbarem Datensatz}
             \label{fig:bsprbfkernel}
         \end{figure}
-    \end{center} \pause
-    Blaue Punkte "umschlossen" \\ \pause
-    $\gamma$ falsch -> z.B. eigene Grenze für jeden Punkt
+    \end{column} \pause
+        \begin{column}{0.2\textwidth}
+    Blaue Punkte umschlossen \\ \pause
+    \vspace{\baselineskip}
+    $\gamma$ nicht korrekt -> z.B. eigene Grenze für jeden Punkt
+            \end{column}
+        \end{columns}
 \end{frame}
 
 \begin{frame}[standout]
