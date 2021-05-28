@@ -29,6 +29,7 @@
 \usepackage{xcolor}
 \usepackage{tabularx}
 \usepackage[style=authoryear, backend=biber]{biblatex}
+\usepackage{graphics}
 \addbibresource{references.bib}
 
 
@@ -881,7 +882,7 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Anpassung QP-Sovler}
+\begin{frame}{Anpassung QP-Solver}
     Lösung mittels Quadratic Programming Solver weiter möglich \\
     \emph{Änderung}: In $Q-Matrix$ $K(x_{n}, x_{m})$ statt $x_{n}^{T}x_{m}$ \\ \pause
     \begin{subequations} \label{subeq:q1_pres}
@@ -903,71 +904,22 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 
 \section{Pseudocode und Beispiele}\label{sec:pseudobsopres}
 
-
-\begin{frame} {A test with tabularx}
-    \begin{columns}[T]
-        \begin{column}{0.7\textwidth}
-        \begin{tabularx}{1.0\textwidth}{|X r|}
-            \hline
-            \textbf{Hard-Margin SVM} & \textbf{Zeile} \\
-            \hline
-            Initialisiere $\mathbf{x}, \mathbf{y}$ & 1\\
-            $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
-            $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
-            $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
-            $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
-            $\mathbf{A_{eq}} = y^{\mathbf{T}}$ & 6\\
-            $b_{eq} = 0$ & 7\\
-            $\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 8 \\
-            $\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$ & 9 \\
-            $\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}} \right)$ & 10\\
-            $\mathbf{w} = \sum\limits_{n=SV} \alpha_{n} y_{n} x_{n}$  & 11\\
-            & \\[-1em]
-            $bias = \frac{1}{y_{n}} - \mathbf{w}^{\mathbf{T}}x_{n}$ & 12\\
-            & \\
-            \hline
-        \end{tabularx}
-        \end{column}
-        \begin{column}{0.3\textwidth}
-        \begin{tabularx}{1.0\textwidth}{|X|}
-            \hline
-            \textbf{Anmerkungen} \\
-            \hline
-            Zeile 1: Initialisieren von Werte- und Klassenvektoren\\
-            Zeile 2: Berechnen der Matrix Q \\
-            Zeile 3: Berechnen von c \\
-            Zeile 4, 5: Berechnen der Ungleichheitsbedingungen\\
-            Zeile 6, 7: Berechnen der Gleichheitsbedingungen\\
-            Zeile 8: Lösen mittels Quadratic Programming \\
-            Zeile 9: Berechnung Gewichte mit Stützvektoren \\
-            Zeile 10: Berechnung bias mit beliebigem Stützvektor \\
-            \hline
-        \end{tabularx}
-        \end{column}
-    \end{columns}
-
-\end{frame}
-
 \begin{frame}{Pseudocode Hard-Margin SVM}
-    \begin{tabular}{|l r|}
-        \hline
+    \centering
+    \begin{tabular}{l r}
         \textbf{Hard-Margin SVM} & \textbf{Zeile} \\
         \hline
-        Initialisiere $\mathbf{x}, \mathbf{y}$ & 1\\
-        $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
-        $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
+        Initialisiere $\mathbf{x}, \mathbf{y}$ & 1\\ \pause
+        $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\ \pause
+        $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\ \pause
         $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
-        $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
+        $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\ \pause
         $\mathbf{A_{eq}} = y^{\mathbf{T}}$ & 6\\
-        $b_{eq} = 0$ & 7\\
-        $\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 8 \\
-        $\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$ & 9 \\
-        $\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}} \right)$ & 10\\
-        $\mathbf{w} = \sum\limits_{n=SV} \alpha_{n} y_{n} x_{n}$  & 11\\
+        $b_{eq} = 0$ & 7\\ \pause
+        $\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}} \right)$ & 8\\ \pause
+        $\mathbf{w} = \sum\limits_{n=SV} \alpha_{n} y_{n} x_{n}$  & 9\\ \pause
         & \\[-1em]
-        $bias = \frac{1}{y_{n}} - \mathbf{w}^{\mathbf{T}}x_{n}$ & 12\\
-        & \\
-        \hline
+        $bias = \frac{1}{y_{n}} - \mathbf{w}^{\mathbf{T}}x_{n}$ & 10\\
     \end{tabular}
 \end{frame}
 
@@ -986,17 +938,16 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 \end{frame}
 
 \begin{frame}{Pseudocode Berechnung $K$-Matrix}
-    \begin{tabular}{|l r|}
-        \hline
+    \centering
+    \begin{tabular}{l r}
         $\mathbf{K}$ \textbf{Berechnung} & \textbf{Zeile} \\
         \hline
-        Initialisiere $\mathbf{x}$ & 1 \\
+        Initialisiere $\mathbf{x}$ & 1 \\ \pause
         For $i=1$ To $N$ & 2 \\
-        \quad For $j=2$ To $N$ & 3 \\
+        \quad For $j=2$ To $N$ & 3 \\ \pause
         \quad\quad $\mathbf{K}\left( i, j \right) = x_{i} \cdot x_{j}$ & 4 \\
         \quad Ende For & 5 \\
         Ende For & 6 \\
-        \hline
     \end{tabular}
 \end{frame}
 
@@ -1012,25 +963,23 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 \end{frame}
 
 \begin{frame}{Pseudocode Soft-Margin SVM}
-    \begin{tabular}{|l r|}
-        \hline
+    \centering
+    \begin{tabular}{l r}
         \textbf{Soft-Margin SVM} & \textbf{Zeile} \\
         \hline
-        Initialisiere $\mathbf{x}, \mathbf{y}, C$ & 1\\
+        \textcolor{red}{Initialisiere $\mathbf{x}, \mathbf{y}, C$ }& 1\\ \pause
         $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
         $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
         $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
         $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
         $\mathbf{A_{eq}} = \mathbf{y}^{\mathbf{T}}$ & 6\\
-        $b_{eq} = 0$ & 7\\
+        $b_{eq} = 0$ & 7\\ \pause
         \textcolor{red}{$\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$} & 8 \\
-        \textcolor{red}{$\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$} & 9 \\
-        \textcolor{red}{$\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}}, \mathbf{lb}, \mathbf{ub} \right)$} & 10\\
+        \textcolor{red}{$\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$} & 9 \\ \pause
+        \textcolor{red}{$\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}}, \mathbf{lb}, \mathbf{ub} \right)$} & 10\\ \pause
         $\mathbf{w} = \sum\limits_{n=SV} \alpha_{n} y_{n} x_{n}$  & 11\\
         & \\[-1em]
         $bias = \frac{1}{y_{n}} - \mathbf{w}^{\mathbf{T}}x_{n}$ & 12\\
-        & \\
-        \hline
     \end{tabular}
 \end{frame}
 
@@ -1062,12 +1011,12 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 \end{frame}
 
 \begin{frame}{Pseudocode Kernel-Trick}
-    \begin{tabular}{|l r|}
-        \hline
+    \centering
+    \begin{tabular}{l r}
         \textbf{Soft-Margin SVM mit Kernel-Trick} & \textbf{Zeile} \\
         \hline
-        Initialisiere $\mathbf{x}, \mathbf{y}, C$ & 1\\
-        $\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$ & 2\\
+        Initialisiere $\mathbf{x}, \mathbf{y}, C$ & 1\\ \pause
+        \textcolor{red}{$\mathbf{Q} = (\mathbf{y}\mathbf{y}^{\mathbf{T}})\mathbf{K}$} & 2\\ \pause
         $\mathbf{c} = \left( -1, -1, \ldots, -1 \right)^{\mathbf{T}}$ & 3 \\
         $\mathbf{A} = diag\left( -1, -1, \ldots, -1 \right)$ & 4 \\
         $\mathbf{b} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 5\\
@@ -1075,10 +1024,8 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
         $b_{eq} = 0$ & 7\\
         $\mathbf{lb} = \left( 0, 0, \ldots, 0 \right)^{\mathbf{T}}$ & 8 \\
         $\mathbf{ub} = C * \left( 1, 1, \ldots, 1 \right)^{\mathbf{T}}$ & 9 \\
-        $\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}}, \mathbf{lb}, \mathbf{ub} \right)$ & 10\\
+        $\mathbf{\alpha} = QPSolver\left( \mathbf{Q}, \mathbf{c}, \mathbf{A}, b, \mathbf{A_{eq}}, \mathbf{b_{eq}}, \mathbf{lb}, \mathbf{ub} \right)$ & 10\\ \pause
         \textcolor{red}{$bias = y_{k} - \sum\limits_{\alpha_{n} > 0} \alpha_{n} y_{n} KF\left( x_{n}, x_{k} \right) $} & 11 \\
-        & \\
-        \hline
     \end{tabular}
 \end{frame}
 
@@ -1101,18 +1048,18 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 \end{frame}
 
 \begin{frame}{Pseudocode für $K$-Matrix bei Kernel}
-    \begin{tabular}{|l r|}
-        \hline
+    \centering
+    \begin{tabular}{l r}
         $\mathbf{K}$ \textbf{Berechnung} & \textbf{Zeile} \\
         \hline
         Initialisiere $\mathbf{x}$ & 1 \\
         For $i=1$ To $N$ & 2 \\
-        \quad For $j=2$ To $N$ & 3 \\
+        \quad For $j=2$ To $N$ & 3 \\ \pause
         \textcolor{red}{\quad\quad $\mathbf{K}\left( i, j \right) = KF\left( x_{i}, x_{j} \right)$} & 4 \\
         \quad Ende For & 5 \\
         Ende For & 6 \\
-        \hline
-    \end{tabular} \pause
+    \end{tabular} \pause \\
+    \vspace{\baselineskip}
     $N$ Suchraumdimensionalität, $KF$ Kernel-Funktion \\
     Anstatt Skalarprodukt Kernel-Funktion \\
     Spart Transformation in höhere Dimensionen
