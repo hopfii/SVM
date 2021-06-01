@@ -769,6 +769,7 @@ Es folgt der Pseudocode mit Anmerkungen für eine Hard-Margin Support Vector Mac
     & \\
     \hline
 \end{tabular}
+\\
 \begin{tabular}{|l|}
     \hline
     \textbf{Anmerkungen} \\
@@ -848,6 +849,7 @@ Man erweitert den Algorithmus um einen Bestrafungsparameter C und die untere und
     & \\
     \hline
 \end{tabular}
+\\
 \begin{tabular}{|l|}
     \hline
     \textbf{Anmerkungen} \\
@@ -887,7 +889,7 @@ Wird der Bestrafungsparameter $C$ sehr hoch eingestellt, so verhält sich eine S
 Bei der Erweiterung mit dem Kerneltrick kann die Soft-Margin SVM als Basis gewählt werden.
 Im Algorithmus ändert sich hierbei nur die Berechnung von $\mathbf{K}$ (siehe Anmerkung) und die des bias. %TODO hier Anmerkung refernzieren)
 Weiters wird anstatt des Gewichtsvektors $\mathbf{w}$ der Vektor $\alpha$ zurückgegeben und dessen positiven Teile $\alpha > 0$ für die Klassifikation verwendet.
-\begin{table}[H]\label{tab:kernelpc}
+\begin{table}[H]
 \begin{tabular}{|l r|}
     \hline
     \textbf{Soft-Margin SVM mit Kernel-Trick} & \textbf{Zeile} \\
@@ -906,6 +908,7 @@ Weiters wird anstatt des Gewichtsvektors $\mathbf{w}$ der Vektor $\alpha$ zurüc
     & \\
     \hline
 \end{tabular}
+\\
 \begin{tabular}{|l|}
     \hline
     \textbf{Anmerkungen} \\
@@ -924,7 +927,7 @@ Weiters wird anstatt des Gewichtsvektors $\mathbf{w}$ der Vektor $\alpha$ zurüc
     Aufgrund von Rechenungenauigkeiten empfiehlt sich ein Vergleich von $\alpha_{n}$ mit nicht exakt $0$ \\
     sondern einem sehr kleinen Wert, e.g. $10^{-10}$ \\
     \hline
-\end{tabular}
+\end{tabular}\label{tab:pseudokernel}
 \end{table}
 $KF$ ist hierbei die Kernel-Funktion.
 Der Algorithmus ist für alle Kernel (e.g. RBF oder polynomiell) gleich.
