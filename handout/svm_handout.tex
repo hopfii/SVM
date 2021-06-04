@@ -982,8 +982,18 @@ Die Punkte werden, auch bei diesem nichtlinearen Problem, sauber getrennt.
 \section{Kernel-Trick, RBF Kernel - Beispiel}\label{sec:rbfkern_bsp}
 Anders als beim polynomiellen Kernel muss beim \ac{RBF} Kernel nicht nach einem Polynom gesucht werden.
 Dafür muss der Parameter $\gamma$ korrekt eingestellt werden.
+\autoref{fig:rbfgammacomp} zeigt die Ergebnisse mit verschiedenen Werten für $\gamma$, angewandt auf den Datensatz KM40M2-NN.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 16cm]{../code/octave/images/sgdrbfkernelcomp}
+    \caption{Nichtlinear separierbarer Datensatz mit Grenze von \ac{SVM} mit \ac{RBF}-Kernel für verschiedene $\gamma$}
+    \label{fig:rbfgammacomp}
+\end{figure}
+Man sieht, dass sich bei manchen Werten für $\gamma$ mehrere kleinere abgegrenzte Bereiche bilden, aber nicht eine saubere Trenngrenze gezogen wird.
+Mit $\gamma=1$ und $\gamma=1.5$ wird sauber getrennt.
+Bei $\gamma=1$ werden die Punkte der Klasse 1 von einer Grenze umschlossen, bei $\gamma=1.5$ die Punkte der Klasse -1.\newline
 % Weiter muss auch auf den Bestrafungsparameter $C$ geachtet werden.
-Für $\gamma = 1$ ergibt sich, angewandt auf den Datensatz KM40M2-NN, \autoref{fig:rbfkern_dataset}. %TODO mention C=200?
+Die Grenze für $\gamma = 1$ wird noch einmal separat in \autoref{fig:rbfkern_dataset} dargestellt. %TODO mention C=200?
 \begin{figure}[H]
     \centering
     \includegraphics[width = 16cm]{../code/octave/images/sgdrbfkernel}
@@ -991,8 +1001,7 @@ Für $\gamma = 1$ ergibt sich, angewandt auf den Datensatz KM40M2-NN, \autoref{f
     \label{fig:rbfkern_dataset}
 \end{figure}
 Man sieht, dass die Punkte schön getrennt werden.
-Auch auffallend ist, dass die Grenze die blauen Punkte quasi umschließt.
-Bei einer falschen Einstellung von $\gamma$ könnte es z.B. passieren, dass jeder Punkt eine eigene Grenze bekommt. %TODO zeigen?
+Auch das Umschließen einer Klasse, das typisch für SVM mit RBF-Kernel ist, sieht man gut.
 
 % THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
 \nocite{*}

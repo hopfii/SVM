@@ -1060,20 +1060,36 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
     \end{center}
 \end{frame}
 
-\begin{frame}{Beispiel RBF Kernel}
-    Parameter $\gamma$ muss richtig eingestellt werden, hier: $\gamma=1$ \\ \pause
+\begin{frame}{Beispiel RBF Kernel, verschiedene $\gamma$}
+    Parameter $\gamma$ muss richtig eingestellt werden \pause
+    \begin{columns}
+        \begin{column}{0.8\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/sgdrbfkernelcomp}
+                \caption{Trenngrenzen für RBF Kernel mit verschiedenen $\gamma$}
+                \label{fig:bsprbfkernelcomp}
+            \end{figure}
+        \end{column} \pause
+        \begin{column}{0.2\textwidth}
+            Bei falschem $\gamma$ zu kleine Gebiete \\ \pause
+            \vspace{\baselineskip}
+            $\gamma$ gut -> eine Klasse umschlossen
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Beispiel RBF Kernel, $\gamma=1$}
+    Parameter $\gamma=1$ \\ \pause
     \begin{columns}
         \begin{column}{0.8\textwidth}
         \begin{figure}
             \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/sgdrbfkernel}
-            \caption{Trenngrenzen für RBF Kernel mit $\gamma=1$ auf nicht linear trennbarem Datensatz}
+            \caption{Trenngrenzen für RBF Kernel mit $\gamma=1$}
             \label{fig:bsprbfkernel}
         \end{figure}
     \end{column} \pause
         \begin{column}{0.2\textwidth}
-    Blaue Punkte umschlossen \\ \pause
-    \vspace{\baselineskip}
-    $\gamma$ nicht korrekt -> z.B. eigene Grenze für jeden Punkt
+    Blaue Punkte umschlossen
             \end{column}
         \end{columns}
 \end{frame}
