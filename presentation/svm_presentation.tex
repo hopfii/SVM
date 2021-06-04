@@ -709,7 +709,7 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
     \end{equation*}
 \end{frame}
 
-\begin{frame}{Beispiel Kernel-Funktion}
+\begin{frame}{Beweis Kernel-Funktion entspricht Skalarprodukt}
     Annahme für verwendete Transformationsfunktion $\Phi$: \\
     \begin{equation*}
         \begin{aligned}
@@ -748,7 +748,7 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 \end{frame}
 
 \begin{frame}{Radial Basis Function Kernel}
-    Weitere Kernel-Funktion: Radials Basis Function (RBF) Kernel: \\ \pause
+    Weitere Kernel-Funktion: Radial Basis Function (RBF) Kernel: \\ \pause
     \begin{equation*} \label{eq:rbfk_pres}
     \begin{aligned}
         K(x, x') &= \exp{\gamma \norm{x - x'}^2}
@@ -803,7 +803,7 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
         \begin{aligned}
             b &= \frac{1}{y_{k}} - w^{T} z_{k} = \\ \pause
             &= \frac{1}{y_{k}} - \sum_{\alpha_{n} > 0} \alpha_{n} y_{n} K(x_{n}, x_{k}) = \\ \pause
-            &= y_{k} - \sum_{\alpha_{n} > 0} \alpha_{n} y_{n} K(x_{n}, x_{k}) = \\
+            &= y_{k} - \sum_{\alpha_{n} > 0} \alpha_{n} y_{n} K(x_{n}, x_{k}) \\
         \end{aligned}
     \end{equation*}
 \end{frame}
@@ -822,7 +822,7 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
     Kernel-Funktion muss Skalarprodukt in Raum entsprechen \\
     Zwei verschiedene Ansätze, um das zu zeigen: \\ \pause
     \begin{itemize}
-        \item Für vermutlich richtige Kernel-Funktion wird konstruktiv versucht, die zugehörige Transformationsfunktion $\Phi$ zu bestimmen
+        \item Für vermutlich richtige Kernel-Funktion wird konstruktiv versucht, die zugehörige Transformationsfunktion $\Phi$ zu bestimmen \pause
         \item Kernel ist gültig, wenn $K(x, x')$ symmetrisch und die Matrix \[
                                                                                 \begin{aligned}
                                                                                     K &=
@@ -900,7 +900,7 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
         \hline
         Initialisiere $\mathbf{x}$ & 1 \\ \pause
         For $i=1$ To $N$ & 2 \\
-        \quad For $j=2$ To $N$ & 3 \\ \pause
+        \quad For $j=1$ To $N$ & 3 \\ \pause
         \quad\quad $\mathbf{K}\left( i, j \right) = x_{i} \cdot x_{j}$ & 4 \\
         \quad Ende For & 5 \\
         Ende For & 6 \\
@@ -1015,13 +1015,13 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
         \hline
         Initialisiere $\mathbf{x}$ & 1 \\
         For $i=1$ To $N$ & 2 \\
-        \quad For $j=2$ To $N$ & 3 \\ \pause
+        \quad For $j=1$ To $N$ & 3 \\ \pause
         \textcolor{red}{\quad\quad $\mathbf{K}\left( i, j \right) = KF\left( x_{i}, x_{j} \right)$} & 4 \\
         \quad Ende For & 5 \\
         Ende For & 6 \\
     \end{tabular} \pause \\
     \vspace{\baselineskip}
-    $N$ Suchraumdimensionalität, $KF$ Kernel-Funktion \\
+    $N$ Anzahl Eingabevektoren, $KF$ Kernel-Funktion \\
     Anstatt Skalarprodukt Kernel-Funktion \\
     Spart Transformation in höhere Dimensionen
 \end{frame}

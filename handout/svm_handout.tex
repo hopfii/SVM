@@ -795,7 +795,7 @@ Im Folgenden der Pseudocode für die Berechnung von $\mathbf{K}$.
         \hline
         Initialisiere $\mathbf{x}$ & 1 \\
         For $i=1$ To $N$ & 2 \\
-        \quad For $j=2$ To $N$ & 3 \\
+        \quad For $j=1$ To $N$ & 3 \\
         \quad\quad $\mathbf{K}\left( i, j \right) = x_{i} \cdot x_{j}$ & 4 \\
         \quad Ende For & 5 \\
         Ende For & 6 \\
@@ -803,7 +803,7 @@ Im Folgenden der Pseudocode für die Berechnung von $\mathbf{K}$.
     \end{tabular}
 \end{table}
 
-$N$ ist hierbei die Suchraumdimensionalität.
+$N$ ist hierbei die Anzahl der Eingabevektoren.
 
 \section{Hard-Margin SVM - Beispiel}\label{sec:hmsvmbsp}
 Mit einer Hard-Margin \ac{SVM} können linear separierbare Punkte getrennt werden.
@@ -944,7 +944,7 @@ Die einzige Änderung ist, dass anstatt des Skalarproduktes die Kernelfunktion v
         \hline
         Initialisiere $\mathbf{x}$ & 1 \\
         For $i=1$ To $N$ & 2 \\
-        \quad For $j=2$ To $N$ & 3 \\
+        \quad For $j=1$ To $N$ & 3 \\
         \textcolor{red}{\quad\quad $\mathbf{K}\left( i, j \right) = KF\left( x_{i}, x_{j} \right)$} & 4 \\
         \quad Ende For & 5 \\
         Ende For & 6 \\
@@ -952,7 +952,7 @@ Die einzige Änderung ist, dass anstatt des Skalarproduktes die Kernelfunktion v
     \end{tabular}
 \end{table}
 
-$N$ ist hierbei wieder die Suchraumdimensionalität, $KF$ ist die Kernelfunktion.
+$N$ ist hierbei die Anzahl der Eingabevektoren, $KF$ ist die Kernelfunktion.
 Durch diese Berechnung spart man sich die Transformation der Eingabe in höhere Dimensionen, die Essenz des Kernel Tricks.
 
 \section{Kernel-Trick, Polynomieller Kernel - Beispiel}\label{sec:plykernbsp}
