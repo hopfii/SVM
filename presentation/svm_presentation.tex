@@ -879,6 +879,13 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
     \end{tabular}
 \end{frame}
 
+\begin{frame}{QP Parameter Hard Margin}
+    \centering
+    $\min_{x} = \frac{1}{2} x^{T} Q x + c x + d $ \\
+    $A x \leq b$ \\
+    $A_{e q} x = b_{e q}$ \\
+\end{frame}
+
 \begin{frame}{Anmerkungen zu Pseudocode Hard-Margin SVM}
     \textbf{Anmerkungen} \\
     \begin{itemize}
@@ -937,6 +944,14 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
         & \\[-1em]
         $bias = \frac{1}{y_{n}} - \mathbf{w}^{\mathbf{T}}x_{n}$ & 12\\
     \end{tabular}
+\end{frame}
+
+\begin{frame}{QP Parameter Soft Margin}
+    \centering
+    $\min_{x} = \frac{1}{2} x^{T} Q x + c x + d $ \\
+    $A x \leq b$ \\
+    $A_{e q} x = b_{e q}$ \\
+    $lb \leq x \leq ub$
 \end{frame}
 
 \begin{frame}{Anmerkungen zu Pseudocode Soft-Margin SVM}
