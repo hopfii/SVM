@@ -1001,8 +1001,28 @@ Die Grenze für $\gamma = 1$ wird noch einmal separat in \autoref{fig:rbfkern_da
     \label{fig:rbfkern_dataset}
 \end{figure}
 Man sieht, dass die Punkte schön getrennt werden.
-Auch das Umschließen einer Klasse, das typisch für SVM mit RBF-Kernel ist, sieht man gut.
+Auch das Umschließen einer Klasse, das typisch für SVM mit RBF-Kernel ist, sieht man gut.\newline
 
+\section{Kernel-Trick, Vergleich verschiedener Methoden}\label{sec:compkernelothers}
+Vergleicht man die SVM mit Kernel Trick mit bereits aus der Vorlesung bekannten Methoden, erhält man \autoref{fig:compdatasetkernelothers}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 16cm]{../code/octave/images/compbatchdecisionboundary}
+    \caption{Nichtlinear separierbarer Datensatz mit Grenzen verschiedener Methoden}
+    \label{fig:compdatasetkernelothers}
+\end{figure}
+Man sieht, dass alle Methoden trennen.
+Wichtig ist hier, dass die SVM-Methoden stabiler sind, durch die Abwesenheit der zufällig initialisierten Gewichtsmatrix der anderen Methoden.
+Vergleicht man die Zeit, die die Algorithmen brauchen, erhält man \autoref{fig:compbatchtimes}.
+\begin{figure}[H]
+    \centering
+    \includegraphics{../code/octave/images/compbatchtimes}
+    \caption{Dauer verschiedener Methoden für nichtlinearen Datensatz}
+    \label{fig:compbatchtimes}
+\end{figure}
+Man sieht, dass die SVM-Methoden wesentlich schneller sind.
+Das verwendete QP-Solver Framework trägt hier sicher einiges dazu bei.
+Die Kombination aus kurzer Dauer und Stabilität macht das Experimentieren zum Finden der richtigen Hyperparameter ($\gamma$ oder $Q, a, b$) mit den SVM-Methoden angenehmer.
 % THIS COMMAND ADDS ALL ENTRIES (EVEN UNREFERENCED) TO BIBLIOGRAPHY
 \nocite{*}
 

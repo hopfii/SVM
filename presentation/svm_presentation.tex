@@ -1105,13 +1105,45 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
         \end{columns}
 \end{frame}
 
+\begin{frame}{Vergleich verschiedener Algorithmen}
+            \begin{figure}
+                \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/compbatchdecisionboundary}
+                \caption{Trenngrenzen für verschiedene Methoden}
+                \label{fig:vergleichalgos}
+            \end{figure}
+\end{frame}
+
+\begin{frame}{Vergleich verschiedener Algorithmen}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../code/octave/images/compbatchtimes}
+                \caption{Dauer verschiedener Algorithmen}
+                \label{fig:daueralgos}
+            \end{figure}
+        \end{column} \pause
+        \begin{column}{0.6\textwidth}
+            \begin{itemize}
+                \item SVM sehr schnell \pause
+                \item QP-Solver spielt entscheidende Rolle \pause
+                \item SVM stabiler -> keine zufällig initialisierte Gewichtsmatrix \pause
+                \item Experimente für Hyperparameter schnell und stabil
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \begin{frame}{Zusammenfassung}
     \centering
-    SVM für lineare, binäre Klassifikationsprobleme \\ \pause
-    Hard und Soft Margin (Soft vermindert Einfluss Ausreißer) \\ \pause
-    Optimierungsproblem -> Lösen mit QP-Solver \\ \pause
-    Nichtlinear nur durch Transformation Eingabevektoren \\ \pause
-    Kernel Trick zum Umgehen der Transformation \\
+    \begin{itemize}
+        \item SVM für lineare, binäre Klassifikationsprobleme \pause
+        \item Hard und Soft Margin (Soft vermindert Einfluss Ausreißer) \pause
+        \item Optimierungsproblem -> Lösen mit QP-Solver \pause
+        \item Nichtlinear nur durch Transformation Eingabevektoren \pause
+        \item Kernel Trick zum Umgehen der Transformation \pause
+        \item Schnell, deterministisch
+    \end{itemize}
+
 \end{frame}
 
 \begin{frame}[standout]
