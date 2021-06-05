@@ -881,9 +881,9 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 
 \begin{frame}{QP Parameter Hard Margin}
     \centering
-    $\min_{x} = \frac{1}{2} x^{T} Q x + c x + d $ \\
-    $A x \leq b$ \\
-    $A_{e q} x = b_{e q}$ \\
+    $\!\min_{\alpha} \qquad \Lagr(\alpha) = \frac{1}{2} \alpha^{T} Q \alpha + (-1^T) \alpha$ \\ \pause
+    $A \alpha \leq b$ -> $diag(-1) * \alpha \leq 0$ \\ \pause
+    $A_{e q} \alpha = b_{e q}$ -> $y^{T} \alpha = 0$
 \end{frame}
 
 \begin{frame}{Anmerkungen zu Pseudocode Hard-Margin SVM}
@@ -959,10 +959,10 @@ Optimierungsproblem mit transformierten Eingabevektoren: \\ \pause
 
 \begin{frame}{QP Parameter Soft Margin}
     \centering
-    $\min_{x} = \frac{1}{2} x^{T} Q x + c x + d $ \\
-    $A x \leq b$ \\
-    $A_{e q} x = b_{e q}$ \\
-    $lb \leq x \leq ub$
+    $\!\min_{\alpha} \qquad \Lagr(\alpha) = \frac{1}{2} \alpha^{T} Q \alpha + (-1^T) \alpha$ \\ \pause
+    $A \alpha \leq b$ -> $diag(-1) * \alpha \leq 0$ \\ \pause
+    $A_{e q} \alpha = b_{e q}$ -> $y^{T} \alpha = 0$ \\ \pause
+    $lb \leq \alpha \leq ub$ -> $0 \leq \alpha \leq C$
 \end{frame}
 
 \begin{frame}{Anmerkungen zu Pseudocode Soft-Margin SVM}
