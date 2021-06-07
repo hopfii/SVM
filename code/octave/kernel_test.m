@@ -1,3 +1,4 @@
+% script for testing whether polynomial kernel produces same result as scalar product of transformed input vectors for Q matrix
 % set kernel parameters
 a = 1;
 b = 1;

@@ -1,3 +1,4 @@
+% script for comparing alpha lms, madalin nn with pseudoinv and hard margin SVM on linearly separable dataset
 x = [
     1,2;
     2,1;

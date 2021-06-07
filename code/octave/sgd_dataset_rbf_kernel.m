@@ -1,3 +1,4 @@
+% script for using rbf kernel SVM with gamma=1 for not linearly seperable dataset
 % input values
 load("K40M2-NN-binary.mat");
 X=X';

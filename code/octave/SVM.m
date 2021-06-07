@@ -2,10 +2,10 @@
 % Matlab: install the Optimization Toolbox (HOME -> Addons -> Get Addons -> serach for Optimization Toolbox)
 % Octave: load the optim package (on the command line, enter "pkg load optim").
 % If the package is not there, install it with: "pkg install -forge optim"
-% Function for a hard margin support vector machine
+% Function for a hard or soft margin support vector machine
 % Input parameters:
 % X = the training data, where each row is an input-pattern
-% D = the class data belonging to the training data, where each row is a class
+% Y = the class data belonging to the training data, where each row is a class
 % C = parameter that determines "punishment" for errors -> large values: hard margin, small values: soft margin
 % Return values:
 % weight = the calculated weight vector w (for classification with w*x + bias)
@@ -22,30 +22,19 @@ function [weight, bias, sup_weight, avg_bias] = SVM(X,Y,C)
             K(i,j) = dot(X(i,:),X(j,:));
         end
     end
-    % disp("K"), disp(K);
-    % K matches
     outer = Y*Y';
-    % outer matches
-    % disp("outer"), disp(outer);
     Q = outer .* K;
-    % disp("Q"), disp(Q);
-    % Q matches
     % make sure Q is symmetric
     Q=(Q+Q')/2;
     c = ones(rows,1) * -1;
-    % disp("c"), disp(c);
-    % c matches
+
     % Equality constraints
     Aeq = Y';
     beq = 0;
-    % disp("Equality constraints"), disp(Aeq), disp(beq);
-    % Equality constraints match
 
     % Inequality constraints
     A = diag(-1*ones(rows,1));
     b = zeros(rows,1);
-    % disp("Inequality constraints"), disp(A), disp(b);
-    % Inequality constraints match
 
     % soft margin lower and upper bounds
     lb = zeros(rows,1);
@@ -54,22 +43,13 @@ function [weight, bias, sup_weight, avg_bias] = SVM(X,Y,C)
     % solve optimization
     [alpha,fval,exitflag,output,lambda] = quadprog(Q,c,A,b,Aeq,beq,lb,ub);
     disp("alpha"), disp(alpha);
-    disp("lambda"), disp(lambda);
-    % alpha does not match -> difference in quadprog???
 
     % determine support vectors
     positive = alpha > 10^-10;
-    % disp("Positive multipliers"), disp(positive);
-    % pos multipliers match
     pos_alphas = alpha(positive);
     disp("pos alphas"), disp(pos_alphas);
-    % since alpha does not match, these do not match either
     support_vecs = X(positive,:);
-    % disp("Support vecs"), disp(support_vecs);
-    % support vectors match
     support_class_vecs = Y(positive);
-    % disp("Support class vecs"), disp(support_class_vecs);
-    % support class vectors match
 
     % calculate weight
     weight = sum(alpha.*X.*Y);

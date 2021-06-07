@@ -1,3 +1,4 @@
+% script for Octave (won't work in Matlab!) that transforms K40M2-NN.dat into a binary mat file that Matlab can load as well
 % input values
 X = load("K40M2-NN.dat")';
 % class values

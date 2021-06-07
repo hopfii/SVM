@@ -1,3 +1,4 @@
+% script for comparing results of RBF Kernel SVM with various values for gamma on not linearly seperable dataset
 % input values
 load("K40M2-NN-binary.mat");
 X=X';

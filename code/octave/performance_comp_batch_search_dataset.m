@@ -1,3 +1,4 @@
+% script for comparing various algorithms on not linearly separable dataset
 % input values
 X = load("K40M2-NN.dat")';
 % class values

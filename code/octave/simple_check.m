@@ -1,3 +1,4 @@
+% script for testing Hard Margin SVM with linearly separable dataset
 % input values
 % note: x input is transferred internally into column vectors i.e. x1 = [1; 1; 2] (1 for bias)
 x = [

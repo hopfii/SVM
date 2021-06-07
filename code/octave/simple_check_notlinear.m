@@ -1,3 +1,4 @@
+% script for comparing Hard Margin SVM with Soft Margin SVM on dataset with some outliers that is otherwise linearly separable
 % input values
 % note: x input is transferred internally into column vectors i.e. x1 = [1; 1; 2] (1 for bias)
 x = [

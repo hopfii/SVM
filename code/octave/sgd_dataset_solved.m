@@ -1,3 +1,4 @@
+% script for showing polynomial kernel SVM on non-linear dataset with Q=4, a=1, b=1
 % input values
 load("K40M2-NN-binary.mat");
 X=X';

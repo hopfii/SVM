@@ -1,3 +1,4 @@
+% script for comparing polynomial kernel SVM with a=1, b=1 and various values for Q
 % input values
 load("K40M2-NN-binary.mat");
 X=X';
