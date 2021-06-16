@@ -13,5 +13,6 @@ Um den Code ausführen zu können, müssen aber einige Voraussetzungen erfüllt 
 ### Matlab
 Optimization Toolbox installieren: HOME -> Addons -> Get Addons -> suche nach Optimization Toolbox.
 ### Octave
-Das package "optim" laden (auf der Kommandozeile den Befehl `pkg load optim`).
+Das package "optim" laden (auf der Kommandozeile den Befehl `pkg load optim` eingeben).
 Ist das package noch nicht installiert, kann dies auf der Kommandozeile mit `pkg install -forge optim` nachgeholt werden.
+Das Laden des packages muss nach jedem Neustart von Octave erneut erfolgen.
