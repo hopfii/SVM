@@ -7,7 +7,7 @@ Folgende Dokumente geben eine allgemeine Einführung zum Thema "Support Vector M
 - [Handout SVM](handout/svm_handout.pdf)
 - [Slides der Präsentation](presentation/svm_presentation.pdf)
 
-## Code Benutzung Voraussetzungen
+## Voraussetzungen für die Code-Benutzung
 Sämtlicher Code funktioniert in Matlab und Octave.
 Um den Code ausführen zu können, müssen aber einige Voraussetzungen erfüllt sein.
 ### Matlab
